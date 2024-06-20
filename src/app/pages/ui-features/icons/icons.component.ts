@@ -9,6 +9,8 @@ import { NbIconLibraries } from '@nebular/theme';
 })
 export class IconsComponent {
 
+  numberedCircleIcon = 'fa-circle'
+
   evaIcons = [];
 
   constructor(iconsLibrary: NbIconLibraries) {

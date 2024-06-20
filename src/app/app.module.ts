@@ -11,6 +11,9 @@ import { CoreModule } from './@core/core.module';
 import { ThemeModule } from './@theme/theme.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { NbIconModule } from '@nebular/theme';
+import { NbStepperModule } from '@nebular/theme';
+
 import {
   NbChatModule,
   NbDatepickerModule,
@@ -24,7 +27,9 @@ import {
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    NbIconModule, 
     BrowserModule,
+    NbStepperModule,
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
@@ -40,7 +45,9 @@ import {
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
   ],
+  
   bootstrap: [AppComponent],
 })
 export class AppModule {
+  
 }
