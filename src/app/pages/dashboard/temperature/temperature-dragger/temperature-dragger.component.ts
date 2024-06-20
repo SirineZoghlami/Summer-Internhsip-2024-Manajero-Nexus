@@ -20,10 +20,9 @@ const VIEW_BOX_SIZE = 300;
   styleUrls: ['./temperature-dragger.component.scss'],
 })
 export class TemperatureDraggerComponent implements AfterViewInit, OnChanges {
-
   @ViewChild('svgRoot', { static: true }) svgRoot: ElementRef;
 
-  @Input() fillColors: string|string[];
+  @Input() fillColors: string | string[];
   @Input() disableArcColor;
   @Input() bottomAngle = 90;
   @Input() arcThickness = 18; // CSS pixels
@@ -33,10 +32,18 @@ export class TemperatureDraggerComponent implements AfterViewInit, OnChanges {
   @Input() thumbBorderColor;
   @Input() maxLeap = 0.4;
 
-  value = 50;
-  @Output() valueChange = new EventEmitter<Number>();
-  @Input('value') set setValue(value) {
-    this.value = value;
+  private _value = 50; // default value
+
+  @Output() valueChange = new EventEmitter<number>();
+  
+  @Input()
+  get value(): number {
+    return this._value;
+  }
+
+  set value(val: number) {
+    this._value = val;
+    this.valueChange.emit(this._value);
   }
 
   @Input() min = 0; // min output value
@@ -91,7 +98,7 @@ export class TemperatureDraggerComponent implements AfterViewInit, OnChanges {
     private location: Location,
     private locationStrategy: LocationStrategy,
   ) {
-    this.oldValue = this.value;
+    this.oldValue = this._value;
   }
 
   ngAfterViewInit(): void {
@@ -120,10 +127,10 @@ export class TemperatureDraggerComponent implements AfterViewInit, OnChanges {
     this.power.emit(!this.off);
 
     if (this.off) {
-      this.oldValue = this.value;
-      this.value = this.min;
+      this.oldValue = this._value;
+      this._value = this.min;
     } else {
-      this.value = this.oldValue;
+      this._value = this.oldValue;
     }
 
     this.invalidatePinPosition();
@@ -358,16 +365,16 @@ export class TemperatureDraggerComponent implements AfterViewInit, OnChanges {
 
       const value = this.toValueNumber(relativeValue);
 
-      if (this.value !== value && (allowJumping || Math.abs(relativeValue - previousRelativeValue) < this.maxLeap)) {
-        this.value = value;
-        this.valueChange.emit(this.value);
+      if (this._value !== value && (allowJumping || Math.abs(relativeValue - previousRelativeValue) < this.maxLeap)) {
+        this._value = value;
+        this.valueChange.emit(this._value);
         this.invalidatePinPosition();
       }
     }
   }
 
   private getValuePercentage() {
-    return (this.value - this.min) / (this.max - this.min);
+    return (this._value - this.min) / (this.max - this.min);
   }
 
   private toValueNumber(factor) {
