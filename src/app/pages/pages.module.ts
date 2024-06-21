@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { NbMenuModule } from '@nebular/theme';
+import { NbMenuModule, NbStepperModule, NbCardModule } from '@nebular/theme'; // Import NbCardModule
 
 import { ThemeModule } from '../@theme/theme.module';
 import { PagesComponent } from './pages.component';
@@ -17,11 +17,12 @@ import { NexusComponent } from './agile/nexus/nexus.component';
     DashboardModule,
     ECommerceModule,
     MiscellaneousModule,
+    NbStepperModule,  // Ensure NbStepperModule is here
+    NbCardModule      // Add NbCardModule here
   ],
   declarations: [
     PagesComponent,
     NexusComponent,
   ],
 })
-export class PagesModule {
-}
+export class PagesModule { }
