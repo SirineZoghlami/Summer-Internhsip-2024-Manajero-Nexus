@@ -5,7 +5,10 @@ import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ECommerceComponent } from './e-commerce/e-commerce.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
-import { NexusComponent } from './agile/nexus/nexus.component';  // Import the component
+import { TutorialComponent } from './agile/nexus/tutorial.component';  
+import { TutorialEditComponent } from './agile/nexus/tutorial-edit/tutorial-edit.component';
+import { TutorialCreateComponent } from './agile/nexus/tutorial-create/tutorial-create.component';
+
 
 
 const routes: Routes = [{
@@ -71,8 +74,16 @@ const routes: Routes = [{
         .then(m => m.MiscellaneousModule),
     },
     {
-      path: 'agile/nexus',  // Add this new route
-      component: NexusComponent
+      path: 'agile/nexus',  
+      component: TutorialComponent
+    },
+    {
+      path: 'agile/nexus/tutorial/edit',  
+      component: TutorialEditComponent
+    },
+    {
+      path: 'agile/nexus/tutorial/create',  
+      component: TutorialCreateComponent
     },
     {
       path: '',

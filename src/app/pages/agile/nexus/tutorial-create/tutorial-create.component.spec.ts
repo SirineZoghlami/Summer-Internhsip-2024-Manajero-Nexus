@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NexusComponent } from './nexus.component';
+import { TutorialCreateComponent } from './tutorial-create.component';
 
-describe('NexusComponent', () => {
-  let component: NexusComponent;
-  let fixture: ComponentFixture<NexusComponent>;
+describe('TutorialCreateComponent', () => {
+  let component: TutorialCreateComponent;
+  let fixture: ComponentFixture<TutorialCreateComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NexusComponent ]
+      declarations: [ TutorialCreateComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(NexusComponent);
+    fixture = TestBed.createComponent(TutorialCreateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

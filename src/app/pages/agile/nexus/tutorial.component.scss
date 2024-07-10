@@ -24,17 +24,32 @@
       font-size: 1rem;
       color: #4a4a4a;
 
-      input {
+      .custom-textarea {
         width: 80%;
-        margin: 1rem 0;
+        margin: 1rem auto; /* Center the textarea */
         padding: 0.5rem;
         border: 1px solid #e6e9f0;
         border-radius: 0.25rem;
+        text-align: center; /* Center the text within the textarea */
+        font-size: 1rem;
+        resize: vertical; /* Allow vertical resizing */
+      }
+
+      .validation-error {
+        color: #ff0000; /* Red color for error message */
+        margin-top: 0.5rem;
+        font-size: 0.875rem;
+      }
+
+      .button-group {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 1rem;
       }
 
       button {
         cursor: pointer;
-        margin: 0.5rem;
         padding: 0.5rem 1rem;
         border: none;
         border-radius: 0.25rem;
@@ -61,7 +76,7 @@
     ::ng-deep nb-card-footer {
       background-color: #f7f9fc;
       border-top: 1px solid #e6e9f0;
-      text-align: right;
+      text-align: center; /* Center align footer content */
       padding: 1rem 0;
 
       button {
@@ -86,9 +101,15 @@
       color: #4a4a4a;
     }
 
+    .button-container {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
     button {
       cursor: pointer;
-      margin: 0.5rem;
       padding: 0.5rem 1rem;
       border: none;
       border-radius: 0.25rem;
