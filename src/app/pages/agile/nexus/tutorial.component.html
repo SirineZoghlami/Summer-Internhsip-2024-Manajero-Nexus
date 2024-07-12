@@ -1,4 +1,9 @@
 <div class="tutorial-component">
+  <div class="button-container">
+    <button nbButton status="primary" routerLink="/agile/nexus/tutorial/create">Create New Tutorial</button>
+  </div>
+  
+  <h1 style="text-align: center">Nexus Agile Framework Tutorial</h1>
 
   <nb-stepper orientation="horizontal" [selectedIndex]="currentStepIndex">
     <!-- Step 1: Introduction -->
@@ -6,6 +11,7 @@
       <div class="step-content">
         <h2>Introduction</h2>
         <p>{{ lastCreatedTutorial?.introduction }}</p>
+        
         <div class="button-container">
           <button nbButton status="primary" (click)="nextStep()">Next</button>
         </div>
@@ -29,6 +35,9 @@
       <div class="step-content">
         <h2>What is Nexus?</h2>
         <p>{{ lastCreatedTutorial?.whatIsNexus }}</p>
+        <div class="image-container">
+          <img src="../../../../assets/images/nexus-scrum-framework-slide1.png" alt="what is nexus image">
+        </div>
         <div class="button-container">
           <button nbButton status="primary" (click)="previousStep()">Previous</button>
           <button nbButton status="primary" (click)="nextStep()" [disabled]="currentStepIndex === 6">Next</button>
@@ -41,6 +50,9 @@
       <div class="step-content">
         <h2>How Does It Work?</h2>
         <p>{{ lastCreatedTutorial?.howDoesItWork }}</p>
+        <div class="image-container">
+          <img src="../../../../assets/images/image-20.png" alt="what is nexus image">
+        </div>
         <div class="button-container">
           <button nbButton status="primary" (click)="previousStep()">Previous</button>
           <button nbButton status="primary" (click)="nextStep()" [disabled]="currentStepIndex === 6">Next</button>

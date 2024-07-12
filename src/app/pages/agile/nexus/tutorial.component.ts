@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Tutorial } from '../../../../models/tutorial.model';
 import { TutorialService } from '../../../../services/tutorial.service';
+import { Router } from '@angular/router';  // Import Router
 
 @Component({
   selector: 'app-tutorial',
@@ -11,7 +12,10 @@ export class TutorialComponent implements OnInit {
   lastCreatedTutorial: Tutorial;
   currentStepIndex: number = 0;
 
-  constructor(private tutorialService: TutorialService) { }
+  constructor(
+    private router: Router,  // Inject Router
+    private tutorialService: TutorialService
+  ) { }
 
   ngOnInit(): void {
     this.fetchLastCreatedTutorial();

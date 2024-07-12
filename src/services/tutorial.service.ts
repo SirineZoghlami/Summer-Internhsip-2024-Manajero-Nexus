@@ -14,7 +14,13 @@ export class TutorialService {
 
   // Create a new tutorial
   createTutorial(tutorial: Tutorial): Observable<Tutorial> {
-    return this.http.post<Tutorial>(this.apiUrl, tutorial);
+    return this.http.post<Tutorial>(`${this.apiUrl}/create`, tutorial)
+      .pipe(
+        catchError(error => {
+          console.error('Error creating tutorial:', error);
+          throw error; // Rethrow to keep observable error going
+        })
+      );
   }
 
   // Fetch all tutorials
