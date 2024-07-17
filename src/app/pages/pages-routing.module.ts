@@ -6,9 +6,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ECommerceComponent } from './e-commerce/e-commerce.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
 import { TutorialComponent } from './agile/nexus/tutorial.component';  
-import { TutorialEditComponent } from './agile/nexus/tutorial-edit/tutorial-edit.component';
 import { TutorialCreateComponent } from './agile/nexus/tutorial-create/tutorial-create.component';
-
+import { IntroductionComponent } from './agile/nexus/introduction/introduction.component';
 
 
 const routes: Routes = [{
@@ -77,13 +76,14 @@ const routes: Routes = [{
       path: 'agile/nexus',  
       component: TutorialComponent
     },
-    {
-      path: 'agile/nexus/tutorial/edit',  
-      component: TutorialEditComponent
-    },
+  
     {
       path: 'agile/nexus/tutorial/create',  
       component: TutorialCreateComponent
+    },
+    {
+      path: 'agile/nexus/introduction',  
+      component: IntroductionComponent
     },
     {
       path: '',

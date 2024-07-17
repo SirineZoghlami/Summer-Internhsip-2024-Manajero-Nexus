@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NbIconModule } from '@nebular/theme';
 import { NbStepperModule } from '@nebular/theme';
+import { QuillModule } from 'ngx-quill';
 
 import {
   NbChatModule,
@@ -39,6 +40,7 @@ import {
     NbDialogModule.forRoot(),
     NbWindowModule.forRoot(),
     NbToastrModule.forRoot(),
+    QuillModule.forRoot(),
     NbChatModule.forRoot({
       messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
     }),
