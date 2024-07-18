@@ -1,10 +1,10 @@
 <div class="tutorial-component">
   <div class="button-container">
-    
-    <button nbButton status="primary" [routerLink]="['/pages/agile/nexus/tutorial/create']">Create New Tutorial</button>
-    <button nbButton (click)="modifyTutorial()">Modify Tutorial</button>
-
+    <button id="create-tutorial" nbButton status="primary" [routerLink]="['/pages/agile/nexus/tutorial/create']">Create New Tutorial</button>
+    <button id="modify-tutorial" nbButton (click)="modifyTutorial()">Modify Tutorial</button>
+    <button id="delete-tutorial" nbButton status="danger" (click)="confirmDelete()">Delete Tutorial</button>
   </div>
+  
   
   <h1 style="text-align: center">Nexus Agile Framework Tutorial</h1>
 

@@ -75,4 +75,15 @@ export class TutorialService {
         })
       );
   }
+
+  // Delete a tutorial
+  deleteTutorial(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`)
+      .pipe(
+        catchError(error => {
+          console.error('Error deleting tutorial:', error);
+          throw error;
+        })
+      );
+  }
 }

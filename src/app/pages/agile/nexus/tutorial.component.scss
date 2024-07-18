@@ -43,7 +43,7 @@
 
       .button-group {
         display: flex;
-        justify-content: center;
+        justify-content: center; /* Center the buttons horizontally */
         gap: 1rem;
         margin-top: 1rem;
       }
@@ -103,7 +103,7 @@
 
     .button-container {
       display: flex;
-      justify-content: center;
+      justify-content: center; /* Center the buttons horizontally */
       gap: 1rem;
       margin-top: 1rem;
     }
@@ -132,7 +132,38 @@
       }
     }
   }
+  
+  #create-tutorial, #modify-tutorial, #delete-tutorial {
+    margin-top: 1rem; /* Add margin-top to provide space between buttons */
+  }
 
+  #create-tutorial {
+    background-color: #4caf50; /* Green color for 'Create New Tutorial' */
+    color: #ffffff;
+    
+    &:hover {
+      background-color: #388e3c; /* Darker green on hover */
+    }
+  }
+
+  #modify-tutorial {
+    background-color: #ffa000; /* Amber color for 'Modify Tutorial' */
+    color: #ffffff;
+
+    &:hover {
+      background-color: #ff6f00; /* Darker amber on hover */
+    }
+  }
+
+  #delete-tutorial {
+    background-color: #f44336; /* Red color for 'Delete Tutorial' */
+    color: #ffffff;
+
+    &:hover {
+      background-color: #c62828; /* Darker red on hover */
+    }
+  }
+  
   .img {
     width: 100%;
     height: auto;
