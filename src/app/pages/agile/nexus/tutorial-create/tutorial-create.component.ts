@@ -3,7 +3,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { TutorialService } from '../../../../../services/tutorial.service';
 import { Tutorial } from '../../../../../models/tutorial.model';
 import { NbToastrService } from '@nebular/theme';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { CustomUploadAdapter } from '../../../../pages/editors/ckeditor/custom-upload-adapter'; // Adjust path as needed
+import { Router } from '@angular/router'; // Import Router
 
 @Component({
   selector: 'ngx-tutorial-create',
@@ -18,20 +20,19 @@ export class TutorialCreateComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private tutorialService: TutorialService,
-    private toastrService: NbToastrService
+    private toastrService: NbToastrService,
+    private router: Router // Inject Router
   ) {
     this.editorConfig = {
       toolbar: {
         items: [
           'heading', '|',
-          'bold', 'italic', 'underline', 'strikethrough', 'subscript', 'superscript', 'code', '|',
-          'link', 'blockquote', 'codeBlock', '|',
-          'bulletedList', 'numberedList', 'todoList', '|',
+          'bold', 'italic', '|',
+          'link', 'blockquote', '|',
+          'bulletedList', 'numberedList', '|',
           'indent', 'outdent', '|',
           'imageUpload', 'insertTable', 'mediaEmbed', '|',
-          'undo', 'redo', '|',
-          'alignment', 'fontBackgroundColor', 'fontColor', 'fontSize', 'fontFamily', 'highlight', '|',
-          'horizontalLine', 'pageBreak', 'removeFormat'
+          'undo', 'redo'
         ]
       },
       image: {
@@ -47,16 +48,13 @@ export class TutorialCreateComponent implements OnInit {
       mediaEmbed: {
         previewsInData: true
       },
-      // Other configurations
-      language: 'en',
-      simpleUpload: {
-        uploadUrl: '/path/to/upload/image' // Replace with your image upload URL
-      }
+      language: 'en'
     };
   }
 
   ngOnInit(): void {
     this.createForm();
+    this.initializeEditor();
   }
 
   createForm(): void {
@@ -84,6 +82,7 @@ export class TutorialCreateComponent implements OnInit {
         console.log('Tutorial created:', response);
         this.toastrService.success('Tutorial created successfully!', 'Success');
         this.resetForm();
+        this.router.navigate(['/pages/agile/nexus/tutorial']); // Navigate to the desired route
       },
       error => {
         console.error('Error creating tutorial:', error);
@@ -94,5 +93,25 @@ export class TutorialCreateComponent implements OnInit {
 
   resetForm(): void {
     this.tutorialForm.reset();
+  }
+
+  initializeEditor(): void {
+    ClassicEditor
+      .create(document.querySelector('#editor') as HTMLElement, {
+        ...this.editorConfig,
+        extraPlugins: [this.MyCustomUploadAdapterPlugin]
+      })
+      .then(editor => {
+        console.log('Editor initialized successfully');
+      })
+      .catch(error => {
+        console.error('Error initializing editor:', error);
+      });
+  }
+
+  MyCustomUploadAdapterPlugin(editor: any): void {
+    editor.plugins.get('FileRepository').createUploadAdapter = (loader: any) => {
+      return new CustomUploadAdapter(loader, 'http://localhost:8080/api/tutorials/uploadImage');
+    };
   }
 }

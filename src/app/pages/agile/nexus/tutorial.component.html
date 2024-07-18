@@ -1,6 +1,9 @@
 <div class="tutorial-component">
   <div class="button-container">
+    
     <button nbButton status="primary" [routerLink]="['/pages/agile/nexus/tutorial/create']">Create New Tutorial</button>
+    <button nbButton (click)="modifyTutorial()">Modify Tutorial</button>
+
   </div>
   
   <h1 style="text-align: center">Nexus Agile Framework Tutorial</h1>

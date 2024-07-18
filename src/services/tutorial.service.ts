@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Tutorial } from '../models/tutorial.model';
 import { catchError, map } from 'rxjs/operators';
+import { Tutorial } from '../models/tutorial.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class TutorialService {
       .pipe(
         catchError(error => {
           console.error('Error creating tutorial:', error);
-          throw error; // Rethrow to keep observable error going
+          throw error;
         })
       );
   }
@@ -29,7 +29,7 @@ export class TutorialService {
       .pipe(
         catchError(error => {
           console.error('Error fetching tutorials:', error);
-          throw error; // Rethrow to keep observable error going
+          throw error;
         })
       );
   }
@@ -38,16 +38,40 @@ export class TutorialService {
   getLastCreatedTutorial(): Observable<Tutorial> {
     return this.http.get<Tutorial[]>(this.apiUrl)
       .pipe(
-        map(tutorials => {
-          if (tutorials.length > 0) {
-            return tutorials[tutorials.length - 1]; // Get the last tutorial in the array
-          } else {
-            return null; // Handle case where no tutorials are found
-          }
-        }),
+        map(tutorials => tutorials.length > 0 ? tutorials[tutorials.length - 1] : null),
         catchError(error => {
           console.error('Error fetching tutorials:', error);
-          throw error; // Rethrow to keep observable error going
+          throw error;
+        })
+      );
+  }
+
+  // Upload image for a tutorial
+  uploadImage(tutorialId: string, file: File): Observable<Tutorial> {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const uploadUrl = `${this.apiUrl}/${tutorialId}/uploadImage`;
+    const httpOptions = {
+      headers: new HttpHeaders({ 'enctype': 'multipart/form-data' })
+    };
+
+    return this.http.post<Tutorial>(uploadUrl, formData, httpOptions)
+      .pipe(
+        catchError(error => {
+          console.error('Error uploading image:', error);
+          throw error;
+        })
+      );
+  }
+
+  // Update an existing tutorial
+  updateTutorial(tutorial: Tutorial): Observable<Tutorial> {
+    return this.http.put<Tutorial>(`${this.apiUrl}/${tutorial.id}`, tutorial)
+      .pipe(
+        catchError(error => {
+          console.error('Error updating tutorial:', error);
+          throw error;
         })
       );
   }

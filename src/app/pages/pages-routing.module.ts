@@ -7,7 +7,7 @@ import { ECommerceComponent } from './e-commerce/e-commerce.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
 import { TutorialComponent } from './agile/nexus/tutorial.component';  
 import { TutorialCreateComponent } from './agile/nexus/tutorial-create/tutorial-create.component';
-
+import { TutorialUpdateComponent } from './agile/nexus/tutorial-update/tutorial-update.component';
 
 const routes: Routes = [{
   path: '',
@@ -72,7 +72,7 @@ const routes: Routes = [{
         .then(m => m.MiscellaneousModule),
     },
     {
-      path: 'agile/nexus',  
+      path: 'agile/nexus/tutorial',  
       component: TutorialComponent
     },
   
@@ -80,7 +80,10 @@ const routes: Routes = [{
       path: 'agile/nexus/tutorial/create',  
       component: TutorialCreateComponent
     },
- 
+    {
+      path: 'agile/nexus/tutorial/update/:id',
+      component: TutorialUpdateComponent
+    },
     {
       path: '',
       redirectTo: 'dashboard',

@@ -50,4 +50,10 @@ export class TutorialComponent implements OnInit {
   getSanitizedContent(content: string) {
     return this.sanitizer.bypassSecurityTrustHtml(content);
   }
+
+  modifyTutorial(): void {
+    if (this.lastCreatedTutorial) {
+      this.router.navigate(['/pages/agile/nexus/tutorial/update', this.lastCreatedTutorial.id]);
+    }
+  }
 }
