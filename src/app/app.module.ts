@@ -13,7 +13,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NbIconModule } from '@nebular/theme';
 import { NbStepperModule } from '@nebular/theme';
-import { QuillModule } from 'ngx-quill';
+import { CKEditorModule } from 'ng2-ckeditor';
 
 import {
   NbChatModule,
@@ -23,6 +23,7 @@ import {
   NbSidebarModule,
   NbToastrModule,
   NbWindowModule,
+
 } from '@nebular/theme';
 
 @NgModule({
@@ -40,12 +41,13 @@ import {
     NbDialogModule.forRoot(),
     NbWindowModule.forRoot(),
     NbToastrModule.forRoot(),
-    QuillModule.forRoot(),
     NbChatModule.forRoot({
       messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
     }),
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
+    CKEditorModule,
+
   ],
   
   bootstrap: [AppComponent],

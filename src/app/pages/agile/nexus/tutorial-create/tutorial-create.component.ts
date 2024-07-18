@@ -12,6 +12,7 @@ import { NbToastrService } from '@nebular/theme';
 export class TutorialCreateComponent implements OnInit {
   tutorialForm: FormGroup;
   tutorial: Tutorial;
+  editorConfig: any; // Define editorConfig as any type
 
   constructor(
     private formBuilder: FormBuilder,
@@ -28,8 +29,28 @@ export class TutorialCreateComponent implements OnInit {
       applyingNexus: '',
       conclusion: ''
     };
-  }
 
+    // CKEditor configuration
+    this.editorConfig = {
+      toolbar: [
+        { name: 'document', items: ['Source', '-', 'NewPage', 'Preview', '-', 'Templates'] },
+        { name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo'] },
+        { name: 'editing', items: ['Find', 'Replace', '-', 'SelectAll', '-', 'Scayt'] },
+        '/',
+        { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat'] },
+        { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl'] },
+        { name: 'links', items: ['Link', 'Unlink', 'Anchor'] },
+        { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe'] },
+        '/',
+        { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
+        { name: 'colors', items: ['TextColor', 'BGColor'] },
+        { name: 'tools', items: ['Maximize', 'ShowBlocks', '-', 'About'] }
+      ],
+      // Optionally configure the CKEditor instance further
+      // Example: height: '400px'
+      // Example: language: 'en'
+    };
+  }
   ngOnInit(): void {
     this.createForm();
   }
@@ -47,33 +68,22 @@ export class TutorialCreateComponent implements OnInit {
   }
 
   createTutorial(): void {
-    this.tutorial = this.tutorialForm.value; // Update tutorial object with form values
+    const tutorial: Tutorial = this.tutorialForm.value;
 
-    this.tutorialService.createTutorial(this.tutorial).subscribe(
-        response => {
-            console.log('Tutorial created:', response);
-            this.toastrService.success('Tutorial created successfully!', 'Success');
-            this.resetForm();
-        },
-        error => {
-            console.error('Error creating tutorial:', error);
-            this.toastrService.danger('Failed to create tutorial. Please try again.', 'Error');
-        }
+    this.tutorialService.createTutorial(tutorial).subscribe(
+      response => {
+        console.log('Tutorial created:', response);
+        this.toastrService.success('Tutorial created successfully!', 'Success');
+        this.resetForm();
+      },
+      error => {
+        console.error('Error creating tutorial:', error);
+        this.toastrService.danger('Failed to create tutorial: ' + error.message, 'Error');
+      }
     );
   }
 
   resetForm(): void {
     this.tutorialForm.reset();
-    this.tutorial = {
-      id: null,
-      introduction: '',
-      whyUse: '',
-      whatIsNexus: '',
-      howDoesItWork: '',
-      limitations: '',
-      applyingNexus: '',
-      conclusion: ''
-    };
   }
-
 }

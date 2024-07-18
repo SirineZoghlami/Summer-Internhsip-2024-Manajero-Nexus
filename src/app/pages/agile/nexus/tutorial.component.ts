@@ -4,7 +4,7 @@ import { TutorialService } from '../../../../services/tutorial.service';
 import { Router } from '@angular/router';  // Import Router
 
 @Component({
-  selector: 'app-tutorial',
+  selector: 'ngx-tutorial-create',
   templateUrl: './tutorial.component.html',
   styleUrls: ['./tutorial.component.scss']
 })

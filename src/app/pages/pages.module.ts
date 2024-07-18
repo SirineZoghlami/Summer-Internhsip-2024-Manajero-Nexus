@@ -10,8 +10,7 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import { TutorialComponent } from './agile/nexus/tutorial.component';
 import { TutorialCreateComponent } from './agile/nexus/tutorial-create/tutorial-create.component';
-import { IntroductionComponent } from './agile/nexus/introduction/introduction.component';
-import { QuillModule } from 'ngx-quill';
+import { CKEditorModule } from 'ng2-ckeditor'; 
 
 @NgModule({
   imports: [
@@ -26,13 +25,12 @@ import { QuillModule } from 'ngx-quill';
     FormsModule,
     ReactiveFormsModule,
     NbDialogModule.forChild(),
-    QuillModule.forRoot(),
+    CKEditorModule, 
   ],
   declarations: [
     PagesComponent,
     TutorialComponent,
     TutorialCreateComponent,
-    IntroductionComponent,
   ],
   providers: [],
 })

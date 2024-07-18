@@ -7,8 +7,11 @@
           <nb-step [label]="'Introduction'">
             <div class="step-content">
               <h2>Introduction</h2>
-              <textarea [(ngModel)]="tutorial.introduction" name="introduction" placeholder="Enter Introduction" class="custom-textarea"></textarea>
-              <div class="button-group">
+     <ckeditor
+              [(ngModel)]="tutorial.introduction"
+              name="introduction"
+              [config]="editorConfig"
+            ></ckeditor>              <div class="button-group">
                 <button nbButton nbStepperNext>Next</button>
               </div>
             </div>
