@@ -10,7 +10,8 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import { TutorialComponent } from './agile/nexus/tutorial.component';
 import { TutorialCreateComponent } from './agile/nexus/tutorial-create/tutorial-create.component';
-import { CKEditorModule } from 'ng2-ckeditor'; 
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+
 
 @NgModule({
   imports: [
@@ -32,6 +33,7 @@ import { CKEditorModule } from 'ng2-ckeditor';
     PagesComponent,
     TutorialComponent,
     TutorialCreateComponent,
+
   ],
   providers: [],
 })

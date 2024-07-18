@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { TutorialService } from '../../../../../services/tutorial.service';
 import { Tutorial } from '../../../../../models/tutorial.model';
 import { NbToastrService } from '@nebular/theme';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'ngx-tutorial-create',
@@ -10,6 +11,7 @@ import { NbToastrService } from '@nebular/theme';
   styleUrls: ['./tutorial-create.component.scss']
 })
 export class TutorialCreateComponent implements OnInit {
+  public Editor = ClassicEditor;
   tutorialForm: FormGroup;
   editorConfig: any;
 
@@ -19,20 +21,37 @@ export class TutorialCreateComponent implements OnInit {
     private toastrService: NbToastrService
   ) {
     this.editorConfig = {
-      toolbar: [
-        { name: 'document', items: ['Source', '-', 'NewPage', 'Preview', '-', 'Templates'] },
-        { name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo'] },
-        { name: 'editing', items: ['Find', 'Replace', '-', 'SelectAll', '-', 'Scayt'] },
-        '/',
-        { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat'] },
-        { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl'] },
-        { name: 'links', items: ['Link', 'Unlink', 'Anchor'] },
-        { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe'] },
-        '/',
-        { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
-        { name: 'colors', items: ['TextColor', 'BGColor'] },
-        { name: 'tools', items: ['Maximize', 'ShowBlocks', '-', 'About'] }
-      ]
+      toolbar: {
+        items: [
+          'heading', '|',
+          'bold', 'italic', 'underline', 'strikethrough', 'subscript', 'superscript', 'code', '|',
+          'link', 'blockquote', 'codeBlock', '|',
+          'bulletedList', 'numberedList', 'todoList', '|',
+          'indent', 'outdent', '|',
+          'imageUpload', 'insertTable', 'mediaEmbed', '|',
+          'undo', 'redo', '|',
+          'alignment', 'fontBackgroundColor', 'fontColor', 'fontSize', 'fontFamily', 'highlight', '|',
+          'horizontalLine', 'pageBreak', 'removeFormat'
+        ]
+      },
+      image: {
+        toolbar: [
+          'imageTextAlternative', 'imageStyle:full', 'imageStyle:side', 'linkImage'
+        ]
+      },
+      table: {
+        contentToolbar: [
+          'tableColumn', 'tableRow', 'mergeTableCells', 'tableProperties', 'tableCellProperties'
+        ]
+      },
+      mediaEmbed: {
+        previewsInData: true
+      },
+      // Other configurations
+      language: 'en',
+      simpleUpload: {
+        uploadUrl: '/path/to/upload/image' // Replace with your image upload URL
+      }
     };
   }
 
