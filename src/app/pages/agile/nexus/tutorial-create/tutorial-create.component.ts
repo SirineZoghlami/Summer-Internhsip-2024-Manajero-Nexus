@@ -5,7 +5,7 @@ import { Tutorial } from '../../../../../models/tutorial.model';
 import { NbToastrService } from '@nebular/theme';
 
 @Component({
-  selector: 'app-tutorial-create',
+  selector: 'ngx-tutorial-create',
   templateUrl: './tutorial-create.component.html',
   styleUrls: ['./tutorial-create.component.scss']
 })

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { NbMenuModule, NbStepperModule, NbCardModule, NbDialogModule } from '@nebular/theme';
+import { NbMenuModule, NbStepperModule, NbCardModule, NbDialogModule, NbButtonModule  } from '@nebular/theme';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ThemeModule } from '../@theme/theme.module';
@@ -26,6 +26,7 @@ import { CKEditorModule } from 'ng2-ckeditor';
     ReactiveFormsModule,
     NbDialogModule.forChild(),
     CKEditorModule, 
+    NbButtonModule,
   ],
   declarations: [
     PagesComponent,

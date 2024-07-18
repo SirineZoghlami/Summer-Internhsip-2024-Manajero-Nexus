@@ -1,6 +1,6 @@
 <div class="tutorial-component">
   <div class="button-container">
-    <button nbButton status="primary" routerLink="/agile/nexus/tutorial/create">Create New Tutorial</button>
+    <button nbButton status="primary" [routerLink]="['/pages/agile/nexus/tutorial/create']">Create New Tutorial</button>
   </div>
   
   <h1 style="text-align: center">Nexus Agile Framework Tutorial</h1>
@@ -10,7 +10,7 @@
     <nb-step [label]="'Introduction'">
       <div class="step-content">
         <h2>Introduction</h2>
-        <p>{{ lastCreatedTutorial?.introduction }}</p>
+        <div [innerHTML]="getSanitizedContent(lastCreatedTutorial?.introduction)"></div>
         
         <div class="button-container">
           <button nbButton status="primary" (click)="nextStep()">Next</button>
@@ -22,7 +22,7 @@
     <nb-step [label]="'Why Use the Nexus Agile Framework?'">
       <div class="step-content">
         <h2>Why Use the Nexus Agile Framework?</h2>
-        <p>{{ lastCreatedTutorial?.whyUse }}</p>
+        <div [innerHTML]="getSanitizedContent(lastCreatedTutorial?.whyUse)"></div>
         <div class="button-container">
           <button nbButton status="primary" (click)="previousStep()" [disabled]="currentStepIndex === 0">Previous</button>
           <button nbButton status="primary" (click)="nextStep()" [disabled]="currentStepIndex === 6">Next</button>
@@ -34,9 +34,9 @@
     <nb-step [label]="'What is Nexus?'">
       <div class="step-content">
         <h2>What is Nexus?</h2>
-        <p>{{ lastCreatedTutorial?.whatIsNexus }}</p>
+        <div [innerHTML]="getSanitizedContent(lastCreatedTutorial?.whatIsNexus)"></div>
         <div class="image-container">
-          <img src="../../../../assets/images/nexus-scrum-framework-slide1.png" alt="what is nexus image">
+          <img src="../../../../assets/images/nexus-scrum-framework-slide1.png" alt="What is Nexus image">
         </div>
         <div class="button-container">
           <button nbButton status="primary" (click)="previousStep()">Previous</button>
@@ -49,9 +49,9 @@
     <nb-step [label]="'How Does It Work?'">
       <div class="step-content">
         <h2>How Does It Work?</h2>
-        <p>{{ lastCreatedTutorial?.howDoesItWork }}</p>
+        <div [innerHTML]="getSanitizedContent(lastCreatedTutorial?.howDoesItWork)"></div>
         <div class="image-container">
-          <img src="../../../../assets/images/image-20.png" alt="what is nexus image">
+          <img src="../../../../assets/images/image-20.png" alt="How does it work image">
         </div>
         <div class="button-container">
           <button nbButton status="primary" (click)="previousStep()">Previous</button>
@@ -64,7 +64,7 @@
     <nb-step [label]="'Limitations'">
       <div class="step-content">
         <h2>Limitations</h2>
-        <p>{{ lastCreatedTutorial?.limitations }}</p>
+        <div [innerHTML]="getSanitizedContent(lastCreatedTutorial?.limitations)"></div>
         <div class="button-container">
           <button nbButton status="primary" (click)="previousStep()">Previous</button>
           <button nbButton status="primary" (click)="nextStep()" [disabled]="currentStepIndex === 6">Next</button>
@@ -76,7 +76,7 @@
     <nb-step [label]="'Applying Nexus in the Real World'">
       <div class="step-content">
         <h2>Applying Nexus in the Real World</h2>
-        <p>{{ lastCreatedTutorial?.applyingNexus }}</p>
+        <div [innerHTML]="getSanitizedContent(lastCreatedTutorial?.applyingNexus)"></div>
         <div class="button-container">
           <button nbButton status="primary" (click)="previousStep()">Previous</button>
           <button nbButton status="primary" (click)="nextStep()" [disabled]="currentStepIndex === 6">Next</button>
@@ -88,7 +88,7 @@
     <nb-step [label]="'Conclusion'">
       <div class="step-content">
         <h2>Conclusion</h2>
-        <p>{{ lastCreatedTutorial?.conclusion }}</p>
+        <div [innerHTML]="getSanitizedContent(lastCreatedTutorial?.conclusion)"></div>
         <div class="button-container">
           <button nbButton status="primary" (click)="previousStep()">Previous</button>
         </div>

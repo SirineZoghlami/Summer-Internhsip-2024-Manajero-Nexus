@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Tutorial } from '../../../../models/tutorial.model';
 import { TutorialService } from '../../../../services/tutorial.service';
-import { Router } from '@angular/router';  // Import Router
+import { Router } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser'; // Import DomSanitizer
 
 @Component({
-  selector: 'ngx-tutorial-create',
+  selector: 'ngx-tutorial',
   templateUrl: './tutorial.component.html',
   styleUrls: ['./tutorial.component.scss']
 })
@@ -13,8 +14,9 @@ export class TutorialComponent implements OnInit {
   currentStepIndex: number = 0;
 
   constructor(
-    private router: Router,  // Inject Router
-    private tutorialService: TutorialService
+    private router: Router,
+    private tutorialService: TutorialService,
+    private sanitizer: DomSanitizer // Inject DomSanitizer
   ) { }
 
   ngOnInit(): void {
@@ -29,7 +31,6 @@ export class TutorialComponent implements OnInit {
       },
       error => {
         console.error('Error fetching last created tutorial:', error);
-        // Handle error, e.g., show toast message or set default value
       }
     );
   }
@@ -41,8 +42,12 @@ export class TutorialComponent implements OnInit {
   }
 
   nextStep(): void {
-    if (this.currentStepIndex < 6) { // Assuming there are 7 steps (0-indexed)
+    if (this.currentStepIndex < 6) {
       this.currentStepIndex++;
     }
+  }
+
+  getSanitizedContent(content: string) {
+    return this.sanitizer.bypassSecurityTrustHtml(content);
   }
 }
