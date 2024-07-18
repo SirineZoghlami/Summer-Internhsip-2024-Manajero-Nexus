@@ -11,26 +11,13 @@ import { NbToastrService } from '@nebular/theme';
 })
 export class TutorialCreateComponent implements OnInit {
   tutorialForm: FormGroup;
-  tutorial: Tutorial;
-  editorConfig: any; // Define editorConfig as any type
+  editorConfig: any;
 
   constructor(
     private formBuilder: FormBuilder,
     private tutorialService: TutorialService,
     private toastrService: NbToastrService
   ) {
-    this.tutorial = {
-      id: null,
-      introduction: '',
-      whyUse: '',
-      whatIsNexus: '',
-      howDoesItWork: '',
-      limitations: '',
-      applyingNexus: '',
-      conclusion: ''
-    };
-
-    // CKEditor configuration
     this.editorConfig = {
       toolbar: [
         { name: 'document', items: ['Source', '-', 'NewPage', 'Preview', '-', 'Templates'] },
@@ -45,12 +32,10 @@ export class TutorialCreateComponent implements OnInit {
         { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
         { name: 'colors', items: ['TextColor', 'BGColor'] },
         { name: 'tools', items: ['Maximize', 'ShowBlocks', '-', 'About'] }
-      ],
-      // Optionally configure the CKEditor instance further
-      // Example: height: '400px'
-      // Example: language: 'en'
+      ]
     };
   }
+
   ngOnInit(): void {
     this.createForm();
   }
@@ -68,6 +53,11 @@ export class TutorialCreateComponent implements OnInit {
   }
 
   createTutorial(): void {
+    if (this.tutorialForm.invalid) {
+      this.toastrService.danger('Please fill in all required fields.', 'Error');
+      return;
+    }
+
     const tutorial: Tutorial = this.tutorialForm.value;
 
     this.tutorialService.createTutorial(tutorial).subscribe(
