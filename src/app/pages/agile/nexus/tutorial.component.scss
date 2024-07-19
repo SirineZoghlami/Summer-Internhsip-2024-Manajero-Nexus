@@ -19,7 +19,6 @@
 
     ::ng-deep nb-card-body {
       background-color: #ffffff;
-      text-align: center;
       padding: 1.5rem;
       font-size: 1rem;
       color: #4a4a4a;
@@ -86,7 +85,7 @@
   }
 
   .step-content {
-    text-align: center;
+    text-align: left; /* Align text to the left */
     padding: 1rem;
 
     h2 {
@@ -164,9 +163,16 @@
     }
   }
   
+  .img-container {
+    display: flex;
+    justify-content: center; /* Center the container */
+    align-items: center; /* Align items in the center vertically */
+    margin: 1rem 0; /* Margin for spacing */
+  }
+
   .img {
-    width: 100%;
-    height: auto;
-    max-width: 100%;
+    display: block;        /* Make the image a block-level element */
+    max-width: 100%;       /* Ensure image doesn't exceed container width */
+    height: auto;          /* Maintain aspect ratio */
   }
 }
