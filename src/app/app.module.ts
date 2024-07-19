@@ -13,7 +13,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NbIconModule } from '@nebular/theme';
 import { NbStepperModule } from '@nebular/theme';
-import { CKEditorModule } from 'ng2-ckeditor';
 
 import {
   NbChatModule,
@@ -46,7 +45,6 @@ import {
     }),
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
-    CKEditorModule,
 
   ],
   
