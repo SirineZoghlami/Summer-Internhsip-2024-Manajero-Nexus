@@ -9,11 +9,10 @@
           <nb-step [label]="'Introduction'">
             <div class="step-content">
               <h2>Introduction</h2>
-              <ckeditor
-                formControlName="introduction"
-                [editor]="Editor"
-                [config]="editorConfig"
-              ></ckeditor>
+              <ckeditor formControlName="introduction" [editor]="Editor" [config]="editorConfig"></ckeditor>
+              <div *ngIf="tutorialForm.get('introduction').invalid && (tutorialForm.get('introduction').touched || tutorialForm.get('introduction').dirty)">
+                <p class="error-message" *ngIf="tutorialForm.get('introduction').errors.required">Please enter Introduction.</p>
+              </div>
               <div class="button-group">
                 <button nbButton nbStepperNext>Next</button>
               </div>
@@ -24,11 +23,10 @@
           <nb-step [label]="'Why Use the Nexus Agile Framework?'">
             <div class="step-content">
               <h2>Why Use the Nexus Agile Framework?</h2>
-              <ckeditor
-                formControlName="whyUse"
-                [editor]="Editor"
-                [config]="editorConfig"
-              ></ckeditor>
+              <ckeditor formControlName="whyUse" [editor]="Editor" [config]="editorConfig"></ckeditor>
+              <div *ngIf="tutorialForm.get('whyUse').invalid && (tutorialForm.get('whyUse').touched || tutorialForm.get('whyUse').dirty)">
+                <p class="error-message" *ngIf="tutorialForm.get('whyUse').errors.required">Please enter why use Nexus methodology information.</p>
+              </div>
               <div class="button-group">
                 <button nbButton nbStepperPrevious>Previous</button>
                 <button nbButton nbStepperNext>Next</button>
@@ -40,11 +38,10 @@
           <nb-step [label]="'What is Nexus?'">
             <div class="step-content">
               <h2>What is Nexus?</h2>
-              <ckeditor
-                formControlName="whatIsNexus"
-                [editor]="Editor"
-                [config]="editorConfig"
-              ></ckeditor>
+              <ckeditor formControlName="whatIsNexus" [editor]="Editor" [config]="editorConfig"></ckeditor>
+              <div *ngIf="tutorialForm.get('whatIsNexus').invalid && (tutorialForm.get('whatIsNexus').touched || tutorialForm.get('whatIsNexus').dirty)">
+                <p class="error-message" *ngIf="tutorialForm.get('whatIsNexus').errors.required">Please enter what is Nexus methodology.</p>
+              </div>
               <div class="button-group">
                 <button nbButton nbStepperPrevious>Previous</button>
                 <button nbButton nbStepperNext>Next</button>
@@ -56,11 +53,10 @@
           <nb-step [label]="'How Does It Work?'">
             <div class="step-content">
               <h2>How Does It Work?</h2>
-              <ckeditor
-                formControlName="howDoesItWork"
-                [editor]="Editor"
-                [config]="editorConfig"
-              ></ckeditor>
+              <ckeditor formControlName="howDoesItWork" [editor]="Editor" [config]="editorConfig"></ckeditor>
+              <div *ngIf="tutorialForm.get('howDoesItWork').invalid && (tutorialForm.get('howDoesItWork').touched || tutorialForm.get('howDoesItWork').dirty)">
+                <p class="error-message" *ngIf="tutorialForm.get('howDoesItWork').errors.required">Please enter how Nexus methodology works.</p>
+              </div>
               <div class="button-group">
                 <button nbButton nbStepperPrevious>Previous</button>
                 <button nbButton nbStepperNext>Next</button>
@@ -72,11 +68,10 @@
           <nb-step [label]="'Limitations'">
             <div class="step-content">
               <h2>Limitations</h2>
-              <ckeditor
-                formControlName="limitations"
-                [editor]="Editor"
-                [config]="editorConfig"
-              ></ckeditor>
+              <ckeditor formControlName="limitations" [editor]="Editor" [config]="editorConfig"></ckeditor>
+              <div *ngIf="tutorialForm.get('limitations').invalid && (tutorialForm.get('limitations').touched || tutorialForm.get('limitations').dirty)">
+                <p class="error-message" *ngIf="tutorialForm.get('limitations').errors.required">Please enter the limitations of Nexus methodology.</p>
+              </div>
               <div class="button-group">
                 <button nbButton nbStepperPrevious>Previous</button>
                 <button nbButton nbStepperNext>Next</button>
@@ -88,11 +83,10 @@
           <nb-step [label]="'Applying Nexus in the Real World'">
             <div class="step-content">
               <h2>Applying Nexus in the Real World</h2>
-              <ckeditor
-                formControlName="applyingNexus"
-                [editor]="Editor"
-                [config]="editorConfig"
-              ></ckeditor>
+              <ckeditor formControlName="applyingNexus" [editor]="Editor" [config]="editorConfig"></ckeditor>
+              <div *ngIf="tutorialForm.get('applyingNexus').invalid && (tutorialForm.get('applyingNexus').touched || tutorialForm.get('applyingNexus').dirty)">
+                <p class="error-message" *ngIf="tutorialForm.get('applyingNexus').errors.required">Please enter how to apply Nexus in the real world.</p>
+              </div>
               <div class="button-group">
                 <button nbButton nbStepperPrevious>Previous</button>
                 <button nbButton nbStepperNext>Next</button>
@@ -104,11 +98,10 @@
           <nb-step [label]="'Conclusion'">
             <div class="step-content">
               <h2>Conclusion</h2>
-              <ckeditor
-                formControlName="conclusion"
-                [editor]="Editor"
-                [config]="editorConfig"
-              ></ckeditor>
+              <ckeditor formControlName="conclusion" [editor]="Editor" [config]="editorConfig"></ckeditor>
+              <div *ngIf="tutorialForm.get('conclusion').invalid && (tutorialForm.get('conclusion').touched || tutorialForm.get('conclusion').dirty)">
+                <p class="error-message" *ngIf="tutorialForm.get('conclusion').errors.required">Please enter conclusion.</p>
+              </div>
               <div class="button-group">
                 <button nbButton nbStepperPrevious>Previous</button>
                 <button nbButton type="submit">Create Tutorial</button>

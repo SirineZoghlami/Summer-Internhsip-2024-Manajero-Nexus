@@ -6,6 +6,7 @@ import { NbToastrService } from '@nebular/theme';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CustomUploadAdapter } from '../../../../pages/editors/ckeditor/custom-upload-adapter'; // Adjust path as needed
 import { Router } from '@angular/router'; // Import Router
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'ngx-tutorial-create',
@@ -59,13 +60,13 @@ export class TutorialCreateComponent implements OnInit {
 
   createForm(): void {
     this.tutorialForm = this.formBuilder.group({
-      introduction: [''],
-      whyUse: [''],
-      whatIsNexus: [''],
-      howDoesItWork: [''],
-      limitations: [''],
-      applyingNexus: [''],
-      conclusion: ['']
+      introduction: ['', Validators.required],
+      whyUse: ['', Validators.required],
+      whatIsNexus: ['', Validators.required],
+      howDoesItWork: ['', Validators.required],
+      limitations: ['', Validators.required],
+      applyingNexus: ['', Validators.required],
+      conclusion: ['', Validators.required]
     });
   }
 
