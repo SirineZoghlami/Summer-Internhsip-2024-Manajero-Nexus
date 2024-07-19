@@ -8,6 +8,7 @@ import { NotFoundComponent } from './miscellaneous/not-found/not-found.component
 import { TutorialComponent } from './agile/nexus/tutorial.component';  
 import { TutorialCreateComponent } from './agile/nexus/tutorial-create/tutorial-create.component';
 import { TutorialUpdateComponent } from './agile/nexus/tutorial-update/tutorial-update.component';
+import { NexusQuizComponent } from './agile/nexus/nexus-quiz/nexus-quiz.component'; // Check path
 
 const routes: Routes = [{
   path: '',
@@ -83,6 +84,10 @@ const routes: Routes = [{
     {
       path: 'agile/nexus/tutorial/update/:id',
       component: TutorialUpdateComponent
+    },
+    {
+      path: 'agile/nexus/quizz',
+      component: NexusQuizComponent
     },
     {
       path: '',

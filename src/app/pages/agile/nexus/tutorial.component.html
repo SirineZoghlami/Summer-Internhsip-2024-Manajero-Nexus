@@ -94,6 +94,9 @@
         <div [innerHTML]="getSanitizedContent(lastCreatedTutorial?.conclusion)"></div>
         <div class="button-container">
           <button nbButton status="primary" (click)="previousStep()">Previous</button>
+          <button nbButton status="primary" (click)="navigateToQuiz()">Take the Quiz</button>
+
+
         </div>
       </div>
     </nb-step>

@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Tutorial } from '../../../../models/tutorial.model';
 import { TutorialService } from '../../../../services/tutorial.service';
 import { Router } from '@angular/router';
-import { DomSanitizer } from '@angular/platform-browser'; // Import DomSanitizer
-import { NbDialogService, NbToastrService } from '@nebular/theme'; // Import NbDialogService and NbToastrService
-import { ConfirmationDialogComponent } from '../../agile/nexus/confirmation-dialog/confirmation-dialog.component'; // Corrected import path
+import { DomSanitizer } from '@angular/platform-browser';
+import { NbDialogService, NbToastrService } from '@nebular/theme'; 
+import { ConfirmationDialogComponent } from '../../agile/nexus/confirmation-dialog/confirmation-dialog.component'; 
 
 @Component({
   selector: 'ngx-tutorial',
@@ -18,11 +18,14 @@ export class TutorialComponent implements OnInit {
   constructor(
     private router: Router,
     private tutorialService: TutorialService,
-    private sanitizer: DomSanitizer, // Inject DomSanitizer
-    private dialogService: NbDialogService, // Inject NbDialogService
-    private toastrService: NbToastrService // Inject NbToastrService
+    private sanitizer: DomSanitizer, 
+    private dialogService: NbDialogService, 
+    private toastrService: NbToastrService 
   ) { }
 
+  navigateToQuiz() {
+    this.router.navigate(['/pages/agile/nexus/quizz']);
+  }
   ngOnInit(): void {
     this.fetchLastCreatedTutorial();
   }

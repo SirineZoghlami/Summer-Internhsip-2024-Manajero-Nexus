@@ -1,0 +1,41 @@
+<div class="quiz-container">
+    <h1>Nexus Framework Quiz</h1>
+    <form (ngSubmit)="submitQuiz()">
+      <div *ngFor="let question of questions; let i = index" class="question-block">
+        <h3>{{ question.question }}</h3>
+        <div *ngFor="let option of question.options; let j = index">
+          <label [ngClass]="getResultClass(question, j)">
+            <input 
+              type="radio" 
+              name="question{{ i }}" 
+              (change)="question.selectedAnswer = j" 
+              [disabled]="showResults"
+              [value]="j"
+            />
+            {{ option }}
+          </label>
+        </div>
+      </div>
+
+
+  <div class="button-container">
+      <button nbButton type="submit" class="submit-button" [disabled]="showResults">Submit Quiz</button>
+    </div>    </form>
+    
+    <div *ngIf="showResults" class="results">
+      <h2>Quiz Results</h2>
+      <div *ngFor="let question of questions; let i = index" class="result-item">
+        <div class="result-header">
+          <p><strong>Question {{ i + 1 }}:</strong> {{ question.question }}</p>
+        </div>
+        <div class="result-options">
+          <p><strong>Your Answer:</strong></p>
+          <p class="user-answer">{{ getUserAnswer(question) }}</p>
+          <p *ngIf="question.selectedAnswer !== question.correctAnswer" class="correct-answer">
+            <strong>Correct Answer:</strong> {{ getCorrectAnswer(question) }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
