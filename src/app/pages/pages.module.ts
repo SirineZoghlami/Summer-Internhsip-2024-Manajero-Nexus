@@ -13,7 +13,8 @@ import { TutorialCreateComponent } from './agile/nexus/tutorial-create/tutorial-
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { TutorialUpdateComponent } from './agile/nexus/tutorial-update/tutorial-update.component';
 import { ConfirmationDialogComponent } from './agile/nexus//confirmation-dialog/confirmation-dialog.component';
-import { NexusQuizComponent } from './agile/nexus/nexus-quiz/nexus-quiz.component'; // Check path
+import { NexusQuizComponent } from './agile/nexus/nexus-quiz/nexus-quiz.component';
+import { ErrorMessageComponent } from './agile/nexus/error-message/error-message.component'; // Check path
 
 @NgModule({
   imports: [
@@ -37,7 +38,8 @@ import { NexusQuizComponent } from './agile/nexus/nexus-quiz/nexus-quiz.componen
     TutorialCreateComponent,
     TutorialUpdateComponent,
     ConfirmationDialogComponent,
-    NexusQuizComponent, // Ensure this component exists
+    NexusQuizComponent,
+    ErrorMessageComponent, // Ensure this component exists
   ],
   providers: [],
 })

@@ -16,7 +16,7 @@ export class TutorialCreateComponent implements OnInit {
   public Editor = ClassicEditor;
   tutorialForm: FormGroup;
   editorConfig: any;
-  currentStepIndex: number = 0;
+  currentStepIndex = 0;
 
   @ViewChild('introductionEditor') introductionEditor: CKEditorComponent;
   @ViewChild('whyUseEditor') whyUseEditor: CKEditorComponent;
@@ -32,7 +32,15 @@ export class TutorialCreateComponent implements OnInit {
     private toastrService: NbToastrService,
     private router: Router
   ) {
-    this.editorConfig = {
+    this.editorConfig = this.createEditorConfig();
+  }
+
+  ngOnInit(): void {
+    this.createForm();
+  }
+
+  private createEditorConfig(): any {
+    return {
       toolbar: {
         items: [
           'heading', '|',
@@ -48,11 +56,7 @@ export class TutorialCreateComponent implements OnInit {
     };
   }
 
-  ngOnInit(): void {
-    this.createForm();
-  }
-
-  createForm(): void {
+  private createForm(): void {
     this.tutorialForm = this.formBuilder.group({
       introduction: ['', Validators.required],
       whyUse: ['', Validators.required],
@@ -65,17 +69,12 @@ export class TutorialCreateComponent implements OnInit {
   }
 
   onEditorChange(event, field: string): void {
-    const control = this.tutorialForm.get(field);
-    control.setValue(event.editor.getData());
-    control.updateValueAndValidity();
+    this.tutorialForm.get(field).setValue(event.editor.getData());
   }
 
   onReady(field: string): void {
-    // Focus the editor or perform any setup required
     const editor = this[field + 'Editor'].editorInstance;
-    editor.model.document.on('change:data', () => {
-      this.onEditorChange({ editor }, field);
-    });
+    editor.model.document.on('change:data', () => this.onEditorChange({ editor }, field));
   }
 
   createTutorial(): void {
@@ -84,8 +83,7 @@ export class TutorialCreateComponent implements OnInit {
       return;
     }
 
-    const tutorial: Tutorial = this.tutorialForm.value;
-    this.tutorialService.createTutorial(tutorial).subscribe(
+    this.tutorialService.createTutorial(this.tutorialForm.value as Tutorial).subscribe(
       () => {
         this.toastrService.success('Tutorial created successfully!', 'Success');
         this.router.navigate(['/tutorials']);
@@ -97,7 +95,7 @@ export class TutorialCreateComponent implements OnInit {
   }
 
   nextStep(): void {
-    if (this.currentStepIndex < 6) { // Assuming 7 steps
+    if (this.currentStepIndex < 6) {
       this.currentStepIndex++;
     }
   }

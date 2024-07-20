@@ -35,7 +35,7 @@ export class TutorialUpdateComponent implements OnInit {
     this.loadTutorial();
   }
 
-  initializeForm() {
+  initializeForm(): void {
     this.tutorialForm = this.fb.group({
       introduction: [''],
       whyUse: [''],
@@ -47,24 +47,24 @@ export class TutorialUpdateComponent implements OnInit {
     });
   }
 
-  loadTutorial() {
-    this.tutorialService.getTutorials().subscribe(tutorials => {
-      const tutorial = tutorials.find(t => t.id === this.tutorialId);
-      if (tutorial) {
-        this.tutorialForm.patchValue({
-          introduction: tutorial.introduction,
-          whyUse: tutorial.whyUse,
-          whatIsNexus: tutorial.whatIsNexus,
-          howDoesItWork: tutorial.howDoesItWork,
-          limitations: tutorial.limitations,
-          applyingNexus: tutorial.applyingNexus,
-          conclusion: tutorial.conclusion
-        });
+  loadTutorial(): void {
+    this.tutorialService.getTutorials().subscribe(
+      tutorials => {
+        const tutorial = tutorials.find(t => t.id === this.tutorialId);
+        if (tutorial) {
+          this.tutorialForm.patchValue(tutorial);
+        } else {
+          this.toastrService.danger('Tutorial not found', 'Error');
+        }
+      },
+      error => {
+        console.error('Error loading tutorials:', error);
+        this.toastrService.danger('Failed to load tutorial: ' + error.message, 'Error');
       }
-    });
+    );
   }
 
-  updateTutorial() {
+  updateTutorial(): void {
     if (this.tutorialForm.valid) {
       const dialogRef = this.dialogService.open(ConfirmationDialogComponent, {
         context: {
@@ -75,22 +75,27 @@ export class TutorialUpdateComponent implements OnInit {
 
       dialogRef.onClose.subscribe(confirmed => {
         if (confirmed) {
-          const updatedTutorial: Tutorial = {
-            ...this.tutorialForm.value,
-            id: this.tutorialId
-          };
-          this.tutorialService.updateTutorial(updatedTutorial).subscribe(
-            () => {
-              this.toastrService.success('Tutorial updated successfully!', 'Success');
-              this.router.navigate(['pages/agile/nexus/tutorial']);
-            },
-            error => {
-              console.error('Error updating tutorial:', error);
-              this.toastrService.danger('Failed to update tutorial: ' + error.message, 'Error');
-            }
-          );
+          this.saveTutorial();
         }
       });
     }
+  }
+
+  private saveTutorial(): void {
+    const updatedTutorial: Tutorial = {
+      ...this.tutorialForm.value,
+      id: this.tutorialId
+    };
+
+    this.tutorialService.updateTutorial(updatedTutorial).subscribe(
+      () => {
+        this.toastrService.success('Tutorial updated successfully!', 'Success');
+        this.router.navigate(['pages/agile/nexus/tutorial']);
+      },
+      error => {
+        console.error('Error updating tutorial:', error);
+        this.toastrService.danger('Failed to update tutorial: ' + error.message, 'Error');
+      }
+    );
   }
 }
