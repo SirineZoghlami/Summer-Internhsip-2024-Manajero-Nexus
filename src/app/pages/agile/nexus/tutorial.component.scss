@@ -2,177 +2,122 @@
   display: block;
   padding: 1rem;
   background-color: #f7f9fc;
+}
 
-  ::ng-deep nb-card {
-    margin: 1rem 0;
-    border-radius: 0.5rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-    background-color: #ffffff;
+.tutorial-component {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
 
-    ::ng-deep nb-card-header {
-      background-color: #f7f9fc;
-      border-bottom: 1px solid #e6e9f0;
-      font-weight: bold;
-      text-align: center;
-      padding: 1rem 0;
-    }
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
 
-    ::ng-deep nb-card-body {
-      background-color: #ffffff;
-      padding: 1.5rem;
-      font-size: 1rem;
-      color: #4a4a4a;
+.title {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #3366ff;
+}
 
-      .custom-textarea {
-        width: 80%;
-        margin: 1rem auto; /* Center the textarea */
-        padding: 0.5rem;
-        border: 1px solid #e6e9f0;
-        border-radius: 0.25rem;
-        text-align: center; /* Center the text within the textarea */
-        font-size: 1rem;
-        resize: vertical; /* Allow vertical resizing */
-      }
+.step-content {
+  padding: 1rem;
+  background-color: #f7f9fc;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
 
-      .validation-error {
-        color: #ff0000; /* Red color for error message */
-        margin-top: 0.5rem;
-        font-size: 0.875rem;
-      }
+.step-content h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
 
-      .button-group {
-        display: flex;
-        justify-content: center; /* Center the buttons horizontally */
-        gap: 1rem;
-        margin-top: 1rem;
-      }
+.step-content p {
+  font-size: 1rem;
+  color: #4a4a4a;
+}
 
-      button {
-        cursor: pointer;
-        padding: 0.5rem 1rem;
-        border: none;
-        border-radius: 0.25rem;
-        background-color: #3366ff;
-        color: #ffffff;
-        font-size: 1rem;
-        transition: background-color 0.3s ease;
+.img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0;
+}
 
-        &:hover {
-          background-color: #274bb7;
-        }
+.img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+}
 
-        &.prev {
-          background-color: #f7f9fc;
-          color: #3366ff;
+.button-container button {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  background-color: #3366ff;
+  color: #ffffff;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
 
-          &:hover {
-            background-color: #e6e9f0;
-          }
-        }
-      }
-    }
+.button-container button:hover {
+  background-color: #274bb7;
+}
 
-    ::ng-deep nb-card-footer {
-      background-color: #f7f9fc;
-      border-top: 1px solid #e6e9f0;
-      text-align: center; /* Center align footer content */
-      padding: 1rem 0;
+.button-container .prev {
+  background-color: #f7f9fc;
+  color: #3366ff;
+}
 
-      button {
-        margin-left: 0.5rem;
-      }
-    }
-  }
+.button-container .prev:hover {
+  background-color: #e6e9f0;
+}
 
-  .step-content {
-    text-align: left; /* Align text to the left */
-    padding: 1rem;
+#create-tutorial {
+  background-color: #4caf50;
+}
 
-    h2 {
-      font-size: 1.5rem;
-      font-weight: bold;
-      margin-bottom: 1rem;
-    }
+#modify-tutorial {
+  background-color: #ffa000;
+  color: #ffffff;
+}
 
-    p {
-      font-size: 1rem;
-      margin-bottom: 1rem;
-      color: #4a4a4a;
-    }
+#delete-tutorial {
+  background-color: #f44336;
+  color: #ffffff;
+}
 
-    .button-container {
-      display: flex;
-      justify-content: center; /* Center the buttons horizontally */
-      gap: 1rem;
-      margin-top: 1rem;
-    }
+#delete-tutorial:hover {
+  background-color: #c62828;
+}
 
-    button {
-      cursor: pointer;
-      padding: 0.5rem 1rem;
-      border: none;
-      border-radius: 0.25rem;
-      background-color: #3366ff;
-      color: #ffffff;
-      font-size: 1rem;
-      transition: background-color 0.3s ease;
+#modify-tutorial:hover {
+  background-color: #ff6f00;
+}
 
-      &:hover {
-        background-color: #274bb7;
-      }
+#create-tutorial:hover {
+  background-color: #388e3c;
+}
 
-      &.prev {
-        background-color: #f7f9fc;
-        color: #3366ff;
-
-        &:hover {
-          background-color: #e6e9f0;
-        }
-      }
-    }
-  }
-  
-  #create-tutorial, #modify-tutorial, #delete-tutorial {
-    margin-top: 1rem; /* Add margin-top to provide space between buttons */
-  }
-
-  #create-tutorial {
-    background-color: #4caf50; /* Green color for 'Create New Tutorial' */
-    color: #ffffff;
-    
-    &:hover {
-      background-color: #388e3c; /* Darker green on hover */
-    }
-  }
-
-  #modify-tutorial {
-    background-color: #ffa000; /* Amber color for 'Modify Tutorial' */
-    color: #ffffff;
-
-    &:hover {
-      background-color: #ff6f00; /* Darker amber on hover */
-    }
-  }
-
-  #delete-tutorial {
-    background-color: #f44336; /* Red color for 'Delete Tutorial' */
-    color: #ffffff;
-
-    &:hover {
-      background-color: #c62828; /* Darker red on hover */
-    }
-  }
-  
-  .img-container {
-    display: flex;
-    justify-content: center; /* Center the container */
-    align-items: center; /* Align items in the center vertically */
-    margin: 1rem 0; /* Margin for spacing */
-  }
-
-  .img {
-    display: block;        /* Make the image a block-level element */
-    max-width: 100%;       /* Ensure image doesn't exceed container width */
-    height: auto;          /* Maintain aspect ratio */
+@media (max-width: 768px) {
+  .button-container {
+    flex-direction: column;
+    align-items: center;
   }
 }
+
+/* Media query to hide step labels on smaller screens */
+@media (max-width: 1300px) {
+  ::ng-deep nb-stepper .step-label,
+  ::ng-deep nb-stepper .label {
+    display: none !important;
+  }}

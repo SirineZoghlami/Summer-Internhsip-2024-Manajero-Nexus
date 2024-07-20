@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TutorialService } from '../../../../../services/tutorial.service';
 import { Tutorial } from '../../../../../models/tutorial.model';
 import { NbToastrService } from '@nebular/theme';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { CustomUploadAdapter } from '../../../../pages/editors/ckeditor/custom-upload-adapter'; // Adjust path as needed
-import { Router } from '@angular/router'; // Import Router
-import { Validators } from '@angular/forms';
+import { CKEditorComponent } from '@ckeditor/ckeditor5-angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-tutorial-create',
@@ -17,12 +16,21 @@ export class TutorialCreateComponent implements OnInit {
   public Editor = ClassicEditor;
   tutorialForm: FormGroup;
   editorConfig: any;
+  currentStepIndex: number = 0;
+
+  @ViewChild('introductionEditor') introductionEditor: CKEditorComponent;
+  @ViewChild('whyUseEditor') whyUseEditor: CKEditorComponent;
+  @ViewChild('whatIsNexusEditor') whatIsNexusEditor: CKEditorComponent;
+  @ViewChild('howDoesItWorkEditor') howDoesItWorkEditor: CKEditorComponent;
+  @ViewChild('limitationsEditor') limitationsEditor: CKEditorComponent;
+  @ViewChild('applyingNexusEditor') applyingNexusEditor: CKEditorComponent;
+  @ViewChild('conclusionEditor') conclusionEditor: CKEditorComponent;
 
   constructor(
     private formBuilder: FormBuilder,
     private tutorialService: TutorialService,
     private toastrService: NbToastrService,
-    private router: Router // Inject Router
+    private router: Router
   ) {
     this.editorConfig = {
       toolbar: {
@@ -32,30 +40,16 @@ export class TutorialCreateComponent implements OnInit {
           'link', 'blockquote', '|',
           'bulletedList', 'numberedList', '|',
           'indent', 'outdent', '|',
-          'imageUpload', 'insertTable', 'mediaEmbed', '|',
+          'imageUpload', 'insertTable', '|',
           'undo', 'redo'
         ]
       },
-      image: {
-        toolbar: [
-          'imageTextAlternative', 'imageStyle:full', 'imageStyle:side', 'linkImage'
-        ]
-      },
-      table: {
-        contentToolbar: [
-          'tableColumn', 'tableRow', 'mergeTableCells', 'tableProperties', 'tableCellProperties'
-        ]
-      },
-      mediaEmbed: {
-        previewsInData: true
-      },
-      language: 'en'
+      // Additional config if needed
     };
   }
 
   ngOnInit(): void {
     this.createForm();
-    this.initializeEditor();
   }
 
   createForm(): void {
@@ -70,6 +64,20 @@ export class TutorialCreateComponent implements OnInit {
     });
   }
 
+  onEditorChange(event, field: string): void {
+    const control = this.tutorialForm.get(field);
+    control.setValue(event.editor.getData());
+    control.updateValueAndValidity();
+  }
+
+  onReady(field: string): void {
+    // Focus the editor or perform any setup required
+    const editor = this[field + 'Editor'].editorInstance;
+    editor.model.document.on('change:data', () => {
+      this.onEditorChange({ editor }, field);
+    });
+  }
+
   createTutorial(): void {
     if (this.tutorialForm.invalid) {
       this.toastrService.danger('Please fill in all required fields.', 'Error');
@@ -77,42 +85,26 @@ export class TutorialCreateComponent implements OnInit {
     }
 
     const tutorial: Tutorial = this.tutorialForm.value;
-
     this.tutorialService.createTutorial(tutorial).subscribe(
-      response => {
-        console.log('Tutorial created:', response);
+      () => {
         this.toastrService.success('Tutorial created successfully!', 'Success');
-        this.resetForm();
-        this.router.navigate(['/pages/agile/nexus/tutorial']); // Navigate to the desired route
+        this.router.navigate(['/tutorials']);
       },
       error => {
-        console.error('Error creating tutorial:', error);
-        this.toastrService.danger('Failed to create tutorial: ' + error.message, 'Error');
+        this.toastrService.danger('Error creating tutorial. Please try again.', 'Error');
       }
     );
   }
 
-  resetForm(): void {
-    this.tutorialForm.reset();
+  nextStep(): void {
+    if (this.currentStepIndex < 6) { // Assuming 7 steps
+      this.currentStepIndex++;
+    }
   }
 
-  initializeEditor(): void {
-    ClassicEditor
-      .create(document.querySelector('#editor') as HTMLElement, {
-        ...this.editorConfig,
-        extraPlugins: [this.MyCustomUploadAdapterPlugin]
-      })
-      .then(editor => {
-        console.log('Editor initialized successfully');
-      })
-      .catch(error => {
-        console.error('Error initializing editor:', error);
-      });
-  }
-
-  MyCustomUploadAdapterPlugin(editor: any): void {
-    editor.plugins.get('FileRepository').createUploadAdapter = (loader: any) => {
-      return new CustomUploadAdapter(loader, 'http://localhost:8080/api/tutorials/uploadImage');
-    };
+  previousStep(): void {
+    if (this.currentStepIndex > 0) {
+      this.currentStepIndex--;
+    }
   }
 }

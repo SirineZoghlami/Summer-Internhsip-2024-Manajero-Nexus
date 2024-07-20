@@ -1,27 +1,22 @@
 <div class="tutorial-component">
   <div class="button-container">
-    <button id="create-tutorial" nbButton status="primary" [routerLink]="['/pages/agile/nexus/tutorial/create']">Create New Tutorial</button>
-    <button id="modify-tutorial" nbButton (click)="modifyTutorial()">Modify Tutorial</button>
+    <button id="create-tutorial" nbButton status="success" [routerLink]="['/pages/agile/nexus/tutorial/create']">Create New Tutorial</button>
+    <button id="modify-tutorial" nbButton status="warning" (click)="modifyTutorial()">Modify Tutorial</button>
     <button id="delete-tutorial" nbButton status="danger" (click)="confirmDelete()">Delete Tutorial</button>
   </div>
-  
-  
-  <h1 style="text-align: center">Nexus Agile Framework Tutorial</h1>
+
+  <h1 class="title">Nexus Agile Framework Tutorial</h1>
 
   <nb-stepper orientation="horizontal" [selectedIndex]="currentStepIndex">
-    <!-- Step 1: Introduction -->
     <nb-step [label]="'Introduction'">
       <div class="step-content">
         <h2>Introduction</h2>
         <div [innerHTML]="getSanitizedContent(lastCreatedTutorial?.introduction)"></div>
-        
         <div class="button-container">
           <button nbButton status="primary" (click)="nextStep()">Next</button>
         </div>
       </div>
     </nb-step>
-
-    <!-- Step 2: Why Use the Nexus Agile Framework? -->
     <nb-step [label]="'Why Use the Nexus Agile Framework?'">
       <div class="step-content">
         <h2>Why Use the Nexus Agile Framework?</h2>
@@ -32,14 +27,12 @@
         </div>
       </div>
     </nb-step>
-
-    <!-- Step 3: What is Nexus? -->
     <nb-step [label]="'What is Nexus?'">
       <div class="step-content">
         <h2>What is Nexus?</h2>
         <div [innerHTML]="getSanitizedContent(lastCreatedTutorial?.whatIsNexus)"></div>
         <div class="img-container">
-                    <img src="../../../../assets/images/nexus-scrum-framework-slide1.png" alt="What is Nexus image">
+          <img src="../../../../assets/images/nexus-scrum-framework-slide1.png" alt="What is Nexus image" class="img">
         </div>
         <div class="button-container">
           <button nbButton status="primary" (click)="previousStep()">Previous</button>
@@ -47,14 +40,12 @@
         </div>
       </div>
     </nb-step>
-
-    <!-- Step 4: How Does It Work? -->
     <nb-step [label]="'How Does It Work?'">
       <div class="step-content">
         <h2>How Does It Work?</h2>
         <div [innerHTML]="getSanitizedContent(lastCreatedTutorial?.howDoesItWork)"></div>
         <div class="img-container">
-                    <img src="../../../../assets/images/image-20.png" alt="How does it work image">
+          <img src="../../../../assets/images/image-20.png" alt="How does it work image" class="img">
         </div>
         <div class="button-container">
           <button nbButton status="primary" (click)="previousStep()">Previous</button>
@@ -62,8 +53,6 @@
         </div>
       </div>
     </nb-step>
-
-    <!-- Step 5: Limitations -->
     <nb-step [label]="'Limitations'">
       <div class="step-content">
         <h2>Limitations</h2>
@@ -74,8 +63,6 @@
         </div>
       </div>
     </nb-step>
-
-    <!-- Step 6: Applying Nexus in the Real World -->
     <nb-step [label]="'Applying Nexus in the Real World'">
       <div class="step-content">
         <h2>Applying Nexus in the Real World</h2>
@@ -86,8 +73,6 @@
         </div>
       </div>
     </nb-step>
-
-    <!-- Step 7: Conclusion -->
     <nb-step [label]="'Conclusion'">
       <div class="step-content">
         <h2>Conclusion</h2>
@@ -95,8 +80,6 @@
         <div class="button-container">
           <button nbButton status="primary" (click)="previousStep()">Previous</button>
           <button nbButton status="primary" (click)="navigateToQuiz()">Take the Quiz</button>
-
-
         </div>
       </div>
     </nb-step>
