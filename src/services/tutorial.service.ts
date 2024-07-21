@@ -46,24 +46,7 @@ export class TutorialService {
       );
   }
 
-  // Upload image for a tutorial
-  uploadImage(tutorialId: string, file: File): Observable<Tutorial> {
-    const formData = new FormData();
-    formData.append('file', file);
 
-    const uploadUrl = `${this.apiUrl}/${tutorialId}/uploadImage`;
-    const httpOptions = {
-      headers: new HttpHeaders({ 'enctype': 'multipart/form-data' })
-    };
-
-    return this.http.post<Tutorial>(uploadUrl, formData, httpOptions)
-      .pipe(
-        catchError(error => {
-          console.error('Error uploading image:', error);
-          throw error;
-        })
-      );
-  }
 
   // Update an existing tutorial
   updateTutorial(tutorial: Tutorial): Observable<Tutorial> {
@@ -85,5 +68,20 @@ export class TutorialService {
           throw error;
         })
       );
+  }
+
+
+  uploadImage(tutorialId: string, file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return this.http.post<any>(`${this.apiUrl}/${tutorialId}/uploadImage`, formData, {
+      headers: new HttpHeaders({ 'enctype': 'multipart/form-data' })
+    }).pipe(
+      catchError(error => {
+        console.error('Error uploading image:', error);
+        throw error;
+      })
+    );
   }
 }

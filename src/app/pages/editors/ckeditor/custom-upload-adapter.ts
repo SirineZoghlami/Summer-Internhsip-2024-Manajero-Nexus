@@ -1,43 +1,42 @@
-import { FileLoader } from '@ckeditor/ckeditor5-upload';
-
+// src/app/pages/editors/ckeditor/custom-upload-adapter.ts
 export class CustomUploadAdapter {
-  private loader: FileLoader;
-  private uploadUrl: string;
+  private loader: any;
 
-  constructor(loader: FileLoader, uploadUrl: string) {
+  constructor(loader: any) {
     this.loader = loader;
-    this.uploadUrl = uploadUrl;
   }
 
   upload() {
     return new Promise((resolve, reject) => {
-      if (this.loader.file instanceof File) {
-        const data = new FormData();
-        data.append('file', this.loader.file);
+      const data = new FormData();
+      this.loader.file
+        .then((file: any) => {
+          data.append('file', file);
 
-        fetch(this.uploadUrl, {
-          method: 'POST',
-          body: data,
-          headers: {
-            'Accept': 'application/json'
-          }
-        })
-        .then(response => response.json())
-        .then(responseData => {
-          if (responseData && responseData.url) {
-            resolve({ default: responseData.url });
-          } else {
-            reject('Image upload failed.');
-          }
-        })
-        .catch(error => reject(error));
-      } else {
-        reject('File is not valid.');
-      }
+          return fetch('http://localhost:8080/api/tutorials/uploadImage', {
+            method: 'POST',
+            body: data,
+          })
+            .then(response => {
+              if (response.ok) {
+                return response.json();
+              } else {
+                return response.json().then(json => Promise.reject(json));
+              }
+            })
+            .then(responseData => {
+              resolve({
+                default: responseData.url
+              });
+            })
+            .catch(error => {
+              reject(error);
+            });
+        });
     });
   }
 
   abort() {
-    // Handle abort logic here (if needed)
+    // Implement abort logic if needed
   }
 }

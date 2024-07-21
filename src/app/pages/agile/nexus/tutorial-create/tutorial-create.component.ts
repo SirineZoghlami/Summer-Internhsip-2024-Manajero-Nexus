@@ -6,6 +6,7 @@ import { NbToastrService } from '@nebular/theme';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CKEditorComponent } from '@ckeditor/ckeditor5-angular';
 import { Router } from '@angular/router';
+import { CustomUploadAdapter } from '../../../editors/ckeditor/custom-upload-adapter'; // Adjust the path accordingly
 
 @Component({
   selector: 'ngx-tutorial-create',
@@ -52,7 +53,21 @@ export class TutorialCreateComponent implements OnInit {
           'undo', 'redo'
         ]
       },
-      // Additional config if needed
+      image: {
+        toolbar: [
+          'imageTextAlternative',
+          '|',
+          'imageStyle:alignLeft',
+          'imageStyle:full',
+          'imageStyle:alignRight'
+        ],
+        styles: [
+          'full',
+          'alignLeft',
+          'alignRight'
+        ]
+      },
+      extraPlugins: [MyCustomUploadAdapterPlugin]
     };
   }
 
@@ -68,13 +83,13 @@ export class TutorialCreateComponent implements OnInit {
     });
   }
 
-  onEditorChange(event, field: string): void {
+  onEditorChange(event: any, field: string): void {
     this.tutorialForm.get(field).setValue(event.editor.getData());
   }
 
   onReady(field: string): void {
-    const editor = this[field + 'Editor'].editorInstance;
-    editor.model.document.on('change:data', () => this.onEditorChange({ editor }, field));
+    const editorInstance = this[field + 'Editor'].editorInstance;
+    editorInstance.model.document.on('change:data', () => this.onEditorChange({ editor: editorInstance }, field));
   }
 
   createTutorial(): void {
@@ -105,4 +120,9 @@ export class TutorialCreateComponent implements OnInit {
       this.currentStepIndex--;
     }
   }
+}
+
+// Custom upload adapter plugin function
+function MyCustomUploadAdapterPlugin(editor: any) {
+  editor.plugins.get('FileRepository').createUploadAdapter = (loader: any) => new CustomUploadAdapter(loader);
 }
