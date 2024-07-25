@@ -1,35 +1,34 @@
 <div class="tutorial-component">
-  <div class="button-container">
-    <button nbButton id="create-tutorial" status="success" [routerLink]="['/pages/agile/nexus/tutorial/create']">Create New Tutorial</button>
-    <button nbButton id="modify-tutorial" status="warning" (click)="modifyTutorial()">Modify Tutorial</button>
-    <button nbButton id="delete-tutorial" status="danger" (click)="confirmDelete()">Delete Tutorial</button>
+  <div *ngIf="isDatabaseEmpty; else tutorialContent">
+    <h2>No Tutorials Available</h2>
+    <p>Please create a new tutorial to get started.</p>
+    <button nbButton status="success" [routerLink]="['/pages/agile/nexus/tutorial/create']">Create New Tutorial</button>
   </div>
 
-  <h1 class="title">Nexus Agile Framework Tutorial</h1>
+  <ng-template #tutorialContent>
+    <div class="button-container">
+      <button nbButton id="create-tutorial" status="success" [routerLink]="['/pages/agile/nexus/tutorial/create']">Create New Tutorial</button>
+      <button nbButton id="modify-tutorial" status="warning" (click)="modifyTutorial()">Modify Tutorial</button>
+      <button nbButton id="delete-tutorial" status="danger" (click)="confirmDelete()">Delete Tutorial</button>
+    </div>
 
-  <nb-stepper orientation="horizontal" [selectedIndex]="currentStepIndex">
-    <nb-step *ngFor="let step of tutorialSteps; let i = index" [label]="step.label">
-      <div class="step-content">
-        <h2>{{ step.title }}</h2>
-        <div [innerHTML]="getSanitizedContent(lastCreatedTutorial[step.contentField])"></div>
-        <div *ngIf="step.imageField" class="img-container">
-          <img [src]="lastCreatedTutorial[step.imageField]" alt="{{ step.imageAlt }}" class="img">
+    <h1 class="title">Nexus Agile Framework Tutorial</h1>
+
+    <nb-stepper orientation="horizontal" [selectedIndex]="currentStepIndex">
+      <nb-step *ngFor="let step of tutorialSteps; let i = index" [label]="step.label">
+        <div class="step-content">
+          <h2>{{ step.title }}</h2>
+          <div [innerHTML]="getSanitizedContent(lastCreatedTutorial[step.contentField])"></div>
+          <div *ngIf="step.imageField" class="img-container">
+            <img [src]="lastCreatedTutorial[step.imageField]" alt="{{ step.imageAlt }}" class="img">
+          </div>
+          <div class="button-container">
+            <button nbButton class="prev" (click)="previousStep()" *ngIf="currentStepIndex > 0">Previous</button>
+            <button nbButton (click)="nextStep()" *ngIf="currentStepIndex < tutorialSteps.length - 1">Next</button>
+            <button nbButton (click)="navigateToQuiz()" *ngIf="currentStepIndex === tutorialSteps.length - 1">Take the Quiz</button>
+          </div>
         </div>
-        <div class="button-container">
-          <!-- "Previous" button should not be displayed on the first step -->
-          <button nbButton class="prev" (click)="previousStep()" *ngIf="currentStepIndex > 0">Previous</button>
-          
-          <!-- "Next" button should be hidden on the last step -->
-          <button nbButton (click)="nextStep()" *ngIf="currentStepIndex < tutorialSteps.length - 1">
-            Next
-          </button>
-          
-          <!-- "Finish" button should be displayed on the last step -->
-          <button nbButton (click)="navigateToQuiz()" *ngIf="currentStepIndex === tutorialSteps.length - 1">
-            Take the Quiz
-          </button>
-        </div>
-      </div>
-    </nb-step>
-  </nb-stepper>
+      </nb-step>
+    </nb-stepper>
+  </ng-template>
 </div>

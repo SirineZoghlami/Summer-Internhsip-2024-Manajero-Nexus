@@ -3,8 +3,8 @@ import { Tutorial } from '../../../../models/tutorial.model';
 import { TutorialService } from '../../../../services/tutorial.service';
 import { Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
-import { NbDialogService, NbToastrService } from '@nebular/theme'; 
-import { ConfirmationDialogComponent } from '../../agile/nexus/confirmation-dialog/confirmation-dialog.component'; 
+import { NbDialogService, NbToastrService } from '@nebular/theme';
+import { ConfirmationDialogComponent } from '../../agile/nexus/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'ngx-tutorial',
@@ -23,8 +23,8 @@ export class TutorialComponent implements OnInit {
     conclusion: ''
   };
   currentStepIndex: number = 0;
+  isDatabaseEmpty: boolean = false;
 
-  // Define tutorialSteps
   tutorialSteps = [
     { label: 'Introduction', title: 'Introduction', contentField: 'introduction', imageField: '', imageAlt: '' },
     { label: 'Why Use the Nexus Agile Framework?', title: 'Why Use the Nexus Agile Framework?', contentField: 'whyUse', imageField: '', imageAlt: '' },
@@ -38,9 +38,9 @@ export class TutorialComponent implements OnInit {
   constructor(
     private router: Router,
     private tutorialService: TutorialService,
-    private sanitizer: DomSanitizer, 
-    private dialogService: NbDialogService, 
-    private toastrService: NbToastrService 
+    private sanitizer: DomSanitizer,
+    private dialogService: NbDialogService,
+    private toastrService: NbToastrService
   ) { }
 
   ngOnInit(): void {
@@ -49,10 +49,16 @@ export class TutorialComponent implements OnInit {
 
   fetchLastCreatedTutorial(): void {
     this.tutorialService.getLastCreatedTutorial().subscribe(
-      (tutorial: Tutorial) => this.lastCreatedTutorial = tutorial,
+      (tutorial: Tutorial) => {
+        if (!tutorial || !tutorial.id) {
+          this.isDatabaseEmpty = true;
+        } else {
+          this.lastCreatedTutorial = tutorial;
+        }
+      },
       error => {
         console.error('Error fetching last created tutorial:', error);
-        this.toastrService.danger('Failed to fetch tutorial'); // Show error toast
+        this.toastrService.danger('Failed to fetch tutorial');
       }
     );
   }
@@ -94,12 +100,12 @@ export class TutorialComponent implements OnInit {
     if (this.lastCreatedTutorial?.id) {
       this.tutorialService.deleteTutorial(this.lastCreatedTutorial.id).subscribe(
         () => {
-          this.toastrService.success('Tutorial deleted successfully'); // Show success toast
-          this.router.navigate(['/pages/agile/nexus/tutorial/create']); // Navigate to create tutorial page
+          this.toastrService.success('Tutorial deleted successfully');
+          this.router.navigate(['/pages/agile/nexus/tutorial/create']);
         },
         error => {
           console.error('Error deleting tutorial:', error);
-          this.toastrService.danger('Failed to delete tutorial'); // Show error toast if deletion fails
+          this.toastrService.danger('Failed to delete tutorial');
         }
       );
     }

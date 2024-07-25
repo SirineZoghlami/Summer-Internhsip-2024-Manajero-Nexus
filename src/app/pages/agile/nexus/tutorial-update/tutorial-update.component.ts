@@ -90,7 +90,7 @@ export class TutorialUpdateComponent implements OnInit {
     this.tutorialService.updateTutorial(updatedTutorial).subscribe(
       () => {
         this.toastrService.success('Tutorial updated successfully!', 'Success');
-        this.router.navigate(['pages/agile/nexus/tutorial']);
+        this.router.navigate(['pages/agile/nexus']);
       },
       error => {
         console.error('Error updating tutorial:', error);
