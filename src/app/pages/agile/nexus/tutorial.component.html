@@ -7,10 +7,14 @@
 
   <ng-template #tutorialContent>
     <div class="button-container">
-      <button nbButton id="create-tutorial" status="success" [routerLink]="['/pages/agile/nexus/tutorial/create']">Create New Tutorial</button>
+          <!-- 
+      <button nbButton id="create-tutorial" status="success" [routerLink]="['/pages/agile/nexus/tutorial/create']">Create New Tutorial</button>  -->
+
       <button nbButton id="modify-tutorial" status="warning" (click)="modifyTutorial()">Modify Tutorial</button>
       <button nbButton id="delete-tutorial" status="danger" (click)="confirmDelete()">Delete Tutorial</button>
+      <button nbButton id="try-this-method" status="info" (click)="tryThisMethod()">Try This Method</button> 
     </div>
+    
 
     <h1 class="title">Nexus Agile Framework Tutorial</h1>
 

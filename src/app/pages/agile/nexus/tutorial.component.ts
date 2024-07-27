@@ -70,7 +70,9 @@ export class TutorialComponent implements OnInit {
   previousStep(): void {
     if (this.currentStepIndex > 0) this.currentStepIndex--;
   }
-
+  tryThisMethod():void{
+    this.router.navigate(['/pages/agile/nexus/projects']);
+  }
   nextStep(): void {
     if (this.currentStepIndex < this.tutorialSteps.length - 1) this.currentStepIndex++;
   }

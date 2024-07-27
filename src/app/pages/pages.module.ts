@@ -3,7 +3,6 @@ import { NbMenuModule, NbStepperModule, NbCardModule, NbDialogModule, NbButtonMo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-
 import { ThemeModule } from '../@theme/theme.module';
 import { PagesComponent } from './pages.component';
 import { DashboardModule } from './dashboard/dashboard.module';
@@ -16,6 +15,11 @@ import { TutorialUpdateComponent } from './agile/nexus/tutorial-update/tutorial-
 import { ConfirmationDialogComponent } from './agile/nexus/confirmation-dialog/confirmation-dialog.component';
 import { NexusQuizComponent } from './agile/nexus/nexus-quiz/nexus-quiz.component';
 import { ErrorMessageComponent } from './agile/nexus/error-message/error-message.component';
+import { ProjectsComponent } from './agile/nexus/projects/projects.component';
+import { SprintListComponent } from './agile/nexus/sprint-list/sprint-list.component';
+import { SprintDetailComponent } from './agile/nexus/sprint-detail/sprint-detail.component';
+import { TeamListComponent } from './agile/nexus/team-list/team-list.component';
+import { TeamDetailComponent } from './agile/nexus/team-detail/team-detail.component';
 
 @NgModule({
   imports: [
@@ -42,6 +46,11 @@ import { ErrorMessageComponent } from './agile/nexus/error-message/error-message
     ConfirmationDialogComponent,
     NexusQuizComponent,
     ErrorMessageComponent,
+    ProjectsComponent,
+    SprintListComponent,
+    SprintDetailComponent,
+    TeamListComponent,
+    TeamDetailComponent,
  
   ],
   providers: [],

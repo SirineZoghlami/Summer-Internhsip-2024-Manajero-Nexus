@@ -1,0 +1,160 @@
+.team-list {
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  margin: 2rem auto;
+  overflow: hidden;
+  position: relative;
+
+  h2 {
+    text-align: center;
+    color: #3366ff;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+  }
+
+  button {
+    display: block;
+    margin: 1rem auto;
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    font-weight: 600;
+    border: 1px solid transparent;
+    align-self: center;
+
+    &.nbButton {
+      color: #fff;
+      background-color: transparent; /* Transparent background */
+    }
+
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    &.edit-button {
+      border-color: #ffa000; /* Border color for edit button */
+    }
+
+    &.delete-button {
+      border-color: #f44336; /* Border color for delete button */
+    }
+  }
+
+  .team-card {
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      background-color: #f5f5f5;
+    }
+
+    .team-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 0.75rem;
+
+      h3 {
+        font-size: 1.5rem;
+        color: #333;
+        margin: 0;
+        font-weight: 700;
+      }
+
+      .team-status {
+        font-size: 0.875rem;
+        padding: 0.5rem 0.75rem;
+        border-radius: 0.5rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        text-align: center;
+        background-color: transparent;
+        border: 2px solid transparent; /* Default border style */
+        color: #333; /* Default text color for visibility */
+
+        &.Active {
+          border-color: #4caf50; /* Green outline */
+          color: #4caf50; /* Green text */
+        }
+
+        &.Upcoming {
+          border-color: #ffa000; /* Yellow outline */
+          color: #ffa000; /* Yellow text */
+        }
+
+        &.NotStarted {
+          border-color: #f44336; /* Red outline */
+          color: #f44336; /* Red text */
+        }
+      }
+    }
+
+  .team-dates {
+      font-size: 0.875rem;
+      color: #757575;
+      margin-bottom: 1rem;
+
+      span {
+        display: block;
+        margin-bottom: 0.25rem;
+      }
+    }
+
+    p {
+      font-size: 1rem;
+      color: #4a4a4a;
+      line-height: 1.6;
+      margin: 0;
+      text-align: justify;
+      background: #f9f9f9;
+      border-radius: 0.5rem;
+      border: 1px solid #e0e0e0;
+      padding: 0.75rem;
+    }
+  }
+}
+
+// Responsive Styles
+@media (max-width: 768px) {
+  .team-list {
+    padding: 1rem;
+    margin: 1rem auto;
+  }
+
+  .team-card {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .team-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .team-status {
+    margin-top: 0.5rem;
+  }
+
+  button {
+    width: auto;
+    margin: 0.5rem auto;
+  }
+}

@@ -1,0 +1,14 @@
+<div class="team-list">
+  <h2>Teams</h2>
+  <button nbButton status="success" class="create-team-button" (click)="createTeam()">Create New Team</button>
+  <div class="team-card" *ngFor="let team of teams">
+    <div class="team-header">
+      <h3>{{ team.name }}</h3>
+    </div>
+    <p>{{ team.description }}</p>
+    <div class="button-container">
+      <button nbButton status="warning" class="edit-button" (click)="editTeam(team.id)">Edit</button>
+      <button nbButton status="danger" class="delete-button" (click)="deleteTeam(team.id)">Delete</button>
+    </div>
+  </div>
+</div>

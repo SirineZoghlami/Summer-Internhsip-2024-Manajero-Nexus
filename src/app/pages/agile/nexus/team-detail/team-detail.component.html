@@ -1,0 +1,13 @@
+<div class="team-detail">
+  <h2>Team Details</h2>
+  <form>
+    <label for="name">Team Name:</label>
+    <input id="name" type="text" nbInput fullWidth placeholder="Team Name" [(ngModel)]="team.name" name="name">
+
+    <label for="description">Description:</label>
+    <textarea id="description" rows="5" nbInput fullWidth shape="round" placeholder="Description" [(ngModel)]="team.description" name="description"></textarea>
+    
+    <button nbButton class="save-button" (click)="saveTeam()">Save</button>
+    <button nbButton class="cancel-button" (click)="cancel()">Cancel</button>
+  </form>
+</div>

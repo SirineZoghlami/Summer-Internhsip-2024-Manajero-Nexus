@@ -46,7 +46,17 @@ export class TutorialService {
       );
   }
 
-
+  // Check if there are any existing tutorials
+  hasTutorials(): Observable<boolean> {
+    return this.http.get<Tutorial[]>(this.apiUrl)
+      .pipe(
+        map(tutorials => tutorials.length > 0),
+        catchError(error => {
+          console.error('Error checking for existing tutorials:', error);
+          throw error;
+        })
+      );
+  }
 
   // Update an existing tutorial
   updateTutorial(tutorial: Tutorial): Observable<Tutorial> {
@@ -70,7 +80,7 @@ export class TutorialService {
       );
   }
 
-
+  // Upload an image for a tutorial
   uploadImage(tutorialId: string, file: File): Observable<any> {
     const formData = new FormData();
     formData.append('file', file);

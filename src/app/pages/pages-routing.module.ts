@@ -9,6 +9,11 @@ import { TutorialComponent } from './agile/nexus/tutorial.component';
 import { TutorialCreateComponent } from './agile/nexus/tutorial-create/tutorial-create.component';
 import { TutorialUpdateComponent } from './agile/nexus/tutorial-update/tutorial-update.component';
 import { NexusQuizComponent } from './agile/nexus/nexus-quiz/nexus-quiz.component'; 
+import { ProjectsComponent } from './agile/nexus/projects/projects.component';
+import { SprintListComponent } from './agile/nexus/sprint-list/sprint-list.component';
+import { SprintDetailComponent } from './agile/nexus/sprint-detail/sprint-detail.component';
+import { TeamListComponent } from './agile/nexus/team-list/team-list.component';
+import { TeamDetailComponent } from './agile/nexus/team-detail/team-detail.component';
 
 const routes: Routes = [{
   path: '',
@@ -88,6 +93,26 @@ const routes: Routes = [{
     {
       path: 'agile/nexus/quizz',
       component: NexusQuizComponent
+    },
+    {
+      path: 'agile/nexus/projects',
+      component: ProjectsComponent
+    },
+    {
+      path: 'agile/nexus/sprint-list',
+      component: SprintListComponent
+    },
+    {
+      path: 'agile/nexus/sprint-detail',
+      component: SprintDetailComponent
+    },
+    {
+      path: 'agile/nexus/team-list',
+      component: TeamListComponent
+    },
+    {
+      path: 'agile/nexus/team-detail',
+      component: TeamDetailComponent,
     },
 
     {

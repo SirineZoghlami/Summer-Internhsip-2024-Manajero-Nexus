@@ -1,0 +1,124 @@
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  
+    button {
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 0.25rem;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+  
+      &.try-nexus-button {
+        background-color: #009688;
+        color: #ffffff;
+  
+        &:hover {
+          background-color: #00796b;
+        }
+      }
+  
+      &.edit-button {
+        background-color: #ffa000;
+        color: #ffffff;
+  
+        &:hover {
+          background-color: #ff6f00;
+        }
+      }
+  
+      &.delete-button {
+        background-color: #f44336;
+        color: #ffffff;
+  
+        &:hover {
+          background-color: #c62828;
+        }
+      }
+    }
+  }
+  
+  .project-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .project-card {
+    flex: 1 1 calc(33.333% - 1rem);
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: box-shadow 0.3s ease;
+  
+    &:hover {
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+  
+    h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+  
+    p {
+      font-size: 1rem;
+      color: #4a4a4a;
+      margin-bottom: 1rem;
+      flex-grow: 1;
+    }
+  
+    .button-container {
+      display: flex;
+      gap: 0.5rem;
+  
+      button {
+        cursor: pointer;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 0.25rem;
+        font-size: 1rem;
+        transition: background-color 0.3s ease;
+  
+        &.try-nexus-button {
+          background-color: #009688;
+          color: #ffffff;
+  
+          &:hover {
+            background-color: #00796b;
+          }
+        }
+  
+        &.edit-button {
+          background-color: #ffa000;
+          color: #ffffff;
+  
+          &:hover {
+            background-color: #ff6f00;
+          }
+        }
+  
+        &.delete-button {
+          background-color: #f44336;
+          color: #ffffff;
+  
+          &:hover {
+            background-color: #c62828;
+          }
+        }
+      }
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .project-card {
+      flex: 1 1 100%;
+    }
+  }
+  

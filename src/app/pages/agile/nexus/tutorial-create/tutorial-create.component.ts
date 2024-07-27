@@ -101,8 +101,8 @@ export class TutorialCreateComponent implements OnInit {
     this.tutorialService.createTutorial(this.tutorialForm.value as Tutorial).subscribe(
       () => {
         this.toastrService.success('Tutorial created successfully!', 'Success');
-        this.router.navigate(['/tutorials']);
-      },
+        this.router.navigate(['pages/agile/nexus']); 
+           },
       error => {
         this.toastrService.danger('Error creating tutorial. Please try again.', 'Error');
       }
