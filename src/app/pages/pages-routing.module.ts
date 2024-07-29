@@ -16,6 +16,7 @@ import { TeamListComponent } from './agile/nexus/team-list/team-list.component';
 import { TeamDetailComponent } from './agile/nexus/team-detail/team-detail.component';
 import { TaskListComponent } from './agile/nexus/task-list/task-list.component';
 import { TaskCreationModalComponent } from './agile/nexus/task-creation-modal/task-creation-modal.component';
+import { NexusBoardComponent } from './agile/nexus/nexus-board/nexus-board.component';
 
 const routes: Routes = [{
   path: '',
@@ -100,29 +101,24 @@ const routes: Routes = [{
       path: 'agile/nexus/projects',
       component: ProjectsComponent
     },
+   
+    
+   
+   
+ 
+ 
     {
-      path: 'agile/nexus/sprint-list',
-      component: SprintListComponent
-    },
-    {
-      path: 'agile/nexus/sprint-detail',
-      component: SprintDetailComponent
-    },
-    {
-      path: 'agile/nexus/team-list',
-      component: TeamListComponent
-    },
-    {
-      path: 'agile/nexus/team-detail',
-      component: TeamDetailComponent,
-    },
-    {
-      path: 'agile/nexus/task-list',
-      component: TaskListComponent,
-    },
-    {
-      path: 'agile/nexus/task-create',
-      component: TaskCreationModalComponent,
+      path: 'agile/nexus-board',  
+      component: NexusBoardComponent,
+      children: [
+        { path: 'sprint-list', component: SprintListComponent },
+        { path: 'sprint-detail', component: SprintDetailComponent },
+        { path: 'team-list', component: TeamListComponent },
+        { path: 'team-detail', component: TeamDetailComponent },
+        { path: 'task-list', component: TaskListComponent },
+        { path: 'task-create', component: TaskCreationModalComponent },
+        // Add other child routes here if needed
+      ]
     },
 
     {

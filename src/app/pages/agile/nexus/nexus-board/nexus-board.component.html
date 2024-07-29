@@ -1,0 +1,20 @@
+<div class="nexus-board">
+    <!-- Navbar or Sidebar for navigation -->
+    <div class="navbar">
+      <ul class="nav-menu">
+        <li><a routerLink="timeline" routerLinkActive="active">Timeline</a></li>
+        <li><a routerLink="sprint-list" routerLinkActive="active">Sprints List</a></li>
+        <li><a routerLink="team-list" routerLinkActive="active">Teams List</a></li>
+        <li><a routerLink="task-list" routerLinkActive="active">Tasks List</a></li>
+        <li><a routerLink="calander" routerLinkActive="active">Calander</a></li>
+
+        <!-- other links for the dashboard -->
+      </ul>
+    </div>
+  
+    <!-- Content Area where child components will be displayed -->
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  

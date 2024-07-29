@@ -22,6 +22,8 @@ import { TeamListComponent } from './agile/nexus/team-list/team-list.component';
 import { TeamDetailComponent } from './agile/nexus/team-detail/team-detail.component';
 import { TaskListComponent } from './agile/nexus/task-list/task-list.component';
 import { TaskCreationModalComponent } from './agile/nexus/task-creation-modal/task-creation-modal.component';
+import { NexusBoardComponent } from './agile/nexus/nexus-board/nexus-board.component';
+import { NbLayoutModule, NbSidebarModule, } from '@nebular/theme';
 
 @NgModule({
   imports: [
@@ -39,6 +41,8 @@ import { TaskCreationModalComponent } from './agile/nexus/task-creation-modal/ta
     CKEditorModule, 
     NbButtonModule,
     HttpClientModule,
+    NbLayoutModule,
+    NbSidebarModule,
 
     
 
@@ -59,6 +63,7 @@ import { TaskCreationModalComponent } from './agile/nexus/task-creation-modal/ta
     TeamDetailComponent,
     TaskListComponent,
     TaskCreationModalComponent,
+    NexusBoardComponent,
 
     
     
