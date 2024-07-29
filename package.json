@@ -53,6 +53,7 @@
     "@swimlane/ngx-charts": "^14.0.0",
     "angular2-chartjs": "0.4.1",
     "bootstrap": "4.3.1",
+    "canvas-confetti": "^1.9.3",
     "chart.js": "2.7.1",
     "classlist.js": "1.1.20150312",
     "core-js": "2.5.1",

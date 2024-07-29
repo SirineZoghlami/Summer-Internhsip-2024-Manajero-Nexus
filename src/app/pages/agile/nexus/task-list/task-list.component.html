@@ -1,0 +1,41 @@
+<div class="task-board">
+  <div class="header">
+    <h1 class="title">Nexus Task Board</h1>
+    <div class="header-info">
+      <span class="project-name">Project Name</span>
+      <span class="team-name">Team Name</span>
+    </div>
+    <button class="add-task-button" (click)="openTaskModal()">+</button>
+  </div>
+
+  <div class="columns-container">
+    <div class="column" *ngFor="let column of columns">
+      <h2 class="column-title">
+        {{ column.name }} 
+        <span class="task-count">({{ getTaskCount(column.name) }})</span>
+      </h2>
+      <div class="task-list">
+        <div class="task-card" *ngFor="let task of column.tasks" [ngClass]="task.priority.toLowerCase()">
+          <div class="task-header">
+            <h3 class="task-title">{{ task.title }}</h3>
+            <button class="mark-done-button" (click)="markTaskAsDone(task)">Mark as Done</button>
+          </div>
+          <div class="task-body" (click)="showTaskDetails(task)">
+            <p class="task-description">{{ task.description }}</p>
+            <p class="task-due-date">Due: {{ task.dueDate }}</p>
+            <div class="task-priority">
+              <span class="priority-label">{{ task.priority }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="confetti-container" *ngIf="showConfettiAnimation"></div>
+
+  <ngx-task-creation-modal
+    [showModal]="isModalVisible"
+    (taskCreated)="handleTaskCreation($event)"
+  ></ngx-task-creation-modal>
+</div>

@@ -20,6 +20,8 @@ import { SprintListComponent } from './agile/nexus/sprint-list/sprint-list.compo
 import { SprintDetailComponent } from './agile/nexus/sprint-detail/sprint-detail.component';
 import { TeamListComponent } from './agile/nexus/team-list/team-list.component';
 import { TeamDetailComponent } from './agile/nexus/team-detail/team-detail.component';
+import { TaskListComponent } from './agile/nexus/task-list/task-list.component';
+import { TaskCreationModalComponent } from './agile/nexus/task-creation-modal/task-creation-modal.component';
 
 @NgModule({
   imports: [
@@ -37,6 +39,10 @@ import { TeamDetailComponent } from './agile/nexus/team-detail/team-detail.compo
     CKEditorModule, 
     NbButtonModule,
     HttpClientModule,
+
+    
+
+   
   ],
   declarations: [
     PagesComponent,
@@ -51,7 +57,13 @@ import { TeamDetailComponent } from './agile/nexus/team-detail/team-detail.compo
     SprintDetailComponent,
     TeamListComponent,
     TeamDetailComponent,
- 
+    TaskListComponent,
+    TaskCreationModalComponent,
+
+    
+    
+
+
   ],
   providers: [],
 })

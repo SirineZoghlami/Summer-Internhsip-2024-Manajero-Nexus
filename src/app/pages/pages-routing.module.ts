@@ -14,6 +14,8 @@ import { SprintListComponent } from './agile/nexus/sprint-list/sprint-list.compo
 import { SprintDetailComponent } from './agile/nexus/sprint-detail/sprint-detail.component';
 import { TeamListComponent } from './agile/nexus/team-list/team-list.component';
 import { TeamDetailComponent } from './agile/nexus/team-detail/team-detail.component';
+import { TaskListComponent } from './agile/nexus/task-list/task-list.component';
+import { TaskCreationModalComponent } from './agile/nexus/task-creation-modal/task-creation-modal.component';
 
 const routes: Routes = [{
   path: '',
@@ -113,6 +115,14 @@ const routes: Routes = [{
     {
       path: 'agile/nexus/team-detail',
       component: TeamDetailComponent,
+    },
+    {
+      path: 'agile/nexus/task-list',
+      component: TaskListComponent,
+    },
+    {
+      path: 'agile/nexus/task-create',
+      component: TaskCreationModalComponent,
     },
 
     {

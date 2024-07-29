@@ -1,0 +1,189 @@
+.task-board {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #f4f4f4;
+  min-height: 100vh;
+  position: relative;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    .title {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .header-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      .project-name, .team-name {
+        font-size: 1rem;
+        color: #666;
+      }
+    }
+
+    .add-task-button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      width: 40px;
+      height: 40px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      top: 0;
+      right: 0;
+      margin: 0;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+  }
+
+  .columns-container {
+    display: flex;
+    gap: 20px;
+
+    .column {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 10px;
+      flex: 1;
+      min-width: 200px;
+
+      .column-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #007bff;
+      }
+
+      .task-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .task-card {
+          background-color: #fff;
+          border-radius: 8px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          padding: 10px;
+          cursor: pointer;
+          transition: box-shadow 0.3s ease, border-color 0.3s ease;
+          border: 1px solid transparent; // Finer border width
+
+          &:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+          }
+
+          &.high {
+            border-color: #dc3545; // Red for High priority
+          }
+          &.medium {
+            border-color: #ffc107; // Yellow for Medium priority
+          }
+          &.low {
+            border-color: #17a2b8; // Blue for Low priority
+          }
+
+          .task-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+
+            .task-title {
+              font-size: 1rem;
+              font-weight: bold;
+              color: #333;
+            }
+
+            .mark-done-button {
+              background-color: #28a745;
+              color: white;
+              border: none;
+              border-radius: 5px;
+              padding: 5px 10px;
+              cursor: pointer;
+              font-size: 0.875rem;
+
+              &:hover {
+                background-color: #218838;
+              }
+            }
+          }
+
+          .task-body {
+            font-size: 0.875rem;
+            color: #666;
+
+            .task-priority {
+              display: inline-block;
+              width: 10px;
+              height: 10px;
+              border-radius: 50%;
+              background-color: transparent; // Default background color
+
+              &.high {
+                background-color: #dc3545; // Red
+              }
+              &.medium {
+                background-color: #ffc107; // Yellow
+              }
+              &.low {
+                background-color: #17a2b8; // Blue
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 10;
+    overflow: hidden;
+  }
+
+  .modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    z-index: 100;
+
+    .modal-content {
+      .close-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+    }
+  }
+}
