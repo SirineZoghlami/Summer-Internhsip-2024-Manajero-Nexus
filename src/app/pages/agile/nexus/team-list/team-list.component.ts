@@ -1,30 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-team-list',
   templateUrl: './team-list.component.html',
   styleUrls: ['./team-list.component.scss']
 })
-export class TeamListComponent implements OnInit {
+export class TeamListComponent {
+
   teams = [
-    { id: '1', name: 'Team A', description: 'Description for Team A' },
-    { id: '2', name: 'Team B', description: 'Description for Team B' },
-    { id: '3', name: 'Team C', description: 'Description for Team C' }
+    { id: 1, name: 'Development Team', members: ['Alice', 'Bob', 'Charlie'], roles: ['Developer', 'Tester', 'Lead'] },
+    { id: 2, name: 'Design Team', members: ['David', 'Eve'], roles: ['UI/UX Designer', 'Graphic Designer'] },
+    { id: 3, name: 'Marketing Team', members: ['Frank', 'Grace'], roles: ['Marketing Manager', 'Content Creator'] },
+    { id: 4, name: 'Sales Team', members: ['Hannah', 'Ian'], roles: ['Sales Manager', 'Sales Representative'] }
   ];
 
-  constructor() {}
-
-  ngOnInit(): void {}
-
-  createTeam(): void {
-    // Navigate to create team
+  viewTeamDetails(team: any) {
+    alert(`Viewing details for: ${team.name}`);
   }
 
-  editTeam(teamId: string): void {
-    // Navigate to edit team
+  editTeam(team: any) {
+    alert(`Editing team: ${team.name}`);
   }
 
-  deleteTeam(teamId: string): void {
-    this.teams = this.teams.filter(team => team.id !== teamId);
+  getRoleClass(role: string): string {
+    return role.toLowerCase().replace(/ /g, '-');
   }
 }

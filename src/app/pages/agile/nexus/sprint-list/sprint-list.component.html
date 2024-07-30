@@ -1,19 +1,24 @@
-<div class="sprint-list">
-  <h2>Sprints</h2>
-  <button nbButton status="success" (click)="createSprint()">Create New Sprint</button>
-  <div class="sprint-card" *ngFor="let sprint of sprints">
-    <div class="sprint-header">
-      <h3>{{ sprint.name }}</h3>
-      <span class="sprint-status">{{ sprint.status }}</span>
+<nb-card>
+  <nb-card-header>Sprint List</nb-card-header>
+  <nb-card-body>
+    <div class="sprint-list-container">
+      <div class="sprint-item" *ngFor="let sprint of sprints">
+        <div class="item-header">
+          <h4>{{ sprint.name }}</h4>
+          <span class="status" [ngClass]="getStatusClass(sprint.status)">
+            {{ sprint.status }}
+          </span>
+        </div>
+        <p class="item-dates">Start Date: {{ sprint.startDate }} | End Date: {{ sprint.endDate }}</p>
+        <div class="item-footer">
+          <button nbButton status="primary" (click)="viewSprintDetails(sprint)">
+            View Details
+          </button>
+          <button nbButton status="success" (click)="markAsCompleted(sprint)" [disabled]="sprint.status === 'Completed'">
+            Mark as Completed
+          </button>
+        </div>
+      </div>
     </div>
-    <p>{{ sprint.description }}</p>
-    <div class="sprint-dates">
-      <span>Start Date: {{ sprint.startDate }}</span>
-      <span>End Date: {{ sprint.endDate }}</span>
-    </div>
-    <div class="button-container">
-      <button nbButton status="warning" class="edit-button" (click)="editSprint(sprint.id)">Edit</button>
-      <button nbButton status="danger" class="delete-button" (click)="deleteSprint(sprint.id)">Delete</button>
-    </div>
-  </div>
-</div>
+  </nb-card-body>
+</nb-card>

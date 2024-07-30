@@ -1,0 +1,28 @@
+<nb-card>
+    <nb-card-header>Sprint Backlog</nb-card-header>
+    <nb-card-body>
+      <div class="backlog-container">
+        <div class="backlog-item" *ngFor="let item of backlogItems">
+          <div class="item-header">
+            <h4>{{ item.title }}</h4>
+            <span class="priority" [ngClass]="getPriorityClass(item.priority)">
+              {{ item.priority }}
+            </span>
+          </div>
+          <p class="item-description">{{ item.description }}</p>
+          <div class="item-footer">
+            <span class="status" [ngClass]="getStatusClass(item.status)">
+              {{ item.status }}
+            </span>
+            <button nbButton status="primary" (click)="viewDetails(item)">
+              View Details
+            </button>
+            <button nbButton status="success" (click)="markAsCompleted(item)" [disabled]="item.status === 'Completed'">
+              Mark as Completed
+            </button>
+          </div>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+  

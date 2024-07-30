@@ -1,14 +1,22 @@
-<div class="team-list">
-  <h2>Teams</h2>
-  <button nbButton status="success" class="create-team-button" (click)="createTeam()">Create New Team</button>
-  <div class="team-card" *ngFor="let team of teams">
-    <div class="team-header">
-      <h3>{{ team.name }}</h3>
+<nb-card>
+  <nb-card-header>Team List</nb-card-header>
+  <nb-card-body>
+    <div class="team-list-container">
+      <div class="team-item" *ngFor="let team of teams">
+        <div class="item-header">
+          <h4>{{ team.name }}</h4>
+        </div>
+        <p class="item-members">Members: {{ team.members.join(', ') }}</p>
+        <p class="item-roles">Roles: {{ team.roles.join(', ') }}</p>
+        <div class="item-footer">
+          <button nbButton status="primary" (click)="viewTeamDetails(team)">
+            View Details
+          </button>
+          <button nbButton status="warning" (click)="editTeam(team)">
+            Edit Team
+          </button>
+        </div>
+      </div>
     </div>
-    <p>{{ team.description }}</p>
-    <div class="button-container">
-      <button nbButton status="warning" class="edit-button" (click)="editTeam(team.id)">Edit</button>
-      <button nbButton status="danger" class="delete-button" (click)="deleteTeam(team.id)">Delete</button>
-    </div>
-  </div>
-</div>
+  </nb-card-body>
+</nb-card>
