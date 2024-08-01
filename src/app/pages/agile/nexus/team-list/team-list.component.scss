@@ -1,3 +1,36 @@
+nb-card {
+  position: relative; /* Ensure the card is positioned relatively to contain the button */
+}
+
+nb-card-header {
+  position: relative; /* Make sure the header is positioned relatively */
+  padding-right: 60px; /* Add padding to ensure space for the button */
+}
+
+.add-team-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px; 
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute; /* Position the button absolutely */
+  top: 50%; /* Center the button vertically */
+  right: 10px; /* Space from the right edge */
+  transform: translateY(-50%); /* Center the button vertically */
+  transition: background-color 0.3s ease;
+  z-index: 1; /* Ensure the button is above other content */
+
+  &:hover {
+    background-color: #0056b3;
+  }
+}
+
 .team-list-container {
   display: flex;
   flex-direction: column;
@@ -28,7 +61,8 @@
     }
   }
 
-  .item-members, .item-roles {
+  .item-members,
+  .item-roles {
     margin: 0.5rem 0;
     color: #666;
   }

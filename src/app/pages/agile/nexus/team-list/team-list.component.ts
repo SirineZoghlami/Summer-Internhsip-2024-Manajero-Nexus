@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { NbDialogService } from '@nebular/theme';
+import { TeamCreationModalComponent } from '../team-creation-modal/team-creation-modal.component';
 
 @Component({
   selector: 'app-team-list',
@@ -14,6 +16,8 @@ export class TeamListComponent {
     { id: 4, name: 'Sales Team', members: ['Hannah', 'Ian'], roles: ['Sales Manager', 'Sales Representative'] }
   ];
 
+  constructor(private dialogService: NbDialogService) {}
+
   viewTeamDetails(team: any) {
     alert(`Viewing details for: ${team.name}`);
   }
@@ -22,7 +26,12 @@ export class TeamListComponent {
     alert(`Editing team: ${team.name}`);
   }
 
-  getRoleClass(role: string): string {
-    return role.toLowerCase().replace(/ /g, '-');
+  openTeamModal() {
+    this.dialogService.open(TeamCreationModalComponent)
+      .onClose.subscribe((newTeam) => {
+        if (newTeam) {
+          this.teams.push(newTeam);
+        }
+      });
   }
 }

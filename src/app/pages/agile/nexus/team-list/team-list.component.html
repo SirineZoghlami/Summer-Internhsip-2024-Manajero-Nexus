@@ -1,5 +1,8 @@
 <nb-card>
-  <nb-card-header>Team List</nb-card-header>
+  <nb-card-header>
+    Team List
+    <button class="add-team-button" (click)="openTeamModal()">+</button>
+  </nb-card-header>
   <nb-card-body>
     <div class="team-list-container">
       <div class="team-item" *ngFor="let team of teams">

@@ -29,6 +29,7 @@ import { NbSelectModule } from '@nebular/theme';
 import { SprintBacklogComponent } from './agile/nexus/sprint-backlog/sprint-backlog.component';
 import { SprintBacklogModalComponent } from './agile/nexus/sprint-backlog-modal/sprint-backlog-modal.component';
 import { SprintCreationModalComponent } from './agile/nexus/sprint-creation-modal/sprint-creation-modal.component';
+import { TeamCreationModalComponent } from './agile/nexus/team-creation-modal/team-creation-modal.component';
 
 
 @NgModule({
@@ -78,6 +79,7 @@ import { SprintCreationModalComponent } from './agile/nexus/sprint-creation-moda
     SprintBacklogComponent,
     SprintBacklogModalComponent,
     SprintCreationModalComponent,
+    TeamCreationModalComponent,
 
     
     

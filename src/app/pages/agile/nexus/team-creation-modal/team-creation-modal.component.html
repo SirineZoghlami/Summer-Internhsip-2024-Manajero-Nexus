@@ -1,0 +1,43 @@
+<div class="modal-content">
+    <h2>Create New Team</h2>
+    <form (ngSubmit)="createTeam()">
+      <div class="form-group">
+        <label for="teamName">Name:</label>
+        <input
+          id="teamName"
+          type="text"
+          [(ngModel)]="team.name"
+          name="name"
+          required
+        />
+      </div>
+  
+      <div class="form-group">
+        <label for="teamMembers">Members (comma-separated):</label>
+        <input
+          id="teamMembers"
+          type="text"
+          [(ngModel)]="team.members"
+          name="members"
+          required
+        />
+      </div>
+  
+      <div class="form-group">
+        <label for="teamRoles">Roles (comma-separated):</label>
+        <input
+          id="teamRoles"
+          type="text"
+          [(ngModel)]="team.roles"
+          name="roles"
+          required
+        />
+      </div>
+ 
+      <div class="form-buttons">
+        <button type="button" (click)="cancel()">Cancel</button>
+        <button type="submit">Create Team</button>
+      </div>
+    </form>
+  </div>
+  

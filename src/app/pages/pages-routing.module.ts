@@ -20,6 +20,7 @@ import { NexusTimelineComponent } from './agile/nexus/nexus-timeline/nexus-timel
 import { SprintBacklogComponent } from './agile/nexus/sprint-backlog/sprint-backlog.component';
 import { SprintBacklogModalComponent } from './agile/nexus/sprint-backlog-modal/sprint-backlog-modal.component';
 import { SprintCreationModalComponent } from './agile/nexus/sprint-creation-modal/sprint-creation-modal.component';
+import { TeamCreationModalComponent } from './agile/nexus/team-creation-modal/team-creation-modal.component';
 
 
 const routes: Routes = [{
@@ -118,7 +119,7 @@ const routes: Routes = [{
         { path: 'sprint-list', component: SprintListComponent },
         { path: 'sprint-create', component: SprintCreationModalComponent },
         { path: 'team-list', component: TeamListComponent },
-        { path: 'team-detail', component: TeamDetailComponent },
+        { path: 'team-create', component: TeamCreationModalComponent },
         { path: 'task-list', component: TaskListComponent },
         { path: 'task-create', component: TaskCreationModalComponent },
         { path: 'nexus-timeline', component: NexusTimelineComponent},
