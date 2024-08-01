@@ -17,13 +17,19 @@ import { NexusQuizComponent } from './agile/nexus/nexus-quiz/nexus-quiz.componen
 import { ErrorMessageComponent } from './agile/nexus/error-message/error-message.component';
 import { ProjectsComponent } from './agile/nexus/projects/projects.component';
 import { SprintListComponent } from './agile/nexus/sprint-list/sprint-list.component';
-import { SprintDetailComponent } from './agile/nexus/sprint-detail/sprint-detail.component';
 import { TeamListComponent } from './agile/nexus/team-list/team-list.component';
 import { TeamDetailComponent } from './agile/nexus/team-detail/team-detail.component';
 import { TaskListComponent } from './agile/nexus/task-list/task-list.component';
 import { TaskCreationModalComponent } from './agile/nexus/task-creation-modal/task-creation-modal.component';
 import { NexusBoardComponent } from './agile/nexus/nexus-board/nexus-board.component';
 import { NbLayoutModule, NbSidebarModule, } from '@nebular/theme';
+import { NexusTimelineComponent } from './agile/nexus/nexus-timeline/nexus-timeline.component';
+import { NbThemeModule,  NbIconModule, NbProgressBarModule } from '@nebular/theme';
+import { NbSelectModule } from '@nebular/theme';
+import { SprintBacklogComponent } from './agile/nexus/sprint-backlog/sprint-backlog.component';
+import { SprintBacklogModalComponent } from './agile/nexus/sprint-backlog-modal/sprint-backlog-modal.component';
+import { SprintCreationModalComponent } from './agile/nexus/sprint-creation-modal/sprint-creation-modal.component';
+
 
 @NgModule({
   imports: [
@@ -43,6 +49,11 @@ import { NbLayoutModule, NbSidebarModule, } from '@nebular/theme';
     HttpClientModule,
     NbLayoutModule,
     NbSidebarModule,
+    NbThemeModule,  
+    NbIconModule, 
+    NbProgressBarModule,
+    NbSelectModule,
+
 
     
 
@@ -58,12 +69,15 @@ import { NbLayoutModule, NbSidebarModule, } from '@nebular/theme';
     ErrorMessageComponent,
     ProjectsComponent,
     SprintListComponent,
-    SprintDetailComponent,
     TeamListComponent,
     TeamDetailComponent,
     TaskListComponent,
     TaskCreationModalComponent,
     NexusBoardComponent,
+    NexusTimelineComponent,
+    SprintBacklogComponent,
+    SprintBacklogModalComponent,
+    SprintCreationModalComponent,
 
     
     

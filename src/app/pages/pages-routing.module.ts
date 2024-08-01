@@ -11,12 +11,16 @@ import { TutorialUpdateComponent } from './agile/nexus/tutorial-update/tutorial-
 import { NexusQuizComponent } from './agile/nexus/nexus-quiz/nexus-quiz.component'; 
 import { ProjectsComponent } from './agile/nexus/projects/projects.component';
 import { SprintListComponent } from './agile/nexus/sprint-list/sprint-list.component';
-import { SprintDetailComponent } from './agile/nexus/sprint-detail/sprint-detail.component';
 import { TeamListComponent } from './agile/nexus/team-list/team-list.component';
 import { TeamDetailComponent } from './agile/nexus/team-detail/team-detail.component';
 import { TaskListComponent } from './agile/nexus/task-list/task-list.component';
 import { TaskCreationModalComponent } from './agile/nexus/task-creation-modal/task-creation-modal.component';
 import { NexusBoardComponent } from './agile/nexus/nexus-board/nexus-board.component';
+import { NexusTimelineComponent } from './agile/nexus/nexus-timeline/nexus-timeline.component';
+import { SprintBacklogComponent } from './agile/nexus/sprint-backlog/sprint-backlog.component';
+import { SprintBacklogModalComponent } from './agile/nexus/sprint-backlog-modal/sprint-backlog-modal.component';
+import { SprintCreationModalComponent } from './agile/nexus/sprint-creation-modal/sprint-creation-modal.component';
+
 
 const routes: Routes = [{
   path: '',
@@ -112,11 +116,17 @@ const routes: Routes = [{
       component: NexusBoardComponent,
       children: [
         { path: 'sprint-list', component: SprintListComponent },
-        { path: 'sprint-detail', component: SprintDetailComponent },
+        { path: 'sprint-create', component: SprintCreationModalComponent },
         { path: 'team-list', component: TeamListComponent },
         { path: 'team-detail', component: TeamDetailComponent },
         { path: 'task-list', component: TaskListComponent },
         { path: 'task-create', component: TaskCreationModalComponent },
+        { path: 'nexus-timeline', component: NexusTimelineComponent},
+        {path : 'sprint-backlog', component:SprintBacklogComponent},
+        {path : 'sprint-backlog-modal', component:SprintBacklogModalComponent},
+
+
+
         // Add other child routes here if needed
       ]
     },

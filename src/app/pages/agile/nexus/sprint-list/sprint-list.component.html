@@ -1,5 +1,10 @@
 <nb-card>
-  <nb-card-header>Sprint List</nb-card-header>
+  <nb-card-header>
+    <div class="header-content">
+      <h1>Sprint List</h1>
+      <button class="add-sprint-button" (click)="openSprintModal()">+</button>
+    </div>
+  </nb-card-header>
   <nb-card-body>
     <div class="sprint-list-container">
       <div class="sprint-item" *ngFor="let sprint of sprints">
@@ -22,3 +27,8 @@
     </div>
   </nb-card-body>
 </nb-card>
+
+<ngx-sprint-creation-modal
+  [showModal]="isModalVisible"
+  (sprintCreated)="handleSprintCreation($event)"
+></ngx-sprint-creation-modal>

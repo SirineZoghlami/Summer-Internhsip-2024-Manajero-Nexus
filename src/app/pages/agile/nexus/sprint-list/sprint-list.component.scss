@@ -1,3 +1,48 @@
+nb-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  position: relative; /* Ensure the button can be positioned absolutely */
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1; /* Allow header content to take up remaining space */
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.add-sprint-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute; /* Position the button absolutely */
+  top: 50%; /* Center the button vertically */
+  right: 1rem; /* Align the button to the right with some margin */
+  transform: translateY(-50%); /* Center the button vertically */
+  transition: background-color 0.3s ease;
+  z-index: 1; /* Ensure the button is above other content */
+
+  &:hover {
+    background-color: #0056b3;
+  }
+}
+
 .sprint-list-container {
   display: flex;
   flex-direction: column;

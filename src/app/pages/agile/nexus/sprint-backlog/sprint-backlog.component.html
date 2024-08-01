@@ -1,5 +1,10 @@
 <nb-card>
-    <nb-card-header>Sprint Backlog</nb-card-header>
+    <nb-card-header>
+      <div class="header-content">
+        <span>Sprint Backlog</span>
+        <button nbButton class="add-sprint-button" (click)="openSprintModal()">+</button>
+      </div>
+    </nb-card-header>
     <nb-card-body>
       <div class="backlog-container">
         <div class="backlog-item" *ngFor="let item of backlogItems">

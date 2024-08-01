@@ -1,0 +1,56 @@
+<div class="modal-content">
+    <h2>Create New Sprint Backlog</h2>
+    <form (ngSubmit)="createSprint()">
+      <div class="form-group">
+        <label for="sprintTitle">Title:</label>
+        <input
+          id="sprintTitle"
+          type="text"
+          [(ngModel)]="newSprint.title"
+          name="title"
+          required
+        />
+      </div>
+  
+      <div class="form-group">
+        <label for="sprintDescription">Description:</label>
+        <textarea
+          id="sprintDescription"
+          [(ngModel)]="newSprint.description"
+          name="description"
+          required
+        ></textarea>
+      </div>
+  
+      <div class="form-group">
+        <label for="sprintDueDate">Due Date:</label>
+        <input
+          id="sprintDueDate"
+          type="date"
+          [(ngModel)]="newSprint.dueDate"
+          name="dueDate"
+          required
+        />
+      </div>
+  
+      <div class="form-group">
+        <label for="sprintPriority">Priority:</label>
+        <select
+          id="sprintPriority"
+          [(ngModel)]="newSprint.priority"
+          name="priority"
+          required
+        >
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+          <option value="Low">Low</option>
+        </select>
+      </div>
+  
+      <div class="form-buttons">
+        <button type="button" (click)="cancel()">Cancel</button>
+        <button type="submit">Create Sprint</button>
+      </div>
+    </form>
+  </div>
+  
