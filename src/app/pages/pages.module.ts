@@ -13,6 +13,7 @@ import { PagesComponent } from './pages.component';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { ECommerceModule } from './e-commerce/e-commerce.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
+import { NbToastrModule } from '@nebular/theme';
 
 import { TutorialComponent } from './agile/nexus/tutorial.component';
 import { TutorialCreateComponent } from './agile/nexus/tutorial-create/tutorial-create.component';
@@ -58,7 +59,8 @@ import { ProjectOverviewComponent } from './agile/nexus/project-overview/project
     DashboardModule,
     ECommerceModule,
     MiscellaneousModule,
-    FullCalendarModule // Add FullCalendarModule here
+    FullCalendarModule, // Add FullCalendarModule here
+    NbToastrModule.forRoot(),
   ],
   declarations: [
     PagesComponent,

@@ -1,4 +1,8 @@
+// sprint-backlog-modal.component.ts
+
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { NbDialogRef, NbToastrService } from '@nebular/theme';
+import { SprintBacklogService } from '../../../../../services/SprintBacklogService';
 
 @Component({
   selector: 'app-sprint-backlog-modal',
@@ -7,32 +11,53 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class SprintBacklogModalComponent {
   @Input() title: string;
+  @Input() description: string;
+  @Output() sprintCreated: EventEmitter<any> = new EventEmitter();
 
-  newSprint = {
+  newSprintBacklog: any = {
     title: '',
     description: '',
     dueDate: '',
-    priority: 'Medium'
+    priority: 'Medium',
+    status: 'Pending'
   };
 
-  createSprint() {
-    // Logic to handle sprint creation
-    alert(`Sprint Created: ${this.newSprint.title}`);
-    // Reset form after submission
-    this.resetForm();
-    // Dialog will close automatically after creation if handled from the service
+  constructor(
+    protected dialogRef: NbDialogRef<SprintBacklogModalComponent>,
+    private sprintBacklogService: SprintBacklogService,
+    private toastrService: NbToastrService
+  ) {}
+
+  createSprintBacklog() {
+    if (this.newSprintBacklog.title && this.newSprintBacklog.description) {
+      this.sprintBacklogService.createSprintBacklog(this.newSprintBacklog).subscribe(
+        response => {
+          this.toastrService.success('Sprint Backlog Created Successfully!', 'Success');
+          this.sprintCreated.emit(response); // Emit the response data
+          this.resetForm();
+          this.dialogRef.close(); // Close the modal
+        },
+        error => {
+          this.toastrService.danger('Error creating sprint backlog', 'Error');
+          console.error('Error creating sprint backlog', error);
+        }
+      );
+    } else {
+      this.toastrService.warning('Title and description are required.', 'Warning');
+    }
   }
 
   resetForm() {
-    this.newSprint = {
+    this.newSprintBacklog = {
       title: '',
       description: '',
       dueDate: '',
-      priority: 'Medium'
+      priority: 'Medium',
+      status: 'Pending'
     };
   }
 
   cancel() {
-    // No need for this method if you are using Nebular's dialog service
+    this.dialogRef.close();
   }
 }

@@ -1,33 +1,45 @@
 <nb-card>
-    <nb-card-header>
-      <div class="header-content">
-        <span>Sprint Backlog</span>
-        <button nbButton class="add-sprint-button" (click)="openSprintModal()">+</button>
-      </div>
-    </nb-card-header>
-    <nb-card-body>
-      <div class="backlog-container">
-        <div class="backlog-item" *ngFor="let item of backlogItems">
-          <div class="item-header">
-            <h4>{{ item.title }}</h4>
-            <span class="priority" [ngClass]="getPriorityClass(item.priority)">
-              {{ item.priority }}
-            </span>
-          </div>
-          <p class="item-description">{{ item.description }}</p>
-          <div class="item-footer">
-            <span class="status" [ngClass]="getStatusClass(item.status)">
-              {{ item.status }}
-            </span>
-            <button nbButton status="primary" (click)="viewDetails(item)">
-              View Details
-            </button>
-            <button nbButton status="success" (click)="markAsCompleted(item)" [disabled]="item.status === 'Completed'">
-              Mark as Completed
-            </button>
-          </div>
+  <nb-card-header>
+    <div class="header-content">
+      <span>Sprint Backlog</span>
+      <!-- Conditional display of "+" button -->
+      <button *ngIf="!isEmpty" nbButton class="add-sprint-button" (click)="openSprintModal()">+</button>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <!-- Show message and button if no backlog items are present -->
+    <div *ngIf="isEmpty" class="no-data-message">
+      <p>No sprint backlog items available.</p>
+      <button nbButton status="primary" (click)="openSprintModal()">Create Sprint Backlog</button>
+    </div>
+    <!-- Show backlog items and pagination if there are items -->
+    <div *ngIf="!isEmpty" class="backlog-container">
+      <div class="backlog-item" *ngFor="let item of pagedBacklogItems">
+        <div class="item-header">
+          <h4>{{ item.title }}</h4>
+          <span class="priority" [ngClass]="getPriorityClass(item.priority)">
+            {{ item.priority }}
+          </span>
+        </div>
+        <p class="item-description">{{ item.description }}</p>
+        <div class="item-footer">
+          <span class="status" [ngClass]="getStatusClass(item.status)">
+            {{ item.status }}
+          </span>
+          <button nbButton status="primary" (click)="viewDetails(item)">
+            View Details
+          </button>
+          <button nbButton status="success" (click)="markAsCompleted(item)" [disabled]="item.status === 'Completed'">
+            Mark as Completed
+          </button>
         </div>
       </div>
-    </nb-card-body>
-  </nb-card>
-  
+      <!-- Pagination controls -->
+      <nb-paginator
+        [total]="totalItems"
+        [perPage]="itemsPerPage"
+        (pageChange)="onPageChange($event)">
+      </nb-paginator>
+    </div>
+  </nb-card-body>
+</nb-card>
