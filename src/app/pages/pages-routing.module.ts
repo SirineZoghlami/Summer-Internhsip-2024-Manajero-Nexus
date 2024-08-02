@@ -21,6 +21,8 @@ import { SprintBacklogComponent } from './agile/nexus/sprint-backlog/sprint-back
 import { SprintBacklogModalComponent } from './agile/nexus/sprint-backlog-modal/sprint-backlog-modal.component';
 import { SprintCreationModalComponent } from './agile/nexus/sprint-creation-modal/sprint-creation-modal.component';
 import { TeamCreationModalComponent } from './agile/nexus/team-creation-modal/team-creation-modal.component';
+import { NexusCalendarComponent } from './agile/nexus/nexus-calendar/nexus-calendar.component';
+import { ProjectOverviewComponent } from './agile/nexus/project-overview/project-overview.component';
 
 
 const routes: Routes = [{
@@ -109,29 +111,26 @@ const routes: Routes = [{
    
     
    
-   
- 
- 
     {
-      path: 'agile/nexus-board',  
+      path: 'agile/nexus-board',
       component: NexusBoardComponent,
       children: [
+        { path: '', redirectTo: 'project-overview', pathMatch: 'full' },
+        { path: 'project-overview', component: ProjectOverviewComponent },
+
         { path: 'sprint-list', component: SprintListComponent },
         { path: 'sprint-create', component: SprintCreationModalComponent },
         { path: 'team-list', component: TeamListComponent },
         { path: 'team-create', component: TeamCreationModalComponent },
         { path: 'task-list', component: TaskListComponent },
         { path: 'task-create', component: TaskCreationModalComponent },
-        { path: 'nexus-timeline', component: NexusTimelineComponent},
-        {path : 'sprint-backlog', component:SprintBacklogComponent},
-        {path : 'sprint-backlog-modal', component:SprintBacklogModalComponent},
+        { path: 'nexus-timeline', component: NexusTimelineComponent },
+        { path: 'sprint-backlog', component: SprintBacklogComponent },
+        { path: 'sprint-backlog-modal', component: SprintBacklogModalComponent },
+        { path: 'nexus-calendar', component: NexusCalendarComponent },
 
-
-
-        // Add other child routes here if needed
       ]
     },
-
     {
       path: '',
       redirectTo: 'dashboard',
