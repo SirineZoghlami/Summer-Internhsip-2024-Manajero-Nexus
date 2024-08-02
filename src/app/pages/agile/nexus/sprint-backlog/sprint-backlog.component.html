@@ -1,45 +1,43 @@
 <nb-card>
-  <nb-card-header>
-    <div class="header-content">
-      <span>Sprint Backlog</span>
-      <!-- Conditional display of "+" button -->
-      <button *ngIf="!isEmpty" nbButton class="add-sprint-button" (click)="openSprintModal()">+</button>
-    </div>
-  </nb-card-header>
-  <nb-card-body>
-    <!-- Show message and button if no backlog items are present -->
-    <div *ngIf="isEmpty" class="no-data-message">
-      <p>No sprint backlog items available.</p>
-      <button nbButton status="primary" (click)="openSprintModal()">Create Sprint Backlog</button>
-    </div>
-    <!-- Show backlog items and pagination if there are items -->
-    <div *ngIf="!isEmpty" class="backlog-container">
-      <div class="backlog-item" *ngFor="let item of pagedBacklogItems">
-        <div class="item-header">
-          <h4>{{ item.title }}</h4>
-          <span class="priority" [ngClass]="getPriorityClass(item.priority)">
-            {{ item.priority }}
-          </span>
-        </div>
-        <p class="item-description">{{ item.description }}</p>
-        <div class="item-footer">
-          <span class="status" [ngClass]="getStatusClass(item.status)">
-            {{ item.status }}
-          </span>
-          <button nbButton status="primary" (click)="viewDetails(item)">
-            View Details
-          </button>
-          <button nbButton status="success" (click)="markAsCompleted(item)" [disabled]="item.status === 'Completed'">
-            Mark as Completed
-          </button>
+    <nb-card-header>
+      <div class="header-content">
+        <span>Sprint Backlog</span>
+        <!-- Conditional display of "+" button -->
+        <button *ngIf="!isEmpty" nbButton class="add-sprint-button" (click)="openSprintModal()">+</button>
+      </div>
+    </nb-card-header>
+    <nb-card-body>
+      <!-- Show message and button if no backlog items are present -->
+      <div *ngIf="isEmpty" class="no-data-message">
+        <p>No sprint backlog items available.</p>
+        <button nbButton status="primary" (click)="openSprintModal()">Create Sprint Backlog</button>
+      </div>
+      <!-- Show backlog items and pagination if there are items -->
+      <div *ngIf="!isEmpty" class="backlog-container">
+        <div class="backlog-item" *ngFor="let item of pagedBacklogItems">
+          <div class="item-header">
+            <h4>{{ item.title }}</h4>
+            <span class="priority" [ngClass]="getPriorityClass(item.priority)">
+              {{ item.priority }}
+            </span>
+          </div>
+          <p class="item-description">{{ item.description }}</p>
+          <div class="item-footer">
+            <span class="status" [ngClass]="getStatusClass(item.status)">
+              {{ item.status }}
+            </span>
+            <button nbButton status="primary" (click)="editBacklog(item)">
+              Edit Backlog
+            </button>
+            <button nbButton status="danger" (click)="openConfirmationDialog('delete', item)">
+              Delete Backlog
+            </button>
+            <button nbButton status="success" (click)="markAsCompleted(item)" [disabled]="item.status === 'Completed'">
+              Mark as Completed
+            </button>
+          </div>
         </div>
       </div>
-      <!-- Pagination controls -->
-      <nb-paginator
-        [total]="totalItems"
-        [perPage]="itemsPerPage"
-        (pageChange)="onPageChange($event)">
-      </nb-paginator>
-    </div>
-  </nb-card-body>
-</nb-card>
+    </nb-card-body>
+  </nb-card>
+  

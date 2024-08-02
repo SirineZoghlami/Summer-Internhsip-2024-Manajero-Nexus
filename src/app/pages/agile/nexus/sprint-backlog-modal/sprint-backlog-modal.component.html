@@ -1,55 +1,56 @@
 <div class="modal-content">
-  <h2>Create New Sprint Backlog</h2>
-  <form (ngSubmit)="createSprintBacklog()">
-    <div class="form-group">
-      <label for="sprintTitle">Title:</label>
-      <input
-        id="sprintTitle"
-        type="text"
-        [(ngModel)]="newSprintBacklog.title"
-        name="title"
-        required
-      />
-    </div>
-
-    <div class="form-group">
-      <label for="sprintDescription">Description:</label>
-      <textarea
-        id="sprintDescription"
-        [(ngModel)]="newSprintBacklog.description"
-        name="description"
-        required
-      ></textarea>
-    </div>
-
-    <div class="form-group">
-      <label for="sprintDueDate">Due Date:</label>
-      <input
-        id="sprintDueDate"
-        type="date"
-        [(ngModel)]="newSprintBacklog.dueDate"
-        name="dueDate"
-        required
-      />
-    </div>
-
-    <div class="form-group">
-      <label for="sprintPriority">Priority:</label>
-      <select
-        id="sprintPriority"
-        [(ngModel)]="newSprintBacklog.priority"
-        name="priority"
-        required
-      >
-        <option value="High">High</option>
-        <option value="Medium">Medium</option>
-        <option value="Low">Low</option>
-      </select>
-    </div>
-
-    <div class="form-buttons">
-      <button type="button" (click)="cancel()">Cancel</button>
-      <button type="submit">Create Sprint Backlog</button>
-    </div>
-  </form>
-</div>
+    <h2>{{ isEditMode ? 'Edit Sprint Backlog' : 'Create New Sprint Backlog' }}</h2>
+    <form (ngSubmit)="saveSprintBacklog()">
+      <div class="form-group">
+        <label for="sprintTitle">Title:</label>
+        <input
+          id="sprintTitle"
+          type="text"
+          [(ngModel)]="newSprintBacklog.title"
+          name="title"
+          required
+        />
+      </div>
+  
+      <div class="form-group">
+        <label for="sprintDescription">Description:</label>
+        <textarea
+          id="sprintDescription"
+          [(ngModel)]="newSprintBacklog.description"
+          name="description"
+          required
+        ></textarea>
+      </div>
+  
+      <div class="form-group">
+        <label for="sprintDueDate">Due Date:</label>
+        <input
+          id="sprintDueDate"
+          type="date"
+          [(ngModel)]="newSprintBacklog.dueDate"
+          name="dueDate"
+          required
+        />
+      </div>
+  
+      <div class="form-group">
+        <label for="sprintPriority">Priority:</label>
+        <select
+          id="sprintPriority"
+          [(ngModel)]="newSprintBacklog.priority"
+          name="priority"
+          required
+        >
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+          <option value="Low">Low</option>
+        </select>
+      </div>
+  
+      <div class="form-buttons">
+        <button type="button" (click)="cancel()">Cancel</button>
+        <button type="submit">{{ isEditMode ? 'Update Sprint Backlog' : 'Create Sprint Backlog' }}</button>
+      </div>
+    </form>
+  </div>
+  

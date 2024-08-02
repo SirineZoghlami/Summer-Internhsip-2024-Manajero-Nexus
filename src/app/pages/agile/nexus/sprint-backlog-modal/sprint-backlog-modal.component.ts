@@ -1,6 +1,4 @@
-// sprint-backlog-modal.component.ts
-
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { NbDialogRef, NbToastrService } from '@nebular/theme';
 import { SprintBacklogService } from '../../../../../services/SprintBacklogService';
 
@@ -9,10 +7,15 @@ import { SprintBacklogService } from '../../../../../services/SprintBacklogServi
   templateUrl: './sprint-backlog-modal.component.html',
   styleUrls: ['./sprint-backlog-modal.component.scss']
 })
-export class SprintBacklogModalComponent {
-  @Input() title: string;
-  @Input() description: string;
-  @Output() sprintCreated: EventEmitter<any> = new EventEmitter();
+export class SprintBacklogModalComponent implements OnInit {
+  @Input() sprintBacklog: any; // For editing existing backlog
+  @Input() title: string = '';
+  @Input() description: string = '';
+
+  item: any;
+
+  @Output() sprintUpdated: EventEmitter<any> = new EventEmitter();
+  
 
   newSprintBacklog: any = {
     title: '',
@@ -22,26 +25,50 @@ export class SprintBacklogModalComponent {
     status: 'Pending'
   };
 
+  isEditMode: boolean = false; // Flag to determine if in edit mode
+
   constructor(
     protected dialogRef: NbDialogRef<SprintBacklogModalComponent>,
     private sprintBacklogService: SprintBacklogService,
     private toastrService: NbToastrService
   ) {}
 
-  createSprintBacklog() {
+  ngOnInit(): void {
+    console.log('Sprint Backlog:', this.sprintBacklog); // Add this line to check the input data
+    if (this.sprintBacklog) {
+      this.isEditMode = true;
+      this.newSprintBacklog = { ...this.sprintBacklog };
+    }
+  }
+  
+
+  saveSprintBacklog() {
     if (this.newSprintBacklog.title && this.newSprintBacklog.description) {
-      this.sprintBacklogService.createSprintBacklog(this.newSprintBacklog).subscribe(
-        response => {
-          this.toastrService.success('Sprint Backlog Created Successfully!', 'Success');
-          this.sprintCreated.emit(response); // Emit the response data
-          this.resetForm();
-          this.dialogRef.close(); // Close the modal
-        },
-        error => {
-          this.toastrService.danger('Error creating sprint backlog', 'Error');
-          console.error('Error creating sprint backlog', error);
-        }
-      );
+      if (this.isEditMode) {
+        this.sprintBacklogService.updateSprintBacklog(this.newSprintBacklog.id, this.newSprintBacklog).subscribe(
+          response => {
+            this.toastrService.success('Sprint Backlog Updated Successfully!', 'Success');
+            this.sprintUpdated.emit(response);
+            this.dialogRef.close();
+          },
+          error => {
+            this.toastrService.danger('Error updating sprint backlog', 'Error');
+            console.error('Error updating sprint backlog', error);
+          }
+        );
+      } else {
+        this.sprintBacklogService.createSprintBacklog(this.newSprintBacklog).subscribe(
+          response => {
+            this.toastrService.success('Sprint Backlog Created Successfully!', 'Success');
+            this.sprintUpdated.emit(response);
+            this.dialogRef.close();
+          },
+          error => {
+            this.toastrService.danger('Error creating sprint backlog', 'Error');
+            console.error('Error creating sprint backlog', error);
+          }
+        );
+      }
     } else {
       this.toastrService.warning('Title and description are required.', 'Warning');
     }

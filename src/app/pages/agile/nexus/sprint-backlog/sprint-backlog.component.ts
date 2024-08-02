@@ -1,9 +1,8 @@
-// sprint-backlog.component.ts
-
 import { Component, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
 import { NbDialogService, NbToastrService } from '@nebular/theme';
 import { SprintBacklogModalComponent } from '../sprint-backlog-modal/sprint-backlog-modal.component';
 import { SprintBacklogService } from '../../../../../services/SprintBacklogService';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component'; // Import the confirmation dialog component
 
 @Component({
   selector: 'app-sprint-backlog',
@@ -97,19 +96,63 @@ export class SprintBacklogComponent implements OnInit {
     }
   }
 
-  viewDetails(item: any): void {
-    alert(`Viewing details for: ${item.title}`);
+  openConfirmationDialog(action: string, item: any): void {
+    const dialogRef = this.dialogService.open(ConfirmationDialogComponent, {
+      context: {
+        title: `Confirm ${action}`,
+        message: `Are you sure you want to ${action} this backlog item?`
+      }
+    });
+
+    dialogRef.onClose.subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        if (action === 'delete') {
+          this.deleteBacklog(item);
+        }
+      }
+    });
+  }
+
+  editBacklog(item: any): void {
+    const dialogRef = this.dialogService.open(SprintBacklogModalComponent, {
+      context: {
+        sprintBacklog: item,
+        title: 'Edit Sprint Backlog',
+        description: 'Edit the details of the sprint backlog item'
+      }
+    });
+  
+    dialogRef.onClose.subscribe((updatedItem: any) => {
+      if (updatedItem) {
+        this.loadSprintBacklogs(); // Refresh the data inside NgZone
+        this.toastrService.success('Sprint backlog updated successfully.', 'Success');
+      }
+    });
+  }
+  
+
+  deleteBacklog(item: any): void {
+    this.sprintBacklogService.deleteSprintBacklog(item.id).subscribe(
+      response => {
+        this.loadSprintBacklogs();
+        this.toastrService.success('Sprint backlog deleted successfully.', 'Success');
+      },
+      error => {
+        console.error('Error deleting sprint backlog', error);
+        this.toastrService.danger('Failed to delete sprint backlog.', 'Error');
+      }
+    );
   }
 
   markAsCompleted(item: any): void {
     this.sprintBacklogService.updateSprintBacklogStatus(item.id, 'Completed').subscribe(
       response => {
-        item.status = 'Completed';
+        this.loadSprintBacklogs();
         this.toastrService.success('Sprint backlog marked as completed.', 'Success');
       },
       error => {
         console.error('Error updating sprint backlog status', error);
-        this.toastrService.danger('Failed to mark sprint backlog as completed.', 'Error');
+        this.toastrService.danger('Failed to update sprint backlog status.', 'Error');
       }
     );
   }
