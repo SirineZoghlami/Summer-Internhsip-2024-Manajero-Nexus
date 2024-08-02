@@ -32,7 +32,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   tryNexus(projectId: string): void {
-    this.router.navigate(['/pages/agile/nexus/projectimport', projectId]);
+    this.router.navigate(['pages/agile/nexus-board', ]);
   }
 
   confirmDelete(projectId: string): void {

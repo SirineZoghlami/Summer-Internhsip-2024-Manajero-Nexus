@@ -1,0 +1,244 @@
+.nexus-board {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #ffffff; // Set background color to white
+
+  
+    .content {
+      flex: 1;
+      padding: 2rem;
+      overflow-y: auto;
+  
+      // Dashboard Header
+      .dashboard-header {
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2rem;
+        border-bottom: 3px solid #3498db;
+  
+        h1 {
+          margin: 0;
+          font-size: 2.8rem;
+          color: #2c3e50;
+          font-weight: 700;
+          text-transform: uppercase;
+        }
+  
+        p {
+          margin: 0.5rem 0 0;
+          color: #7f8c8d;
+          font-size: 1.2rem;
+        }
+      }
+  
+      // Key Metrics Section
+      .key-metrics {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+  
+        .metric-card {
+          background-color: #ffffff;
+          border-radius: 12px;
+          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+          padding: 1.5rem;
+          flex: 1 1 calc(25% - 1rem);
+          margin: 0.5rem;
+          transition: transform 0.3s, box-shadow 0.3s;
+  
+          &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+          }
+  
+          h2 {
+            font-size: 1.4rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+          }
+  
+          p {
+            font-size: 1.1rem;
+            color: #666;
+          }
+  
+          progress {
+            width: 100%;
+            height: 20px;
+            appearance: none;
+            border-radius: 10px;
+            background-color: #ecf0f1;
+  
+            &::-webkit-progress-bar {
+              background-color: #ecf0f1;
+              border-radius: 10px;
+            }
+  
+            &::-webkit-progress-value {
+              background-color: #3498db;
+              border-radius: 10px;
+            }
+          }
+        }
+      }
+  
+      // Project Summary Section
+      .project-summary {
+        display: flex;
+        flex-wrap: wrap; // Allows cards to wrap to the next line if there isn't enough space
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+  
+        .summary-cards {
+          display: flex; // Aligns cards horizontally
+          flex-wrap: nowrap; // Prevents wrapping to the next line
+          gap: 1.5rem; // Adjust spacing between cards
+  
+          .summary-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            flex: 1 1 calc(25% - 1rem); // Adjusts the width of each card
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+  
+            &:hover {
+              transform: translateY(-5px);
+              box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+            }
+  
+            h3 {
+              font-size: 1.3rem;
+              color: #333;
+              margin-bottom: 0.5rem;
+              font-weight: 600;
+            }
+  
+            .count {
+              font-size: 2rem;
+              font-weight: bold;
+              color: #3498db;
+            }
+          }
+        }
+      }
+  
+      // Recent Activity Section
+      .recent-activity {
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+  
+        h2 {
+          font-size: 1.8rem;
+          color: #333;
+          margin-bottom: 1rem;
+          font-weight: 600;
+        }
+  
+        ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+  
+          li {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            color: #666;
+            font-size: 1.1rem;
+          }
+        }
+      }
+  
+      // Quick Links Section
+      .quick-links {
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+  
+        h2 {
+          font-size: 1.8rem;
+          color: #333;
+          margin-bottom: 1rem;
+          font-weight: 600;
+        }
+  
+        ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+  
+          li {
+            margin: 0.5rem 0;
+  
+            a {
+              color: #3498db;
+              text-decoration: none;
+              font-size: 1.2rem;
+              display: block;
+              padding: 0.5rem;
+              border-radius: 8px;
+              transition: background-color 0.3s, color 0.3s;
+  
+              &:hover {
+                background-color: #f0f2f5;
+                color: #0056b3;
+              }
+            }
+          }
+        }
+      }
+    }
+  
+    // Responsive adjustments
+    @media (max-width: 768px) {
+      .content {
+        padding: 1.5rem;
+      }
+  
+      .key-metrics, .project-summary {
+        flex-direction: column;
+        gap: 1rem;
+      }
+  
+      .metric-card, .summary-card {
+        flex: 1 1 100%;
+      }
+    }
+  
+    @media (max-width: 480px) {
+      .content {
+        padding: 1rem;
+      }
+  
+      .dashboard-header h1 {
+        font-size: 2rem;
+      }
+  
+      .dashboard-header p {
+        font-size: 1rem;
+      }
+  
+      .key-metrics, .project-summary {
+        gap: 0.5rem;
+      }
+  
+      .metric-card, .summary-card {
+        flex: 1 1 100%;
+      }
+    }
+  }
+  

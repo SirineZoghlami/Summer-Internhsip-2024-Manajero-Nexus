@@ -8,9 +8,7 @@
       display: flex;
       justify-content: center; // Center nav items horizontally
       background-color: #f0f0f0; // Slightly off-white for a modern look
-      border-bottom: 1px solid #ddd; // Border at the bottom of the navbar
       padding: 0.5rem 1rem; // Padding for the navbar
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); // Subtle shadow for separation
       z-index: 10; // Ensure navbar is above content
   
       .nav-menu {
@@ -46,43 +44,4 @@
       }
     }
   
-    .content {
-      flex: 1;
-      padding: 2rem; // Padding for the content area
-      background-color: #fff;
-      overflow-y: auto; // Allows scrolling if content overflows
-    }
-  }
-  
-  // Responsive adjustments
-  @media (max-width: 768px) {
-    .nexus-board {
-      .navbar {
-        flex-direction: column; // Stack nav items vertically on smaller screens
-        align-items: center; // Center align nav items
-      }
-  
-      .nav-menu {
-        flex-direction: column; // Stack nav items vertically
-        align-items: center; // Center align nav items
-      }
-  
-      .navbar li {
-        margin: 0.5rem 0; // Margin for vertical stack
-      }
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .nexus-board {
-      .navbar {
-        font-size: 0.8rem; // Smaller font size for very small screens
-        padding: 0.5rem;
-      }
-  
-      .content {
-        padding: 1rem; // Reduced padding for small screens
-      }
-    }
-  }
-  
+}
