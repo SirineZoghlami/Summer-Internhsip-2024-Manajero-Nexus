@@ -9,7 +9,7 @@ import { NexusIntegrationTeam } from '../../models/nexus-integration-team.model'
 export class NexusIntegrationTeamService {
   private apiUrl = 'http://localhost:8080/api/nexus-integration-teams';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getAllTeams(): Observable<NexusIntegrationTeam[]> {
     return this.http.get<NexusIntegrationTeam[]>(this.apiUrl);

@@ -7,16 +7,16 @@
     <div class="team-list-container">
       <div class="team-item" *ngFor="let team of teams">
         <div class="item-header">
-          <h4>{{ team.name }}</h4>
+          <h4>{{ team.teamName }}</h4>
         </div>
-        <p class="item-members">Members: {{ team.members.join(', ') }}</p>
-        <p class="item-roles">Roles: {{ team.roles.join(', ') }}</p>
+        <p class="item-members">Members: {{ team.members }}</p>
+        <p class="item-roles">Roles: {{ team.roles }}</p>
         <div class="item-footer">
-          <button nbButton status="primary" (click)="viewTeamDetails(team)">
-            View Details
-          </button>
           <button nbButton status="warning" (click)="editTeam(team)">
             Edit Team
+          </button>
+          <button nbButton status="danger" (click)="deleteTeam(team)">
+            Delete
           </button>
         </div>
       </div>

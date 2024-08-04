@@ -1,43 +1,53 @@
-<div class="modal-content">
-    <h2>Create New Team</h2>
-    <form (ngSubmit)="createTeam()">
-      <div class="form-group">
-        <label for="teamName">Name:</label>
-        <input
-          id="teamName"
-          type="text"
-          [(ngModel)]="team.name"
-          name="name"
-          required
-        />
-      </div>
+<div class="modal-overlay">
+    <div class="modal-content">
+      <h2>{{ team ? 'Edit Team' : 'Create New Team' }}</h2>
+      <form [formGroup]="teamForm" (ngSubmit)="createOrUpdateTeam()">
+        <div class="form-group">
+          <label for="teamName">Team Name:</label>
+          <input
+            id="teamName"
+            type="text"
+            formControlName="teamName"
+            required
+          />
+          <div *ngIf="formControls.teamName.invalid && (formControls.teamName.dirty || formControls.teamName.touched)">
+            <small class="text-danger" *ngIf="formControls.teamName.errors?.required">Team Name is required.</small>
+          </div>
+        </div>
   
-      <div class="form-group">
-        <label for="teamMembers">Members (comma-separated):</label>
-        <input
-          id="teamMembers"
-          type="text"
-          [(ngModel)]="team.members"
-          name="members"
-          required
-        />
-      </div>
+        <div class="form-group">
+          <label for="members">Members (comma-separated):</label>
+          <input
+            id="members"
+            type="text"
+            formControlName="members"
+            required
+          />
+          <div *ngIf="formControls.members.invalid && (formControls.members.dirty || formControls.members.touched)">
+            <small class="text-danger" *ngIf="formControls.members.errors?.required">Members are required.</small>
+          </div>
+        </div>
   
-      <div class="form-group">
-        <label for="teamRoles">Roles (comma-separated):</label>
-        <input
-          id="teamRoles"
-          type="text"
-          [(ngModel)]="team.roles"
-          name="roles"
-          required
-        />
-      </div>
- 
-      <div class="form-buttons">
-        <button type="button" (click)="cancel()">Cancel</button>
-        <button type="submit">Create Team</button>
-      </div>
-    </form>
+        <div class="form-group">
+          <label for="roles">Roles (comma-separated):</label>
+          <input
+            id="roles"
+            type="text"
+            formControlName="roles"
+            required
+          />
+          <div *ngIf="formControls.roles.invalid && (formControls.roles.dirty || formControls.roles.touched)">
+            <small class="text-danger" *ngIf="formControls.roles.errors?.required">Roles are required.</small>
+          </div>
+        </div>
+  
+        <div class="form-buttons">
+          <button class="cancel-button" type="button" nbButton status="danger" (click)="cancel()">Cancel</button>
+          <button type="submit" nbButton status="primary">
+            {{ team ? 'Update Team' : 'Create Team' }}
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
   

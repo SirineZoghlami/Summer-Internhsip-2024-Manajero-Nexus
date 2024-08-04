@@ -9,6 +9,7 @@
             <nb-step label="Form Project">
               <div class="step-content">
                 <h2>Form Project</h2>
+                <p>Establish the project framework and initial setup to begin work.</p>
                 <app-nexus-project></app-nexus-project>
                 <div class="button-container">
                   <button nbButton status="primary" (click)="prev()">Previous</button>
@@ -20,7 +21,7 @@
             <nb-step label="Initiate Nexus Integration Team">
               <div class="step-content">
                 <h2>Initiate Nexus Integration Team</h2>
-                <p>Form the Nexus Integration Team responsible for coordinating and integrating work across multiple Scrum teams.</p>
+                <p>Assemble the Nexus Integration Team to coordinate and integrate efforts across multiple Scrum teams.</p>
                 <app-team-list></app-team-list>
                 <div class="button-container">
                   <button nbButton status="primary" (click)="prev()">Previous</button>
@@ -32,7 +33,7 @@
             <nb-step label="Define Nexus Goal">
               <div class="step-content">
                 <h2>Define Nexus Goal</h2>
-                <p>Set a clear goal for the Nexus framework to align efforts across all teams.</p>
+                <p>Establish a clear, overarching goal for the Nexus framework to ensure alignment and focus across all teams.</p>
                 <app-nexus-goal></app-nexus-goal>
                 <div class="button-container">
                   <button nbButton status="primary" (click)="prev()">Previous</button>
@@ -41,10 +42,10 @@
               </div>
             </nb-step>
   
-            <nb-step label="Product Backlog Refinement">
+            <nb-step label="Product Backlog Creation">
               <div class="step-content">
-                <h2>Product Backlog Refinement</h2>
-                <p>Refine and prioritize the product backlog to ensure it is ready for the next sprint.</p>
+                <h2>Product Backlog Creation</h2>
+                <p>Create the Product Backlog by defining and prioritizing initial features and requirements to guide future development.</p>
                 <div class="button-container">
                   <button nbButton status="primary" (click)="prev()">Previous</button>
                   <button nbButton status="primary" (click)="next()">Next</button>
@@ -55,14 +56,26 @@
             <nb-step label="Sprint Planning">
               <div class="step-content">
                 <h2>Sprint Planning</h2>
-                <p>Organize and plan the work for the upcoming sprint based on the refined backlog.</p>
+                <p>Plan the work for the upcoming Sprint by selecting and organizing items from the Product Backlog.</p>
                 <div class="button-container">
                   <button nbButton status="primary" (click)="prev()">Previous</button>
                   <button nbButton status="primary" (click)="next()">Next</button>
                 </div>
               </div>
             </nb-step>
-  
+            
+            <nb-step label="Sprint Backlog">
+              <div class="step-content">
+                <h2>Sprint Backlog</h2>
+                <p>The Sprint Backlog is a crucial artifact created during Sprint Planning, consisting of selected Product Backlog items and tasks necessary to achieve the Sprint Goal.</p>
+                <app-sprint-backlog></app-sprint-backlog>
+                <div class="button-container">
+                  <button nbButton status="primary" (click)="prev()">Previous</button>
+                  <button nbButton status="primary" (click)="next()">Next</button>
+                </div>
+              </div>
+            </nb-step>
+            
             <nb-step label="Daily Nexus">
               <div class="step-content">
                 <h2>Daily Nexus</h2>
@@ -77,7 +90,7 @@
             <nb-step label="Nexus Sprint Review">
               <div class="step-content">
                 <h2>Nexus Sprint Review</h2>
-                <p>Review the work completed in the sprint, gather feedback, and assess whether sprint objectives were achieved.</p>
+                <p>Review the completed work of the Sprint, gather feedback, and evaluate if the Sprint goals were met.</p>
                 <div class="button-container">
                   <button nbButton status="primary" (click)="prev()">Previous</button>
                   <button nbButton status="primary" (click)="next()">Next</button>
@@ -88,7 +101,7 @@
             <nb-step label="Nexus Sprint Retrospective">
               <div class="step-content">
                 <h2>Nexus Sprint Retrospective</h2>
-                <p>Reflect on the sprint to identify and implement improvements for future sprints.</p>
+                <p>Reflect on the Sprint to identify lessons learned and implement improvements for future Sprints.</p>
                 <div class="button-container">
                   <button nbButton status="primary" (click)="prev()">Previous</button>
                   <button nbButton status="primary" (click)="next()">Next</button>
@@ -99,7 +112,7 @@
             <nb-step label="Nexus Sprint Backlog Refinement">
               <div class="step-content">
                 <h2>Nexus Sprint Backlog Refinement</h2>
-                <p>Refine the sprint backlog based on insights from the retrospective and review to prepare for the next sprint planning.</p>
+                <p>Refine the Sprint Backlog based on retrospective insights and review outcomes to prepare for the next Sprint Planning.</p>
                 <div class="button-container">
                   <button nbButton status="primary" (click)="prev()">Previous</button>
                   <button nbButton status="primary" (click)="finish()">Finish</button>
@@ -112,4 +125,3 @@
       </nb-card>
     </nb-layout-column>
   </nb-layout>
-  
