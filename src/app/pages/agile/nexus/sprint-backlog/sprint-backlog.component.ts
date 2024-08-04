@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
 import { NbDialogService, NbToastrService } from '@nebular/theme';
 import { SprintBacklogModalComponent } from '../sprint-backlog-modal/sprint-backlog-modal.component';
-import { SprintBacklogService } from '../../../../../services/SprintBacklogService';
+import { SprintBacklogService } from '../../../../services/SprintBacklogService/SprintBacklogService';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component'; // Import the confirmation dialog component
 
 @Component({

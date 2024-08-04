@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { TutorialService } from '../../../../services/tutorial.service';
+import { TutorialService } from '../../../services/TutorialService/tutorial.service';
 import { CustomUploadAdapter } from './custom-upload-adapter'; // Ensure the path is correct
 
 @Component({

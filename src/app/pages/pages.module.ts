@@ -35,6 +35,8 @@ import { SprintCreationModalComponent } from './agile/nexus/sprint-creation-moda
 import { TeamCreationModalComponent } from './agile/nexus/team-creation-modal/team-creation-modal.component';
 import { NexusCalendarComponent } from './agile/nexus/nexus-calendar/nexus-calendar.component';
 import { ProjectOverviewComponent } from './agile/nexus/project-overview/project-overview.component';
+import { NexusStepperComponent } from './agile/nexus/nexus-stepper/nexus-stepper.component';
+import { NexusGoalComponent } from './agile/nexus/nexus-goal/nexus-goal.component';
 
 @NgModule({
   imports: [
@@ -83,7 +85,9 @@ import { ProjectOverviewComponent } from './agile/nexus/project-overview/project
     SprintCreationModalComponent,
     TeamCreationModalComponent,
     NexusCalendarComponent,
-    ProjectOverviewComponent
+    ProjectOverviewComponent,
+    NexusStepperComponent,
+    NexusGoalComponent
   ],
   providers: [],
 })

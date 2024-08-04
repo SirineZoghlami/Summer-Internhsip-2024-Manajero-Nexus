@@ -1,0 +1,30 @@
+<div class="container">
+    <h1>Nexus Goals</h1>
+    
+    <form #goalForm="ngForm" (ngSubmit)="createGoal(goalForm.value)">
+      <input type="text" name="goal" ngModel placeholder="New Goal" required>
+      <button type="submit">Add Goal</button>
+    </form>
+  
+    <!-- Display confirmation message -->
+    <div *ngIf="confirmationMessage" class="confirmation-message">
+      {{ confirmationMessage }}
+    </div>
+  
+    <ul>
+      <li *ngFor="let goal of goals">
+        <span>{{ goal.goal }}</span>
+        <button class="edit-btn" (click)="selectGoal(goal)">Edit</button>
+        <button class="delete-btn" (click)="deleteGoal(goal.id!)">Delete</button>
+      </li>
+    </ul>
+  
+    <div *ngIf="selectedGoal" class="edit-form">
+      <h2>Edit Goal</h2>
+      <form #editForm="ngForm" (ngSubmit)="updateGoal(selectedGoal.id!, editForm.value)">
+        <input type="text" name="goal" [(ngModel)]="selectedGoal.goal" required>
+        <button type="submit">Update Goal</button>
+      </form>
+    </div>
+  </div>
+  

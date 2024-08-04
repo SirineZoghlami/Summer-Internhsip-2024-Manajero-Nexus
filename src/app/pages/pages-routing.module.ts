@@ -23,6 +23,8 @@ import { SprintCreationModalComponent } from './agile/nexus/sprint-creation-moda
 import { TeamCreationModalComponent } from './agile/nexus/team-creation-modal/team-creation-modal.component';
 import { NexusCalendarComponent } from './agile/nexus/nexus-calendar/nexus-calendar.component';
 import { ProjectOverviewComponent } from './agile/nexus/project-overview/project-overview.component';
+import { NexusStepperComponent } from './agile/nexus/nexus-stepper/nexus-stepper.component';
+import { NexusGoalComponent } from './agile/nexus/nexus-goal/nexus-goal.component';
 
 
 const routes: Routes = [{
@@ -107,6 +109,14 @@ const routes: Routes = [{
     {
       path: 'agile/nexus/projects',
       component: ProjectsComponent
+    },
+    {
+      path: 'agile/nexus/stepper',
+      component: NexusStepperComponent
+    },
+    {
+      path: 'agile/nexus/nexus-goal',
+      component: NexusGoalComponent
     },
    
     

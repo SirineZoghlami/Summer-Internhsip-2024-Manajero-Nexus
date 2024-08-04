@@ -1,0 +1,128 @@
+<nb-layout>
+    <nb-layout-column>
+      <nb-card class="nexus-stepper">
+        <nb-card-header class="title">Nexus Agile Project Management</nb-card-header>
+        <nb-card-body>
+          <nb-stepper [selectedIndex]="selectedIndex" (change)="onStepChange($event)">
+            
+            <!-- Form Project Step -->
+            <nb-step label="Form Project">
+              <div class="step-content">
+                <h2>Form Project</h2>
+                <form [formGroup]="projectForm">
+                  <input nbInput fullWidth placeholder="Project Name" formControlName="projectName">
+                  <input nbInput fullWidth placeholder="Description" formControlName="description">
+                  <input nbInput fullWidth type="date" placeholder="Start Date" formControlName="startDate">
+                  <input nbInput fullWidth type="date" placeholder="End Date" formControlName="endDate">
+                  <div class="button-container">
+                    <button nbButton status="primary" (click)="next()">Next</button>
+                  </div>
+                </form>
+              </div>
+            </nb-step>
+            
+            <!-- Initiate Nexus Integration Team -->
+            <nb-step label="Initiate Nexus Integration Team">
+              <div class="step-content">
+                <h2>Initiate Nexus Integration Team</h2>
+               <p>Form the Nexus Integration Team responsible for coordinating and integrating work across multiple Scrum teams.</p>
+                <app-team-list></app-team-list>
+               <div class="button-container">
+                  <button nbButton status="primary" class="prev" (click)="prev()">Previous</button>
+                  <button nbButton status="primary" (click)="next()">Next</button>
+                </div>
+              </div>
+            </nb-step>
+            
+            <!-- Define Nexus Goal -->
+            <nb-step label="Define Nexus Goal">
+              <div class="step-content">
+                <h2>Define Nexus Goal</h2>
+                <p>Set a clear goal for the Nexus framework to align efforts across all teams.</p>
+
+               <app-nexus-goal></app-nexus-goal>
+                <div class="button-container">
+                  <button nbButton status="primary" class="prev" (click)="prev()">Previous</button>
+                  <button nbButton status="primary" (click)="next()">Next</button>
+                </div>
+              </div>
+            </nb-step>
+  
+            <!-- Product Backlog Refinement -->
+            <nb-step label="Product Backlog Refinement">
+              <div class="step-content">
+                <h2>Product Backlog Refinement</h2>
+                <p>Refine and prioritize the product backlog to ensure it is ready for the next sprint.</p>
+                <div class="button-container">
+                  <button nbButton status="primary" class="prev" (click)="prev()">Previous</button>
+                  <button nbButton status="primary" (click)="next()">Next</button>
+                </div>
+              </div>
+            </nb-step>
+  
+            <!-- Sprint Planning -->
+            <nb-step label="Sprint Planning">
+              <div class="step-content">
+                <h2>Sprint Planning</h2>
+                <p>Organize and plan the work for the upcoming sprint based on the refined backlog.</p>
+                <div class="button-container">
+                  <button nbButton status="primary" class="prev" (click)="prev()">Previous</button>
+                  <button nbButton status="primary" (click)="next()">Next</button>
+                </div>
+              </div>
+            </nb-step>
+  
+            <!-- Daily Nexus -->
+            <nb-step label="Daily Nexus">
+              <div class="step-content">
+                <h2>Daily Nexus</h2>
+                <p>Conduct daily synchronization meetings to align teams and address any dependencies or blockers.</p>
+                <div class="button-container">
+                  <button nbButton status="primary" class="prev" (click)="prev()">Previous</button>
+                  <button nbButton status="primary" (click)="next()">Next</button>
+                </div>
+              </div>
+            </nb-step>
+  
+            <!-- Nexus Sprint Review -->
+            <nb-step label="Nexus Sprint Review">
+              <div class="step-content">
+                <h2>Nexus Sprint Review</h2>
+                <p>Review the work completed in the sprint, gather feedback, and assess whether sprint objectives were achieved.</p>
+                <div class="button-container">
+                  <button nbButton status="primary" class="prev" (click)="prev()">Previous</button>
+                  <button nbButton status="primary" (click)="next()">Next</button>
+                </div>
+              </div>
+            </nb-step>
+  
+            <!-- Nexus Sprint Retrospective -->
+            <nb-step label="Nexus Sprint Retrospective">
+              <div class="step-content">
+                <h2>Nexus Sprint Retrospective</h2>
+                <p>Reflect on the sprint to identify and implement improvements for future sprints.</p>
+                <div class="button-container">
+                  <button nbButton status="primary" class="prev" (click)="prev()">Previous</button>
+                  <button nbButton status="primary" (click)="next()">Next</button>
+                </div>
+              </div>
+            </nb-step>
+  
+            <!-- Nexus Sprint Backlog Refinement -->
+            <nb-step label="Nexus Sprint Backlog Refinement">
+              <div class="step-content">
+                <h2>Nexus Sprint Backlog Refinement</h2>
+                <p>Refine the sprint backlog based on insights from the retrospective and review to prepare for the next sprint planning.</p>
+                <div class="button-container">
+                  <button nbButton status="primary" class="prev" (click)="prev()">Previous</button>
+                  <button nbButton status="primary" (click)="finish()">Finish</button>
+                </div>
+              </div>
+            </nb-step>
+  
+          </nb-stepper>
+        </nb-card-body>
+      </nb-card>
+    </nb-layout-column>
+  </nb-layout>
+  

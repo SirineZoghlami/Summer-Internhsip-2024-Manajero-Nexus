@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TutorialService } from '../../../../../services/tutorial.service';
-import { Tutorial } from '../../../../../models/tutorial.model';
+import { TutorialService } from '../../../../services/TutorialService/tutorial.service';
+import { Tutorial } from '../../../../models/tutorial.model';
 import { NbToastrService } from '@nebular/theme';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CKEditorComponent } from '@ckeditor/ckeditor5-angular';

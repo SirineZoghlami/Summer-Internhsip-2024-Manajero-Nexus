@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { NbDialogRef, NbToastrService } from '@nebular/theme';
-import { SprintBacklogService } from '../../../../../services/SprintBacklogService';
+import { SprintBacklogService } from '../../../../services/SprintBacklogService/SprintBacklogService';
 
 @Component({
   selector: 'app-sprint-backlog-modal',

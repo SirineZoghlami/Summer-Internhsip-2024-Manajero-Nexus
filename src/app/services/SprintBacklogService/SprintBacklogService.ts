@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { SprintBacklog } from '../models/sprintBacklog'; // Adjust the path as necessary
+import { SprintBacklog } from '../../models/sprintBacklog'; // Adjust the path as necessary
 
 @Injectable({
   providedIn: 'root'
