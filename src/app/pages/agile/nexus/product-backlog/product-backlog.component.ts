@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NbDialogService } from '@nebular/theme';
-import { ProductBacklogItemService } from '../../../../services/ProductBacklogItemService/product-backlog-item.service';
+import { NbDialogService, NbToastrService } from '@nebular/theme';
 import { ProductBacklogItem } from '../../../../models/product-backlog-item.model';
+import { ProductBacklogItemService } from '../../../../services/ProductBacklogItemService/product-backlog-item.service';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
@@ -11,77 +10,96 @@ import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation
   styleUrls: ['./product-backlog.component.scss']
 })
 export class ProductBacklogComponent implements OnInit {
-  productBacklogItems: ProductBacklogItem[] = [];
-  backlogForm: FormGroup;
-  isEdit = false;
-  currentItemId: string | null = null;
+  backlogItems: ProductBacklogItem[] = [];
+  showForm = false;
+  backlogItem: ProductBacklogItem = { title: '', description: '', priority: 'Medium', status: 'To Do' };
+  priorities = ['High', 'Medium', 'Low'];
+  statuses = ['To Do', 'In Progress', 'Done'];
 
   constructor(
-    private fb: FormBuilder,
-    private backlogItemService: ProductBacklogItemService,
+    private backlogService: ProductBacklogItemService,
+    private toastrService: NbToastrService,
     private dialogService: NbDialogService
-  ) {
-    this.backlogForm = this.fb.group({
-      title: ['', Validators.required],
-      description: ['', Validators.required],
-      priority: ['', Validators.required],
-      status: ['', Validators.required]
-    });
-  }
+  ) { }
 
   ngOnInit(): void {
     this.loadBacklogItems();
   }
 
   loadBacklogItems(): void {
-    this.backlogItemService.getAllItems().subscribe(items => {
-      this.productBacklogItems = items;
-    });
+    this.backlogService.getAllItems().subscribe(
+      data => this.backlogItems = data,
+      error => console.error('Error fetching backlog items', error)
+    );
   }
 
   openCreateModal(): void {
-    this.isEdit = false;
-    this.currentItemId = null;
-    this.backlogForm.reset();
+    this.showForm = true;
+    this.backlogItem = { title: '', description: '', priority: 'Medium', status: 'To Do' };
   }
 
   openEditModal(item: ProductBacklogItem): void {
-    this.isEdit = true;
-    this.currentItemId = item.id;
-    this.backlogForm.patchValue(item);
+    this.showForm = true;
+    this.backlogItem = { ...item };
   }
 
   onSubmit(): void {
-    if (this.backlogForm.valid) {
-      const item: ProductBacklogItem = this.backlogForm.value;
-      if (this.isEdit && this.currentItemId) {
-        this.backlogItemService.updateItem(this.currentItemId, item).subscribe(() => {
+    if (this.backlogItem.id) {
+      this.backlogService.updateItem(this.backlogItem.id, this.backlogItem).subscribe(
+        () => {
           this.loadBacklogItems();
-          this.backlogForm.reset();
-          this.isEdit = false;
-          this.currentItemId = null;
-        });
-      } else {
-        this.backlogItemService.createItem(item).subscribe(() => {
+          this.toastrService.success('Backlog item updated successfully!', 'Success');
+          this.showForm = false;
+        },
+        error => {
+          console.error('Error updating backlog item', error);
+          this.toastrService.danger('Failed to update backlog item. Please try again.', 'Error');
+        }
+      );
+    } else {
+      this.backlogService.createItem(this.backlogItem).subscribe(
+        () => {
           this.loadBacklogItems();
-          this.backlogForm.reset();
-        });
-      }
+          this.toastrService.success('Backlog item created successfully!', 'Success');
+          this.showForm = false;
+        },
+        error => {
+          console.error('Error creating backlog item', error);
+          this.toastrService.danger('Failed to create backlog item. Please try again.', 'Error');
+        }
+      );
     }
   }
 
-  deleteItem(id: string): void {
+  confirmDelete(id: string): void {
     this.dialogService.open(ConfirmationDialogComponent, {
       context: {
-        title: 'Delete Confirmation',
-        message: 'Are you sure you want to delete this item?'
+        title: 'Confirm Deletion',
+        message: 'Are you sure you want to delete this backlog item?'
       }
-    }).onClose.subscribe(confirmed => {
-      if (confirmed) {
-        this.backlogItemService.deleteItem(id).subscribe(() => {
-          this.loadBacklogItems();
-        });
+    }).onClose.subscribe(result => {
+      if (result) {
+        this.backlogService.deleteItem(id).subscribe(
+          () => {
+            this.loadBacklogItems();
+            this.toastrService.success('Backlog item deleted successfully!', 'Success');
+          },
+          error => {
+            console.error('Error deleting backlog item', error);
+            this.toastrService.danger('Failed to delete backlog item. Please try again.', 'Error');
+          }
+        );
       }
     });
   }
+
+  getPriorityClass(priority: string) {
+    switch (priority) {
+      case 'High': return 'priority-high';
+      case 'Medium': return 'priority-medium';
+      case 'Low': return 'priority-low';
+      default: return '';
+    }
+  }
+  
 }

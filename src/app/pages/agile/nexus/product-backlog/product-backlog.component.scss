@@ -1,66 +1,126 @@
-.header-content {
+/* Base style for priority label */
+.priority-label {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+  }
+  
+  /* Styles for high priority */
+  .priority-label.priority-high {
+    background-color: #ff6666; /* Red color */
+  }
+  
+  /* Styles for medium priority */
+  .priority-label.priority-medium {
+    background-color: #ffcc66; /* Yellow color */
+  }
+  
+  /* Styles for low priority */
+  .priority-label.priority-low {
+    background-color: #66ff66; /* Green color */
+  }
+  
+  /* Base style for backlog item */
+  .backlog-item {
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    padding: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, border-color 0.3s;
+    font-size: 12px; /* Smaller font size */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  
+    /* Highlight the border color based on priority */
+    &.priority-high {
+      border-color: #ff6666; /* Red border */
+    }
+  
+    &.priority-medium {
+      border-color: #ffcc66; /* Yellow border */
+    }
+  
+    &.priority-low {
+      border-color: #66ff66; /* Green border */
+    }
+  }
+  
+  .backlog-item:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .item-content {
+    display: flex;
+    align-items: center;
+    flex: 1;
+  }
+  
+  .item-title,
+  .item-status,
+  .priority-label {
+    flex: 1;
+    text-align: center;
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+  
+  .item-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  
+  /* Header and buttons styles */
+  .header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
   
-  .add-goal-button {
+  .add-backlog-button {
     font-size: 24px;
     border: none;
     background: #007bff;
     color: white;
-    border-radius: 50%;
+    border-radius: 5px;
     width: 40px;
     height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
   }
   
-  .goal-list-container {
-    display: flex;
-    flex-direction: column;
-  }
+  /* Form styles */
+  form {
+    .form-group {
+      margin-bottom: 16px;
   
-  .goal-item {
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    margin-bottom: 16px;
-    padding: 12px;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+      }
   
-  .item-header {
-    margin-bottom: 8px;
-  }
+      input,
+      textarea,
+      nb-select {
+        display: block;
+        width: 100%;
+        padding: 8px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+    }
   
-  .item-footer {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-  }
-  
-  .high-priority {
-    border-left: 5px solid red;
-  }
-  
-  .medium-priority {
-    border-left: 5px solid orange;
-  }
-  
-  .low-priority {
-    border-left: 5px solid green;
-  }
-  
-  .form-group {
-    margin-bottom: 12px;
-  }
-  
-  .form-actions {
-    display: flex;
-    justify-content: center;
-    margin-top: 12px;
+    button {
+      display: block;
+      margin: 0 auto;
+    }
   }
   

@@ -2,63 +2,51 @@
     <nb-card-header>
       <div class="header-content">
         <h1>Product Backlog</h1>
-        <button class="add-goal-button" (click)="openCreateModal()">+</button>
+        <button class="add-backlog-button" (click)="openCreateModal()">+</button>
       </div>
     </nb-card-header>
     <nb-card-body>
-      <!-- Form for creating/updating backlog items -->
-      <form [formGroup]="backlogForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <label for="title">Title</label>
-          <input type="text" id="title" formControlName="title" class="form-control" />
-        </div>
-        <div class="form-group">
-          <label for="description">Description</label>
-          <textarea id="description" formControlName="description" class="form-control"></textarea>
-        </div>
-        <div class="form-group">
-          <label for="priority">Priority</label>
-          <select id="priority" formControlName="priority" class="form-control">
-            <option value="" disabled>Select priority</option>
-            <option value="High">High</option>
-            <option value="Medium">Medium</option>
-            <option value="Low">Low</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="status">Status</label>
-          <select id="status" formControlName="status" class="form-control">
-            <option value="" disabled>Select status</option>
-            <option value="To Do">To Do</option>
-            <option value="In Progress">In Progress</option>
-            <option value="Done">Done</option>
-          </select>
-        </div>
-        <div class="form-actions">
-          <button nbButton status="primary" type="submit" [disabled]="backlogForm.invalid">
-            {{ isEdit ? 'Update' : 'Create' }} Item
-          </button>
-        </div>
+      <form *ngIf="showForm" (ngSubmit)="onSubmit()">
+        <nb-card>
+          <nb-card-header>
+            <h2>Create Product Backlog Item</h2>
+          </nb-card-header>
+          <nb-card-body>
+            <div class="form-group">
+              <label for="title">Title</label>
+              <input nbInput fullWidth id="title" [(ngModel)]="backlogItem.title" name="title" required />
+            </div>
+            <div class="form-group">
+              <label for="description">Description</label>
+              <textarea nbInput fullWidth id="description" [(ngModel)]="backlogItem.description" name="description" required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="priority">Priority</label>
+              <nb-select fullWidth id="priority" [(ngModel)]="backlogItem.priority" name="priority" required>
+                <nb-option *ngFor="let priority of priorities" [value]="priority">{{ priority }}</nb-option>
+              </nb-select>
+            </div>
+            <div class="form-group">
+              <label for="status">Status</label>
+              <nb-select fullWidth id="status" [(ngModel)]="backlogItem.status" name="status" required>
+                <nb-option *ngFor="let status of statuses" [value]="status">{{ status }}</nb-option>
+              </nb-select>
+            </div>
+            <button nbButton status="success" type="submit">save</button>
+          </nb-card-body>
+        </nb-card>
       </form>
-      <hr />
-      <!-- List of backlog items -->
-      <div class="goal-list-container">
-        <div
-          class="goal-item"
-          *ngFor="let item of productBacklogItems"
-          [ngClass]="{
-            'high-priority': item.priority === 'High',
-            'medium-priority': item.priority === 'Medium',
-            'low-priority': item.priority === 'Low'
-          }"
-        >
-          <div class="item-header">
-            <h4>{{ item.title }}</h4>
-            <p>{{ item.description }}</p>
+  
+      <div class="backlog-list-container">
+        <div class="backlog-item" *ngFor="let item of backlogItems" [ngClass]="getPriorityClass(item.priority)">
+          <div class="item-content">
+            <span class="item-title">{{ item.title }}</span>
+            <span class="item-status">{{ item.status }}</span>
+            <span class="priority-label">{{ item.priority }}</span>
           </div>
-          <div class="item-footer">
-            <button nbButton status="info" (click)="openEditModal(item)">Edit</button>
-            <button nbButton status="danger" (click)="deleteItem(item.id!)">Delete</button>
+          <div class="item-actions">
+            <button nbButton size="small" status="info" (click)="openEditModal(item)">Edit</button>
+            <button nbButton size="small" status="danger" (click)="confirmDelete(item.id)">Delete</button>
           </div>
         </div>
       </div>
