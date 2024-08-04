@@ -1,0 +1,66 @@
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .add-goal-button {
+    font-size: 24px;
+    border: none;
+    background: #007bff;
+    color: white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  
+  .goal-list-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .goal-item {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    padding: 12px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .item-header {
+    margin-bottom: 8px;
+  }
+  
+  .item-footer {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .high-priority {
+    border-left: 5px solid red;
+  }
+  
+  .medium-priority {
+    border-left: 5px solid orange;
+  }
+  
+  .low-priority {
+    border-left: 5px solid green;
+  }
+  
+  .form-group {
+    margin-bottom: 12px;
+  }
+  
+  .form-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+  }
+  

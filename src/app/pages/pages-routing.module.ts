@@ -26,6 +26,7 @@ import { ProjectOverviewComponent } from './agile/nexus/project-overview/project
 import { NexusStepperComponent } from './agile/nexus/nexus-stepper/nexus-stepper.component';
 import { NexusGoalComponent } from './agile/nexus/nexus-goal/nexus-goal.component';
 import { NexusProjectComponent } from './agile/nexus/nexus-project/nexus-project/nexus-project.component';
+import { ProductBacklogComponent } from './agile/nexus/product-backlog/product-backlog.component';
 
 
 const routes: Routes = [{
@@ -123,6 +124,11 @@ const routes: Routes = [{
       path: 'agile/nexus/nexus-project',
       component: NexusProjectComponent
     },
+    {
+      path: 'agile/nexus/nexus-prduct-backlog',
+      component: ProductBacklogComponent
+    },
+   
    
    
     
