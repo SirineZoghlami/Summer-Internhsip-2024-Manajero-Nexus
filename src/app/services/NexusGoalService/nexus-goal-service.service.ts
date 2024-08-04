@@ -20,11 +20,11 @@ export class NexusGoalService {
   }
 
   createGoal(goal: NexusGoal): Observable<NexusGoal> {
-    return this.http.post<NexusGoal>(this.apiUrl, goal);
+    return this.http.post<NexusGoal>(`${this.apiUrl}/create`, goal); // Updated endpoint
   }
 
   updateGoal(id: string, goal: NexusGoal): Observable<NexusGoal> {
-    return this.http.put<NexusGoal>(`${this.apiUrl}/${id}`, goal);
+    return this.http.put<NexusGoal>(`${this.apiUrl}/update/${id}`, goal); // Updated endpoint
   }
 
   deleteGoal(id: string): Observable<void> {

@@ -1,0 +1,23 @@
+<div class="modal-overlay">
+    <div class="modal-content">
+      <nb-card>
+        <nb-card-header>
+          <h2>{{ isEdit ? 'Edit Goal' : 'Create Goal' }}</h2>
+        </nb-card-header>
+        <nb-card-body>
+          <form [formGroup]="goalForm" (ngSubmit)="submit()">
+            <div class="form-group">
+              <label for="goal">Goal</label>
+              <input id="goal" formControlName="goal" nbInput placeholder="Enter goal" />
+            </div>
+            <div class="form-buttons">
+                <button nbButton status="danger" type="button" (click)="cancel()">Cancel</button>
+
+              <button nbButton status="primary" type="submit">Save</button>
+            </div>
+          </form>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>
+  

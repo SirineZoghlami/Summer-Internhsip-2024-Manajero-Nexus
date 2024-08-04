@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { NbDialogService, NbToastrService } from '@nebular/theme';
 import { NexusGoalService } from '../../../../services/NexusGoalService/nexus-goal-service.service';
 import { NexusGoal } from '../../../../models/nexus-goal';
+import { NexusGoalModalComponent } from '../nexus-goal-modal/nexus-goal-modal.component';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component'; // Import the confirmation dialog
 
 @Component({
   selector: 'app-nexus-goal',
@@ -9,10 +12,12 @@ import { NexusGoal } from '../../../../models/nexus-goal';
 })
 export class NexusGoalComponent implements OnInit {
   goals: NexusGoal[] = [];
-  selectedGoal: NexusGoal | null = null;
-  confirmationMessage: string | null = null; // Add this property
 
-  constructor(private nexusGoalService: NexusGoalService) { }
+  constructor(
+    private nexusGoalService: NexusGoalService,
+    private toastrService: NbToastrService,
+    private dialogService: NbDialogService
+  ) { }
 
   ngOnInit(): void {
     this.loadGoals();
@@ -25,36 +30,45 @@ export class NexusGoalComponent implements OnInit {
     );
   }
 
-  selectGoal(goal: NexusGoal): void {
-    this.selectedGoal = goal;
+  openCreateModal(): void {
+    this.dialogService.open(NexusGoalModalComponent)
+      .onClose.subscribe(result => {
+        if (result === 'created') {
+          this.loadGoals();
+          this.toastrService.success('Goal added successfully!', 'Success');
+        }
+      });
   }
 
-  createGoal(goal: NexusGoal): void {
-    this.nexusGoalService.createGoal(goal).subscribe(
-      () => {
-        this.loadGoals();
-        this.confirmationMessage = 'Goal added successfully!'; // Set the confirmation message
-        setTimeout(() => this.confirmationMessage = null, 3000); // Clear message after 3 seconds
-      },
-      error => {
-        console.error('Error creating goal', error);
-        this.confirmationMessage = 'Failed to add goal. Please try again.';
-        setTimeout(() => this.confirmationMessage = null, 3000); // Clear message after 3 seconds
-      }
-    );
-  }
-
-  updateGoal(id: string, goal: NexusGoal): void {
-    this.nexusGoalService.updateGoal(id, goal).subscribe(
-      () => this.loadGoals(),
-      error => console.error('Error updating goal', error)
-    );
+  openEditModal(goal: NexusGoal): void {
+    this.dialogService.open(NexusGoalModalComponent, { context: { goal } })
+      .onClose.subscribe(result => {
+        if (result === 'updated') {
+          this.loadGoals();
+          this.toastrService.success('Goal updated successfully!', 'Success');
+        }
+      });
   }
 
   deleteGoal(id: string): void {
-    this.nexusGoalService.deleteGoal(id).subscribe(
-      () => this.loadGoals(),
-      error => console.error('Error deleting goal', error)
-    );
+    this.dialogService.open(ConfirmationDialogComponent, {
+      context: {
+        title: 'Confirm Deletion',
+        message: 'Are you sure you want to delete this goal?'
+      }
+    }).onClose.subscribe(result => {
+      if (result) {
+        this.nexusGoalService.deleteGoal(id).subscribe(
+          () => {
+            this.loadGoals();
+            this.toastrService.success('Goal deleted successfully!', 'Success');
+          },
+          error => {
+            console.error('Error deleting goal', error);
+            this.toastrService.danger('Failed to delete goal. Please try again.', 'Error');
+          }
+        );
+      }
+    });
   }
 }

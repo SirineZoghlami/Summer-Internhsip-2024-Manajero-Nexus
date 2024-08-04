@@ -1,30 +1,26 @@
-<div class="container">
-    <h1>Nexus Goals</h1>
-    
-    <form #goalForm="ngForm" (ngSubmit)="createGoal(goalForm.value)">
-      <input type="text" name="goal" ngModel placeholder="New Goal" required>
-      <button type="submit">Add Goal</button>
-    </form>
-  
-    <!-- Display confirmation message -->
-    <div *ngIf="confirmationMessage" class="confirmation-message">
-      {{ confirmationMessage }}
-    </div>
-  
-    <ul>
-      <li *ngFor="let goal of goals">
-        <span>{{ goal.goal }}</span>
-        <button class="edit-btn" (click)="selectGoal(goal)">Edit</button>
-        <button class="delete-btn" (click)="deleteGoal(goal.id!)">Delete</button>
-      </li>
-    </ul>
-  
-    <div *ngIf="selectedGoal" class="edit-form">
-      <h2>Edit Goal</h2>
-      <form #editForm="ngForm" (ngSubmit)="updateGoal(selectedGoal.id!, editForm.value)">
-        <input type="text" name="goal" [(ngModel)]="selectedGoal.goal" required>
-        <button type="submit">Update Goal</button>
-      </form>
-    </div>
-  </div>
+<nb-card>
+    <nb-card-header>
+      <div class="header-content">
+        <h1>Nexus Goals</h1>
+        <button class="add-goal-button" (click)="openCreateModal()">+</button>
+      </div>
+    </nb-card-header>
+    <nb-card-body>
+      <div class="goal-list-container">
+        <div class="goal-item" *ngFor="let goal of goals">
+          <div class="item-header">
+            <h4>{{ goal.goal }}</h4>
+          </div>
+          <div class="item-footer">
+            <button nbButton status="info" (click)="openEditModal(goal)">
+              Edit
+            </button>
+            <button nbButton status="danger" (click)="deleteGoal(goal.id!)">
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
   
