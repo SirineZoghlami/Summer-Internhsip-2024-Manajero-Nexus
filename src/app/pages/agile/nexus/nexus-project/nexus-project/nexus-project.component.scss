@@ -1,0 +1,61 @@
+.container {
+    /* Optional: To ensure each container takes full width */
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    margin-bottom: 20px; /* Space between containers if needed */
+  }
+  
+  form {
+    width: 100%; /* Adjust as needed to control form width */
+    max-width: 600px; /* Optional: Limit the max width of the form */
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  input, textarea, select {
+    display: block;
+    margin: 10px 0;
+    padding: 12px;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 4px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s ease;
+  
+    &:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+  }
+  
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  button {
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    transition: background-color 0.3s ease;
+  
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+  
+  /* Center the button */
+  .button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  

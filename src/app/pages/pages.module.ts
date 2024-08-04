@@ -37,6 +37,7 @@ import { NexusCalendarComponent } from './agile/nexus/nexus-calendar/nexus-calen
 import { ProjectOverviewComponent } from './agile/nexus/project-overview/project-overview.component';
 import { NexusStepperComponent } from './agile/nexus/nexus-stepper/nexus-stepper.component';
 import { NexusGoalComponent } from './agile/nexus/nexus-goal/nexus-goal.component';
+import { NexusProjectComponent } from './agile/nexus/nexus-project/nexus-project/nexus-project.component';
 
 @NgModule({
   imports: [
@@ -87,7 +88,8 @@ import { NexusGoalComponent } from './agile/nexus/nexus-goal/nexus-goal.componen
     NexusCalendarComponent,
     ProjectOverviewComponent,
     NexusStepperComponent,
-    NexusGoalComponent
+    NexusGoalComponent,
+    NexusProjectComponent
   ],
   providers: [],
 })

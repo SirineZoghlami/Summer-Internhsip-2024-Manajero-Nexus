@@ -25,6 +25,7 @@ import { NexusCalendarComponent } from './agile/nexus/nexus-calendar/nexus-calen
 import { ProjectOverviewComponent } from './agile/nexus/project-overview/project-overview.component';
 import { NexusStepperComponent } from './agile/nexus/nexus-stepper/nexus-stepper.component';
 import { NexusGoalComponent } from './agile/nexus/nexus-goal/nexus-goal.component';
+import { NexusProjectComponent } from './agile/nexus/nexus-project/nexus-project/nexus-project.component';
 
 
 const routes: Routes = [{
@@ -118,6 +119,11 @@ const routes: Routes = [{
       path: 'agile/nexus/nexus-goal',
       component: NexusGoalComponent
     },
+    {
+      path: 'agile/nexus/nexus-project',
+      component: NexusProjectComponent
+    },
+   
    
     
    

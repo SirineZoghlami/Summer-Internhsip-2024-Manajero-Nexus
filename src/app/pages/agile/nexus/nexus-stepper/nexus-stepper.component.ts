@@ -1,41 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { ViewChild } from '@angular/core';
+import { NbStepperComponent } from '@nebular/theme';
 
 @Component({
   selector: 'app-nexus-stepper',
   templateUrl: './nexus-stepper.component.html',
-  styleUrls: ['./nexus-stepper.component.scss']
+  styleUrls: ['./nexus-stepper.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NexusStepperComponent implements OnInit {
-  projectForm: FormGroup;
-  selectedIndex: number = 0;
-
-  constructor(private fb: FormBuilder) {
-    this.projectForm = this.fb.group({
-      projectName: [''],
-      description: [''],
-      startDate: [''],
-      endDate: ['']
-    });
-  }
-
-  ngOnInit(): void {}
+export class NexusStepperComponent {
+  @ViewChild(NbStepperComponent) stepper: NbStepperComponent;
 
   next() {
-    this.selectedIndex = Math.min(this.selectedIndex + 1, 3); // Adjust 3 to the number of steps you have
+    this.stepper.next(); // Move to the next step
   }
-
   prev() {
-    this.selectedIndex = Math.max(this.selectedIndex - 1, 0);
+    if (this.stepper.selectedIndex > 0) {
+      this.stepper.previous(); // Move to the previous step
+    }
   }
 
-  onStepChange(event: any) {
-    this.selectedIndex = event.index;
-  }
-
-  // Finish method to be called when clicking the 'Finish' button
   finish() {
-    // Add your finish logic here
-    console.log('Nexus process is complete.');
+    console.log('Stepper finished');
+    // Logic to handle the finish action
   }
 }
