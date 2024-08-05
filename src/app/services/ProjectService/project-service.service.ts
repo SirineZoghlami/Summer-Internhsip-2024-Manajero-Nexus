@@ -23,6 +23,7 @@ export class ProjectService {
 
   // Create a new project
   createProject(project: Project): Observable<Project> {
+    console.log('Creating project:', project);
     return this.http.post<Project>(this.apiUrl, project);
   }
 

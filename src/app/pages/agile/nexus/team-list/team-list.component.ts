@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NbDialogService, NbToastrService } from '@nebular/theme';
 import { TeamCreationModalComponent } from '../team-creation-modal/team-creation-modal.component';
 import { NexusIntegrationTeamService } from '../../../../services/NexusInegrationTeamService/nexus-integration-team.service.service';
@@ -11,6 +11,7 @@ import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation
   styleUrls: ['./team-list.component.scss']
 })
 export class TeamListComponent implements OnInit {
+  @Input() projectId: string;
   teams: NexusIntegrationTeam[] = [];
 
   constructor(
@@ -20,6 +21,7 @@ export class TeamListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log('Received projectId:', this.projectId);
     this.loadTeams();
   }
 

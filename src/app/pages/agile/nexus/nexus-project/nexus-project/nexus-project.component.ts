@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter,OnInit} from '@angular/core';
 import { Project } from '../../../../../models/project';
 import { ProjectService } from '../../../../../services/ProjectService/project-service.service';
 import { NbToastrService } from '@nebular/theme';
@@ -8,45 +8,13 @@ import { NgForm } from '@angular/forms';
   selector: 'app-nexus-project',
   templateUrl: './nexus-project.component.html',
   styleUrls: ['./nexus-project.component.scss']
-})
-export class NexusProjectComponent implements OnInit {
-  newProject: Project = {
-    projectName: '',
-    description: '',
-    startDate: new Date(), 
-    endDate: new Date(),
-    nexusIntegrationTeam: [],
-    nexusGoalId: '',
-    productBacklog: [],
-    sprints: []
-  };
+})export class NexusProjectComponent {
+  newProject: Project;
+  @Output() projectCreated = new EventEmitter<string>();
 
-  constructor(
-    private projectService: ProjectService,
-    private toastrService: NbToastrService,
-  ) { }
-
-  ngOnInit(): void {
-    // Ensure initialization
-    this.resetForm();
-  }
-
-  saveProject(form: NgForm) {
-    if (form.valid) {
-      this.projectService.createProject(this.newProject).subscribe({
-        next: (response) => {
-          this.toastrService.success('Project created successfully!', 'Success');
-          this.resetForm();  // Reset the form after successful submission
-        },
-        error: (error) => {
-          this.toastrService.danger('Error creating project', 'Error');
-        }
-      });
-    }
-  }
-
-  resetForm() {
-    this.newProject = {
+  constructor() {
+    const storedProject = localStorage.getItem('newProject');
+    this.newProject = storedProject ? JSON.parse(storedProject) : {
       projectName: '',
       description: '',
       startDate: new Date(),
@@ -56,5 +24,11 @@ export class NexusProjectComponent implements OnInit {
       productBacklog: [],
       sprints: []
     };
+  }
+
+  // Save project data to local storage on form changes
+  onFormChange() {
+    console.log('Form change detected. Saving to local storage:', this.newProject);
+    localStorage.setItem('newProject', JSON.stringify(this.newProject));
   }
 }
