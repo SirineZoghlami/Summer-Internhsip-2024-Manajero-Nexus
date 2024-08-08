@@ -1,5 +1,5 @@
 export interface Project {
-  id: string;
+  id?: string;  // Optional since IDs are auto-generated
   projectName: string;
   description: string;
   startDate: Date;
@@ -32,6 +32,6 @@ export interface Team {
 }
 
 export interface NexusGoal {
-  id: string;
+  id?: string;  // Optional since IDs are auto-generated
   content: string;
 }

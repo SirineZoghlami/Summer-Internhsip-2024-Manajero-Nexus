@@ -1,0 +1,222 @@
+<form (ngSubmit)="onSubmit()" #projectForm="ngForm">
+    <!-- Project Name -->
+    <div class="form-group">
+      <label for="projectName">Project Name</label>
+      <input
+        type="text"
+        id="projectName"
+        class="form-control"
+        required
+        [(ngModel)]="project.projectName"
+        name="projectName"
+        #projectName="ngModel"
+      />
+      <div *ngIf="projectName.invalid && (projectName.dirty || projectName.touched)" class="alert alert-danger">
+        Project Name is required.
+      </div>
+    </div>
+  
+    <!-- Description -->
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea
+        id="description"
+        class="form-control"
+        required
+        [(ngModel)]="project.description"
+        name="description"
+        #description="ngModel"
+      ></textarea>
+      <div *ngIf="description.invalid && (description.dirty || description.touched)" class="alert alert-danger">
+        Description is required.
+      </div>
+    </div>
+  
+    <!-- Start Date -->
+    <div class="form-group">
+      <label for="startDate">Start Date</label>
+      <input
+        type="datetime-local"
+        id="startDate"
+        class="form-control"
+        required
+        [(ngModel)]="project.startDate"
+        name="startDate"
+        #startDate="ngModel"
+      />
+      <div *ngIf="startDate.invalid && (startDate.dirty || startDate.touched)" class="alert alert-danger">
+        Start Date is required.
+      </div>
+    </div>
+  
+    <!-- End Date -->
+    <div class="form-group">
+      <label for="endDate">End Date</label>
+      <input
+        type="datetime-local"
+        id="endDate"
+        class="form-control"
+        required
+        [(ngModel)]="project.endDate"
+        name="endDate"
+        #endDate="ngModel"
+      />
+      <div *ngIf="endDate.invalid && (endDate.dirty || endDate.touched)" class="alert alert-danger">
+        End Date is required.
+      </div>
+    </div>
+  
+    <!-- Product Backlog -->
+    <div class="form-group">
+      <label>Product Backlog Items</label>
+      <div *ngFor="let item of project.productBacklog; let i = index" class="product-backlog-item">
+        <input
+          type="text"
+          placeholder="Title"
+          class="form-control"
+          [(ngModel)]="item.title"
+          name="productBacklogTitle{{i}}"
+        />
+        <textarea
+          placeholder="Description"
+          class="form-control"
+          [(ngModel)]="item.description"
+          name="productBacklogDescription{{i}}"
+        ></textarea>
+        <input
+          type="text"
+          placeholder="Priority"
+          class="form-control"
+          [(ngModel)]="item.priority"
+          name="productBacklogPriority{{i}}"
+        />
+        <input
+          type="text"
+          placeholder="Status"
+          class="form-control"
+          [(ngModel)]="item.status"
+          name="productBacklogStatus{{i}}"
+        />
+        <button type="button" class="btn btn-danger" (click)="removeProductBacklogItem(i)">Remove</button>
+      </div>
+      <button type="button" class="btn btn-secondary" (click)="addProductBacklogItem()">Add Backlog Item</button>
+    </div>
+  
+    <!-- Sprints -->
+    <div class="form-group">
+      <label>Sprints</label>
+      <div *ngFor="let sprint of project.sprints; let i = index" class="sprint-item">
+        <input
+          type="number"
+          placeholder="Sprint Number"
+          class="form-control"
+          [(ngModel)]="sprint.number"
+          name="sprintNumber{{i}}"
+        />
+        <input
+          type="datetime-local"
+          placeholder="Start Date"
+          class="form-control"
+          [(ngModel)]="sprint.startDate"
+          name="sprintStartDate{{i}}"
+        />
+        <input
+          type="datetime-local"
+          placeholder="End Date"
+          class="form-control"
+          [(ngModel)]="sprint.endDate"
+          name="sprintEndDate{{i}}"
+        />
+        <textarea
+          placeholder="Reviews"
+          class="form-control"
+          [(ngModel)]="sprint.reviews"
+          name="sprintReviews{{i}}"
+        ></textarea>
+        <div>
+          <label>Backlog Items</label>
+          <div *ngFor="let backlogItem of sprint.backlog; let j = index" class="backlog-item">
+            <input
+              type="text"
+              placeholder="Title"
+              class="form-control"
+              [(ngModel)]="backlogItem.title"
+              name="sprintBacklogTitle{{i}}-{{j}}"
+            />
+            <textarea
+              placeholder="Description"
+              class="form-control"
+              [(ngModel)]="backlogItem.description"
+              name="sprintBacklogDescription{{i}}-{{j}}"
+            ></textarea>
+            <input
+              type="text"
+              placeholder="Priority"
+              class="form-control"
+              [(ngModel)]="backlogItem.priority"
+              name="sprintBacklogPriority{{i}}-{{j}}"
+            />
+            <input
+              type="text"
+              placeholder="Status"
+              class="form-control"
+              [(ngModel)]="backlogItem.status"
+              name="sprintBacklogStatus{{i}}-{{j}}"
+            />
+            <button type="button" class="btn btn-danger" (click)="removeSprintBacklogItem(i, j)">Remove</button>
+          </div>
+          <button type="button" class="btn btn-secondary" (click)="addSprintBacklogItem(i)">Add Backlog Item</button>
+        </div>
+        <button type="button" class="btn btn-danger" (click)="removeSprint(i)">Remove Sprint</button>
+      </div>
+      <button type="button" class="btn btn-secondary" (click)="addSprint()">Add Sprint</button>
+    </div>
+  
+    <!-- Teams -->
+    <div class="form-group">
+      <label>Teams</label>
+      <div *ngFor="let team of project.teams; let i = index" class="team-item">
+        <input
+          type="text"
+          placeholder="Team Name"
+          class="form-control"
+          [(ngModel)]="team.name"
+          name="teamName{{i}}"
+        />
+        <input
+          type="text"
+          placeholder="Roles (Comma-separated)"
+          class="form-control"
+          [(ngModel)]="team.roles"
+          name="teamRoles{{i}}"
+        />
+        <input
+          type="text"
+          placeholder="Members (Comma-separated)"
+          class="form-control"
+          [(ngModel)]="team.members"
+          name="teamMembers{{i}}"
+        />
+        <button type="button" class="btn btn-danger" (click)="removeTeam(i)">Remove Team</button>
+      </div>
+      <button type="button" class="btn btn-secondary" (click)="addTeam()">Add Team</button>
+    </div>
+  
+    <!-- Goals -->
+    <div class="form-group">
+      <label>Goals</label>
+      <div *ngFor="let goal of project.goals; let i = index" class="goal-item">
+        <textarea
+          placeholder="Goal Description"
+          class="form-control"
+          [(ngModel)]="goal.description"
+          name="goalDescription{{i}}"
+        ></textarea>
+        <button type="button" class="btn btn-danger" (click)="removeGoal(i)">Remove Goal</button>
+      </div>
+      <button type="button" class="btn btn-secondary" (click)="addGoal()">Add Goal</button>
+    </div>
+  
+    <button type="submit" class="btn btn-primary" [disabled]="projectForm.invalid">Create Project</button>
+  </form>
+  

@@ -9,10 +9,9 @@ import { ProjectService } from '../../../../services/ProjectService/project-serv
   styleUrls: ['./nexus-stepper.component.scss']
 })
 export class NexusStepperComponent implements OnInit {
-  @ViewChild(NbStepperComponent) stepper: NbStepperComponent;
-  projectId: string;
+  @ViewChild(NbStepperComponent, { static: false }) stepper: NbStepperComponent;
   newProject: Project = {
-    id: '',
+    id: '', // Initialize as empty; backend should set this
     projectName: '',
     description: '',
     startDate: new Date(),
@@ -26,7 +25,6 @@ export class NexusStepperComponent implements OnInit {
   constructor(private projectService: ProjectService) {}
 
   ngOnInit(): void {
-    console.log('Initializing NexusStepperComponent');
     this.loadProject();
     this.loadTeams();
   }
@@ -35,15 +33,15 @@ export class NexusStepperComponent implements OnInit {
     const storedProject = localStorage.getItem('newProject');
     if (storedProject) {
       try {
-        this.newProject = JSON.parse(storedProject);
-        this.newProject.startDate = new Date(this.newProject.startDate);
-        this.newProject.endDate = new Date(this.newProject.endDate);
-        console.log('Loaded project from local storage:', this.newProject);
+        const projectData = JSON.parse(storedProject);
+        this.newProject = {
+          ...projectData,
+          startDate: new Date(projectData.startDate),
+          endDate: new Date(projectData.endDate)
+        };
       } catch (error) {
         console.error('Error parsing stored project:', error);
       }
-    } else {
-      console.log('No stored project found in local storage');
     }
   }
 
@@ -52,48 +50,64 @@ export class NexusStepperComponent implements OnInit {
     if (storedTeams) {
       try {
         this.newProject.teams = JSON.parse(storedTeams);
-        console.log('Loaded teams from local storage:', this.newProject.teams);
       } catch (error) {
         console.error('Error parsing stored teams:', error);
       }
-    } else {
-      console.log('No stored teams found in local storage');
     }
   }
 
   onFormChange(): void {
-    console.log('Form change detected');
-    console.log('Current project state:', this.newProject);
+    this.newProject.startDate = new Date(this.newProject.startDate);
+    this.newProject.endDate = new Date(this.newProject.endDate);
+
     localStorage.setItem('newProject', JSON.stringify({
       ...this.newProject,
-      startDate: this.newProject.startDate.toISOString(),
-      endDate: this.newProject.endDate.toISOString()
+      startDate: this.formatDate(this.newProject.startDate),
+      endDate: this.formatDate(this.newProject.endDate)
     }));
   }
 
   next(): void {
     this.onFormChange();
-    this.stepper.next();
+    if (this.stepper) {
+      this.stepper.next();
+    }
   }
 
   prev(): void {
-    if (this.stepper.selectedIndex > 0) {
+    if (this.stepper && this.stepper.selectedIndex > 0) {
       this.stepper.previous();
     }
   }
 
   finish(): void {
+    // Log the project data before sending it to the server
+    console.log('Finishing project creation with data:', this.newProject);
+  
     this.projectService.createProject(this.newProject).subscribe({
       next: (createdProject: Project) => {
-        this.projectId = createdProject.id;
-        console.log('Project created successfully with ID:', this.projectId);
+        // Log the response from the server
+        console.log('Project successfully created:', createdProject);
+  
+        this.newProject = createdProject;
         localStorage.removeItem('newProject');
         localStorage.removeItem('projectTeams');
-        this.stepper.next();
+  
+        if (this.stepper) {
+          this.stepper.next();
+        }
       },
       error: (error) => {
+        // Log any errors that occur during the project creation
         console.error('Error creating project:', error);
       }
     });
+  }
+  
+  formatDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = ('0' + (date.getMonth() + 1)).slice(-2);
+    const day = ('0' + date.getDate()).slice(-2);
+    return `${year}-${month}-${day}`;
   }
 }
