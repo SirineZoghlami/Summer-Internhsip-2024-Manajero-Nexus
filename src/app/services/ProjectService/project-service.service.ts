@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Project } from '../../models/project';
 
@@ -7,33 +7,35 @@ import { Project } from '../../models/project';
   providedIn: 'root'
 })
 export class ProjectService {
+
   private apiUrl = 'http://localhost:8080/api/projects';
+
+  private httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
   constructor(private http: HttpClient) { }
 
-  // Get all projects
-  getAllProjects(): Observable<Project[]> {
+  getProjects(): Observable<Project[]> {
     return this.http.get<Project[]>(this.apiUrl);
   }
 
-  // Get a project by ID
-  getProjectById(id: string): Observable<Project> {
-    return this.http.get<Project>(`${this.apiUrl}/${id}`);
+  getProject(id: string): Observable<Project> {
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.get<Project>(url);
   }
 
-  // Create a new project
   createProject(project: Project): Observable<Project> {
-    console.log('Creating project:', project);
-    return this.http.post<Project>(this.apiUrl, project);
+    return this.http.post<Project>(this.apiUrl, project, this.httpOptions);
   }
 
-  // Update an existing project
-  updateProject(id: string, project: Project): Observable<Project> {
-    return this.http.put<Project>(`${this.apiUrl}/${id}`, project);
+  updateProject(project: Project): Observable<Project> {
+    const url = `${this.apiUrl}/${project.id}`;
+    return this.http.put<Project>(url, project, this.httpOptions);
   }
 
-  // Delete a project
   deleteProject(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.delete<void>(url, this.httpOptions);
   }
 }

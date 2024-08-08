@@ -1,9 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { NbDialogService, NbToastrService } from '@nebular/theme';
+import { Component, OnInit } from '@angular/core';
+import { NbDialogService } from '@nebular/theme';
 import { TeamCreationModalComponent } from '../team-creation-modal/team-creation-modal.component';
-import { NexusIntegrationTeamService } from '../../../../services/NexusInegrationTeamService/nexus-integration-team.service.service';
-import { NexusIntegrationTeam } from '../../../../models/nexus-integration-team.model';
-import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+
+interface Team {
+  name: string;
+  members: string[];
+  roles: string[];
+}
 
 @Component({
   selector: 'app-team-list',
@@ -11,75 +14,42 @@ import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation
   styleUrls: ['./team-list.component.scss']
 })
 export class TeamListComponent implements OnInit {
-  @Input() projectId: string;
-  teams: NexusIntegrationTeam[] = [];
+  teams: Team[] = [];
 
-  constructor(
-    private dialogService: NbDialogService,
-    private teamService: NexusIntegrationTeamService,
-    private toastrService: NbToastrService
-  ) {}
+  constructor(private dialogService: NbDialogService) {}
 
-  ngOnInit() {
-    console.log('Received projectId:', this.projectId);
+  ngOnInit(): void {
     this.loadTeams();
+    console.log('Loaded teams from local storage:', this.teams);
   }
 
-  loadTeams() {
-    this.teamService.getAllTeams().subscribe(
-      (data: NexusIntegrationTeam[]) => {
-        this.teams = data;
-      },
-      error => {
-        console.error('Error fetching teams', error);
+  loadTeams(): void {
+    const storedTeams = localStorage.getItem('projectTeams');
+    this.teams = storedTeams ? JSON.parse(storedTeams) : [];
+
+    // Ensure members and roles are arrays
+    this.teams.forEach(team => {
+      if (!Array.isArray(team.members)) {
+        team.members = [];
       }
-    );
-  }
-
-  editTeam(team: NexusIntegrationTeam) {
-    this.dialogService.open(TeamCreationModalComponent, {
-      context: { team: team }
-    }).onClose.subscribe(result => {
-      if (result && result.team) {
-        this.loadTeams(); // Refresh the list after update
-        this.toastrService.success('Team updated successfully!', 'Success');
-      } else if (result && !result.team && result.isUpdated) {
-        this.toastrService.danger('Failed to update team.', 'Error');
+      if (!Array.isArray(team.roles)) {
+        team.roles = [];
       }
     });
+  }
+
+  viewTeamDetails(team: Team) {
+    alert(`Viewing details for: ${team.name}`);
+  }
+
+  editTeam(team: Team) {
+    alert(`Editing team: ${team.name}`);
   }
 
   openTeamModal() {
     this.dialogService.open(TeamCreationModalComponent)
-      .onClose.subscribe(result => {
-        if (result && result.team) {
-          this.teams.push(result.team);
-          this.toastrService.success('Team added successfully!', 'Success');
-        } else if (result && !result.team) {
-          this.toastrService.danger('Failed to add team.', 'Error');
-        }
+      .onClose.subscribe(() => {
+        this.loadTeams(); // Reload teams after modal is closed
       });
-  }
-
-  deleteTeam(team: NexusIntegrationTeam) {
-    this.dialogService.open(ConfirmationDialogComponent, {
-      context: {
-        title: 'Confirm Deletion',
-        message: `Are you sure you want to delete the team "${team.teamName}"?`
-      }
-    }).onClose.subscribe(confirmed => {
-      if (confirmed) {
-        this.teamService.deleteTeam(team.id!).subscribe(
-          () => {
-            this.loadTeams(); // Refresh the list after deletion
-            this.toastrService.success('Team deleted successfully!', 'Success');
-          },
-          error => {
-            console.error('Error deleting team', error);
-            this.toastrService.danger('Failed to delete team.', 'Error');
-          }
-        );
-      }
-    });
   }
 }

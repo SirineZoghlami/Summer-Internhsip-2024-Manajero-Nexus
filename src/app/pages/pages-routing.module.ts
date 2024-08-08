@@ -12,7 +12,6 @@ import { NexusQuizComponent } from './agile/nexus/nexus-quiz/nexus-quiz.componen
 import { ProjectsComponent } from './agile/nexus/projects/projects.component';
 import { SprintListComponent } from './agile/nexus/sprint-list/sprint-list.component';
 import { TeamListComponent } from './agile/nexus/team-list/team-list.component';
-import { TeamDetailComponent } from './agile/nexus/team-detail/team-detail.component';
 import { TaskListComponent } from './agile/nexus/task-list/task-list.component';
 import { TaskCreationModalComponent } from './agile/nexus/task-creation-modal/task-creation-modal.component';
 import { NexusBoardComponent } from './agile/nexus/nexus-board/nexus-board.component';

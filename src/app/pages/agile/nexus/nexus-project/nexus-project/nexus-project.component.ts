@@ -1,34 +1,43 @@
-import { Component, Output, EventEmitter,OnInit} from '@angular/core';
-import { Project } from '../../../../../models/project';
-import { ProjectService } from '../../../../../services/ProjectService/project-service.service';
-import { NbToastrService } from '@nebular/theme';
-import { NgForm } from '@angular/forms';
+import { Component } from '@angular/core';
+import { Project } from '../../../../../models/project'; // Adjust the import path as needed
 
 @Component({
   selector: 'app-nexus-project',
   templateUrl: './nexus-project.component.html',
   styleUrls: ['./nexus-project.component.scss']
-})export class NexusProjectComponent {
-  newProject: Project;
-  @Output() projectCreated = new EventEmitter<string>();
+})
+export class NexusProjectComponent {
+  newProject: Project = {
+    id: '',
+    projectName: '',
+    description: '',
+    startDate: new Date(),
+    endDate: new Date(),
+    productBacklog: [],
+    sprints: [],
+    teams: [],
+    goals: []
+  };
 
   constructor() {
-    const storedProject = localStorage.getItem('newProject');
-    this.newProject = storedProject ? JSON.parse(storedProject) : {
-      projectName: '',
-      description: '',
-      startDate: new Date(),
-      endDate: new Date(),
-      nexusIntegrationTeam: [],
-      nexusGoalId: '',
-      productBacklog: [],
-      sprints: []
-    };
+    this.loadProjectFromLocalStorage();
   }
 
-  // Save project data to local storage on form changes
-  onFormChange() {
-    console.log('Form change detected. Saving to local storage:', this.newProject);
+  onFormChange(): void {
+    this.saveProjectToLocalStorage();
+  }
+
+  saveProjectToLocalStorage(): void {
     localStorage.setItem('newProject', JSON.stringify(this.newProject));
+  }
+
+  loadProjectFromLocalStorage(): void {
+    const storedProject = localStorage.getItem('newProject');
+    if (storedProject) {
+      this.newProject = JSON.parse(storedProject);
+      // Convert date strings back to Date objects
+      this.newProject.startDate = new Date(this.newProject.startDate);
+      this.newProject.endDate = new Date(this.newProject.endDate);
+    }
   }
 }
