@@ -71,10 +71,11 @@
                 <label for="status">Status:</label>
                 <input id="status" formControlName="status" class="form-control" />
               </div>
+              <button nbButton status="info" type="button" (click)="addProductBacklogItem()">Add Backlog Item</button>
+
             </div>
           </div>
 
-          <button nbButton status="info" type="button" (click)="addProductBacklogItem()">Add Backlog Item</button>
           <button nbButton status="primary" (click)="previousStep()">Previous</button>
           <button nbButton status="success" (click)="nextStep()">Next</button>
         </nb-step>
@@ -114,10 +115,12 @@
                 <label for="reviews">Reviews:</label>
                 <input id="reviews" formControlName="reviews" class="form-control" />
               </div>
+              <button nbButton status="info" type="button" (click)="addSprint()">Add Sprint</button>
+
             </div>
+
           </div>
 
-          <button nbButton status="info" type="button" (click)="addSprint()">Add Sprint</button>
           <button nbButton status="primary" (click)="previousStep()">Previous</button>
           <button nbButton status="success" (click)="nextStep()">Next</button>
         </nb-step>
@@ -154,9 +157,10 @@
                 <button nbButton status="info" type="button" (click)="addMember(i)">Add Member</button>
               </div>
             </div>
+            <button nbButton status="info" type="button" (click)="addTeam()">Add Team</button>
+
           </div>
 
-          <button nbButton status="info" type="button" (click)="addTeam()">Add Team</button>
           <button nbButton status="primary" (click)="previousStep()">Previous</button>
           <button nbButton status="success" (click)="nextStep()">Next</button>
         </nb-step>
@@ -173,9 +177,10 @@
                 </nb-form-field>
               </div>
             </div>
+            <button nbButton status="info" type="button" (click)="addGoal()">Add Goal</button>
+
           </div>
 
-          <button nbButton status="info" type="button" (click)="addGoal()">Add Goal</button>
           <button nbButton status="primary" (click)="previousStep()">Previous</button>
           <button nbButton status="success" type="submit">Submit</button>
         </nb-step>

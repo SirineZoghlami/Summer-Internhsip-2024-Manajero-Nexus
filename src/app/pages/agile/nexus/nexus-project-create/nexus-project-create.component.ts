@@ -118,7 +118,7 @@ export class NexusProjectCreateComponent implements OnInit {
       this.nexusProjectService.createProject(newProject).subscribe(
         response => {
           this.toastrService.success('Project created successfully!', 'Success');
-          this.router.navigate(['/pages/agile/nexus/projects']); // Adjust the route as needed
+          this.router.navigate(['/pages/agile/nexus/project']); // Adjust the route as needed
         },
         error => {
           console.error('Error creating project:', error);

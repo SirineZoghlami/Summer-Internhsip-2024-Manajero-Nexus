@@ -12,6 +12,7 @@ import { NexusQuizComponent } from './agile/nexus/nexus-quiz/nexus-quiz.componen
 import {NexusProjectCreateComponent} from './agile/nexus/nexus-project-create/nexus-project-create.component'
 import { ProjectListComponent } from './agile/nexus/project-list/project-list.component'
 import { ProjectSettingsComponent } from './agile/nexus/project-settings/project-settings.component'
+import { NexusDashboardComponent } from './agile/nexus/nexus-dashboard/nexus-dashboard.component'
 
 const routes: Routes = [{
   path: '',
@@ -102,6 +103,9 @@ const routes: Routes = [{
     },
     { path: 'agile/project-settings/:id',
       component: ProjectSettingsComponent 
+    },
+    { path: 'agile/nexus/dashboard',
+      component: NexusDashboardComponent 
     },
     {
       path: '',

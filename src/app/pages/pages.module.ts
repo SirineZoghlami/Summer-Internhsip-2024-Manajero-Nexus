@@ -16,7 +16,8 @@ import { NexusQuizComponent } from './agile/nexus/nexus-quiz/nexus-quiz.componen
 import {NexusProjectCreateComponent} from './agile/nexus/nexus-project-create/nexus-project-create.component';
 import { ProjectListComponent } from './agile/nexus/project-list/project-list.component';
 import { ProjectDetailComponent } from './agile/nexus/project-detail/project-detail.component';
-import { ProjectSettingsComponent } from './agile/nexus/project-settings/project-settings.component'
+import { ProjectSettingsComponent } from './agile/nexus/project-settings/project-settings.component';
+import { NexusDashboardComponent } from './agile/nexus/nexus-dashboard/nexus-dashboard.component'
 @NgModule({
   imports: [
     PagesRoutingModule,
@@ -45,6 +46,7 @@ import { ProjectSettingsComponent } from './agile/nexus/project-settings/project
     ProjectListComponent,
     ProjectDetailComponent,
     ProjectSettingsComponent,
+    NexusDashboardComponent,
   ],
   providers: [],
 })
