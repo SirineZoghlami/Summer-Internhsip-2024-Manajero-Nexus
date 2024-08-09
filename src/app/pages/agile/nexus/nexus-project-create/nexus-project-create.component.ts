@@ -12,6 +12,8 @@ import { NexusProject } from '../../../../../models/nexus-proejct-model'; // Adj
 })
 export class NexusProjectCreateComponent implements OnInit {
   projectForm: FormGroup;
+  priorities = ['High', 'Medium', 'Low'];
+  sprintNumbers = Array.from({ length: 10 }, (_, i) => i + 1); // Numbers 1 to 10
   @ViewChild('stepper', { static: false }) stepper: NbStepperComponent;
 
   constructor(
@@ -59,7 +61,7 @@ export class NexusProjectCreateComponent implements OnInit {
     this.productBacklog.push(this.fb.group({
       title: ['', Validators.required],
       description: [''],
-      priority: [''],
+      priority: ['', Validators.required],
       status: [''],
     }));
   }
@@ -116,7 +118,7 @@ export class NexusProjectCreateComponent implements OnInit {
       this.nexusProjectService.createProject(newProject).subscribe(
         response => {
           this.toastrService.success('Project created successfully!', 'Success');
-          this.router.navigate(['/agile/nexus/projects']); // Adjust the route as needed
+          this.router.navigate(['/pages/agile/nexus/projects']); // Adjust the route as needed
         },
         error => {
           console.error('Error creating project:', error);

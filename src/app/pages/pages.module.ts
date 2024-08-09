@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
-import { NbMenuModule, NbStepperModule, NbCardModule, NbDialogModule, NbButtonModule } from '@nebular/theme';
+import { NbMenuModule, NbFormFieldModule, NbStepperModule, NbCardModule, NbDialogModule, NbButtonModule } from '@nebular/theme';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { ThemeModule } from '../@theme/theme.module';
 import { PagesComponent } from './pages.component';
 import { DashboardModule } from './dashboard/dashboard.module';
@@ -14,7 +13,10 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { TutorialUpdateComponent } from './agile/nexus/tutorial-update/tutorial-update.component';
 import { ConfirmationDialogComponent } from './agile/nexus//confirmation-dialog/confirmation-dialog.component';
 import { NexusQuizComponent } from './agile/nexus/nexus-quiz/nexus-quiz.component'; // Check path
-import {NexusProjectCreateComponent} from './agile/nexus/nexus-project-create/nexus-project-create.component'
+import {NexusProjectCreateComponent} from './agile/nexus/nexus-project-create/nexus-project-create.component';
+import { ProjectListComponent } from './agile/nexus/project-list/project-list.component';
+import { ProjectDetailComponent } from './agile/nexus/project-detail/project-detail.component';
+import { ProjectSettingsComponent } from './agile/nexus/project-settings/project-settings.component'
 @NgModule({
   imports: [
     PagesRoutingModule,
@@ -30,6 +32,7 @@ import {NexusProjectCreateComponent} from './agile/nexus/nexus-project-create/ne
     NbDialogModule.forChild(), // Change to .forRoot() if used in an eagerly-loaded module
     CKEditorModule, 
     NbButtonModule,
+    NbFormFieldModule,
   ],
   declarations: [
     PagesComponent,
@@ -39,6 +42,9 @@ import {NexusProjectCreateComponent} from './agile/nexus/nexus-project-create/ne
     ConfirmationDialogComponent,
     NexusQuizComponent,
     NexusProjectCreateComponent,
+    ProjectListComponent,
+    ProjectDetailComponent,
+    ProjectSettingsComponent,
   ],
   providers: [],
 })

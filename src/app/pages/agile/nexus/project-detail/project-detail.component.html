@@ -1,0 +1,49 @@
+<div class="project-detail-overlay" (click)="onClose()">
+    <div class="project-detail-modal" (click)="$event.stopPropagation()">
+      <button class="close-button" (click)="onClose()">&times;</button>
+      <h2>{{ project?.projectName }}</h2>
+      <p class="description">{{ project?.description }}</p>
+      
+      <div class="details-section">
+        <h3>Product Backlog</h3>
+        <ul>
+          <li *ngFor="let item of project?.productBacklog">
+            <strong>{{ item.title }}</strong>: {{ item.description }} ({{ item.priority }} - {{ item.status }})
+          </li>
+        </ul>
+      </div>
+  
+      <div class="details-section">
+        <h3>Sprints</h3>
+        <ul>
+          <li *ngFor="let sprint of project?.sprints">
+            <strong>Sprint {{ sprint.number }}</strong>
+            <div>Start: {{ sprint.startDate | date }}</div>
+            <div>End: {{ sprint.endDate | date }}</div>
+            <div>Reviews: {{ sprint.reviews }}</div>
+          </li>
+        </ul>
+      </div>
+  
+      <div class="details-section">
+        <h3>Teams</h3>
+        <ul>
+          <li *ngFor="let team of project?.teams">
+            <strong>{{ team.name }}</strong>
+            <div>Roles: {{ team.roles.join(', ') }}</div>
+            <div>Members: {{ team.members.join(', ') }}</div>
+          </li>
+        </ul>
+      </div>
+  
+      <div class="details-section">
+        <h3>Goals</h3>
+        <ul>
+          <li *ngFor="let goal of project?.goals">
+            {{ goal.content }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,36 @@
+<div class="project-list-container">
+    <!-- Header Section -->
+    <header class="page-header">
+      <h1>Nexus Project Management</h1>
+      <button (click)="createNewProject()" class="btn-create-new">+</button>
+    </header>
+  
+    <!-- Loading Indicator -->
+    <div *ngIf="isLoading" class="loading">
+      <span>Loading Projects...</span>
+    </div>
+  
+    <!-- Project Cards Container -->
+    <div *ngIf="!isLoading" class="project-card-container">
+      <div *ngFor="let project of projects" class="project-card">
+        <div class="project-card-header">
+          <h2>{{ project.projectName }}</h2>
+        </div>
+        <div class="project-card-body">
+          <p class="description">{{ project.description }}</p>
+          <div class="dates">
+            <span><strong>Start Date:</strong> {{ project.startDate | date }}</span>
+            <span><strong>End Date:</strong> {{ project.endDate | date }}</span>
+          </div>
+          <div class="buttons">
+            <button (click)="viewProjectDetails(project)" class="btn-view-details">View Details</button>
+            <button (click)="openSettings(project)" class="btn-settings">Settings</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Project Detail Component -->
+    <app-project-detail *ngIf="selectedProject" [project]="selectedProject" (close)="closeDetails()"></app-project-detail>
+  </div>
+  

@@ -1,177 +1,185 @@
+<nb-card>
+  <nb-card-header>Create Nexus Project</nb-card-header>
+  <nb-card-body>
+    <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+      <nb-stepper #stepper>
+        <!-- Step 1: Basic Information -->
+        <nb-step label="Basic Information">
+          <div class="form-group">
+            <label for="projectName">Project Name:</label>
+            <input id="projectName" formControlName="projectName" class="form-control" />
+            <nb-form-field *ngIf="projectForm.get('projectName').invalid && projectForm.get('projectName').touched">
+              <nb-error>Project name is required</nb-error>
+            </nb-form-field>
+          </div>
 
-      <nb-card>
-        <nb-card-header>Create Nexus Project</nb-card-header>
-        <nb-card-body>
-          <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
-            <nb-stepper #stepper>
-              <!-- Step 1: Basic Information -->
-              <nb-step label="Basic Information">
-                <div class="form-group">
-                  <label for="projectName">Project Name:</label>
-                  <input id="projectName" formControlName="projectName" class="form-control" placeholder="Enter project name" />
-                  <nb-form-field *ngIf="projectForm.get('projectName').invalid && projectForm.get('projectName').touched">
-                    <nb-error>Project name is required</nb-error>
-                  </nb-form-field>
-                </div>
-  
-                <div class="form-group">
-                  <label for="description">Description:</label>
-                  <textarea id="description" formControlName="description" class="form-control" placeholder="Enter project description"></textarea>
-                  <nb-form-field *ngIf="projectForm.get('description').invalid && projectForm.get('description').touched">
-                    <nb-error>Description is required</nb-error>
-                  </nb-form-field>
-                </div>
-  
-                <div class="form-group">
-                  <label for="startDate">Start Date:</label>
-                  <input id="startDate" type="date" formControlName="startDate" class="form-control" />
-                  <nb-form-field *ngIf="projectForm.get('startDate').invalid && projectForm.get('startDate').touched">
-                    <nb-error>Start date is required</nb-error>
-                  </nb-form-field>
-                </div>
-  
-                <div class="form-group">
-                  <label for="endDate">End Date:</label>
-                  <input id="endDate" type="date" formControlName="endDate" class="form-control" />
-                  <nb-form-field *ngIf="projectForm.get('endDate').invalid && projectForm.get('endDate').touched">
-                    <nb-error>End date is required</nb-error>
-                  </nb-form-field>
-                </div>
-                <button nbButton status="success" (click)="nextStep()">Next</button>
-              </nb-step>
-  
-              <!-- Step 2: Product Backlog -->
-              <nb-step label="Product Backlog">
-                <div formArrayName="productBacklog">
-                  <div *ngFor="let item of productBacklog.controls; let i = index" [formGroupName]="i">
-                    <div class="form-group">
-                      <label for="title">Title:</label>
-                      <input id="title" formControlName="title" class="form-control" placeholder="Enter backlog item title" />
-                      <nb-form-field *ngIf="item.get('title').invalid && item.get('title').touched">
-                        <nb-error>Title is required</nb-error>
-                      </nb-form-field>
-                    </div>
-  
-                    <div class="form-group">
-                      <label for="description">Description:</label>
-                      <textarea id="description" formControlName="description" class="form-control" placeholder="Enter backlog item description"></textarea>
-                    </div>
-  
-                    <div class="form-group">
-                      <label for="priority">Priority:</label>
-                      <input id="priority" formControlName="priority" class="form-control" placeholder="Enter priority (e.g., High, Medium, Low)" />
-                    </div>
-  
-                    <div class="form-group">
-                      <label for="status">Status:</label>
-                      <input id="status" formControlName="status" class="form-control" placeholder="Enter status" />
-                    </div>
-                  </div>
-                </div>
-                <button type="button" (click)="addProductBacklogItem()">Add Backlog Item</button>
-                <button nbButton status="primary" (click)="previousStep()">Previous</button>
-                <button nbButton status="success" (click)="nextStep()">Next</button>
-              </nb-step>
-  
-              <!-- Step 3: Sprints -->
-              <nb-step label="Sprints">
-                <div formArrayName="sprints">
-                  <div *ngFor="let sprint of sprints.controls; let i = index" [formGroupName]="i">
-                    <div class="form-group">
-                      <label for="number">Sprint Number:</label>
-                      <input id="number" formControlName="number" class="form-control" placeholder="Enter sprint number" />
-                      <nb-form-field *ngIf="sprint.get('number').invalid && sprint.get('number').touched">
-                        <nb-error>Sprint number is required</nb-error>
-                      </nb-form-field>
-                    </div>
-  
-                    <div class="form-group">
-                      <label for="startDate">Start Date:</label>
-                      <input id="startDate" type="date" formControlName="startDate" class="form-control" />
-                      <nb-form-field *ngIf="sprint.get('startDate').invalid && sprint.get('startDate').touched">
-                        <nb-error>Start date is required</nb-error>
-                      </nb-form-field>
-                    </div>
-  
-                    <div class="form-group">
-                      <label for="endDate">End Date:</label>
-                      <input id="endDate" type="date" formControlName="endDate" class="form-control" />
-                      <nb-form-field *ngIf="sprint.get('endDate').invalid && sprint.get('endDate').touched">
-                        <nb-error>End date is required</nb-error>
-                      </nb-form-field>
-                    </div>
-  
-                    <div class="form-group">
-                      <label for="reviews">Reviews:</label>
-                      <textarea id="reviews" formControlName="reviews" class="form-control" placeholder="Enter sprint reviews"></textarea>
-                    </div>
-                  </div>
-                </div>
-                <button type="button" (click)="addSprint()">Add Sprint</button>
-                <button nbButton status="primary" (click)="previousStep()">Previous</button>
-                <button nbButton status="success" (click)="nextStep()">Next</button>
-              </nb-step>
-  
-              <!-- Step 4: Teams -->
-              <nb-step label="Teams">
-                <div formArrayName="teams">
-                  <div *ngFor="let team of teams.controls; let i = index" [formGroupName]="i">
-                    <div class="form-group">
-                      <label for="name">Team Name:</label>
-                      <input id="name" formControlName="name" class="form-control" placeholder="Enter team name" />
-                      <nb-form-field *ngIf="team.get('name').invalid && team.get('name').touched">
-                        <nb-error>Team name is required</nb-error>
-                      </nb-form-field>
-                    </div>
-  
-                    <div class="form-group">
-                      <label>Roles:</label>
-                      <div formArrayName="roles">
-                        <div *ngFor="let role of team.get('roles').controls; let j = index">
-                          <input [formControlName]="j" class="form-control" placeholder="Enter role" />
-                        </div>
-                      </div>
-                      <button type="button" (click)="addRole(i)">Add Role</button>
-                    </div>
-  
-                    <div class="form-group">
-                      <label>Members:</label>
-                      <div formArrayName="members">
-                        <div *ngFor="let member of team.get('members').controls; let j = index">
-                          <input [formControlName]="j" class="form-control" placeholder="Enter member name" />
-                        </div>
-                      </div>
-                      <button type="button" (click)="addMember(i)">Add Member</button>
-                    </div>
-                  </div>
-                </div>
-                <button type="button" (click)="addTeam()">Add Team</button>
-                <button nbButton status="primary" (click)="previousStep()">Previous</button>
-                <button nbButton status="success" (click)="nextStep()">Next</button>
-              </nb-step>
-  
-              <!-- Step 5: Goals -->
-              <nb-step label="Goals">
-                <div formArrayName="goals">
-                  <div *ngFor="let goal of goals.controls; let i = index" [formGroupName]="i">
-                    <div class="form-group">
-                      <label for="content">Goal Content:</label>
-                      <input id="content" formControlName="content" class="form-control" placeholder="Enter goal content" />
-                      <nb-form-field *ngIf="goal.get('content').invalid && goal.get('content').touched">
-                        <nb-error>Content is required</nb-error>
-                      </nb-form-field>
-                    </div>
-                  </div>
-                </div>
-                <button type="button" (click)="addGoal()">Add Goal</button>
-                <button nbButton status="primary" (click)="previousStep()">Previous</button>
-                <button nbButton status="danger" type="submit">Submit</button>              </nb-step>
-            
-           
-           
-            </nb-stepper>
-          </form>
-        </nb-card-body>
-      </nb-card>
+          <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" formControlName="description" class="form-control"></textarea>
+            <nb-form-field *ngIf="projectForm.get('description').invalid && projectForm.get('description').touched">
+              <nb-error>Description is required</nb-error>
+            </nb-form-field>
+          </div>
 
-  
+          <div class="form-group">
+            <label for="startDate">Start Date:</label>
+            <input id="startDate" formControlName="startDate" type="date" class="form-control" />
+            <nb-form-field *ngIf="projectForm.get('startDate').invalid && projectForm.get('startDate').touched">
+              <nb-error>Start date is required</nb-error>
+            </nb-form-field>
+          </div>
+
+          <div class="form-group">
+            <label for="endDate">End Date:</label>
+            <input id="endDate" formControlName="endDate" type="date" class="form-control" />
+            <nb-form-field *ngIf="projectForm.get('endDate').invalid && projectForm.get('endDate').touched">
+              <nb-error>End date is required</nb-error>
+            </nb-form-field>
+          </div>
+
+          <button nbButton status="success" (click)="nextStep()">Next</button>
+        </nb-step>
+
+        <!-- Step 2: Product Backlog -->
+        <nb-step label="Product Backlog">
+          <div formArrayName="productBacklog">
+            <div *ngFor="let item of productBacklog.controls; let i = index" [formGroupName]="i">
+              <div class="form-group">
+                <label for="title">Title:</label>
+                <input id="title" formControlName="title" class="form-control" />
+                <nb-form-field *ngIf="item.get('title').invalid && item.get('title').touched">
+                  <nb-error>Title is required</nb-error>
+                </nb-form-field>
+              </div>
+
+              <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea id="description" formControlName="description" class="form-control"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="priority">Priority:</label>
+                <select id="priority" formControlName="priority" class="form-control">
+                  <option *ngFor="let priority of priorities" [value]="priority">{{ priority }}</option>
+                </select>
+                <nb-form-field *ngIf="item.get('priority').invalid && item.get('priority').touched">
+                  <nb-error>Priority is required</nb-error>
+                </nb-form-field>
+              </div>
+
+              <div class="form-group">
+                <label for="status">Status:</label>
+                <input id="status" formControlName="status" class="form-control" />
+              </div>
+            </div>
+          </div>
+
+          <button nbButton status="info" type="button" (click)="addProductBacklogItem()">Add Backlog Item</button>
+          <button nbButton status="primary" (click)="previousStep()">Previous</button>
+          <button nbButton status="success" (click)="nextStep()">Next</button>
+        </nb-step>
+
+        <!-- Step 3: Sprints -->
+        <nb-step label="Sprints">
+          <div formArrayName="sprints">
+            <div *ngFor="let sprint of sprints.controls; let i = index" [formGroupName]="i">
+              <div class="form-group">
+                <label for="number">Sprint Number:</label>
+                <select id="number" formControlName="number" class="form-control">
+                  <option *ngFor="let number of sprintNumbers" [value]="number">{{ number }}</option>
+                </select>
+                <nb-form-field *ngIf="sprint.get('number').invalid && sprint.get('number').touched">
+                  <nb-error>Sprint number is required</nb-error>
+                </nb-form-field>
+              </div>
+
+              <div class="form-group">
+                <label for="startDate">Start Date:</label>
+                <input id="startDate" formControlName="startDate" type="date" class="form-control" />
+                <nb-form-field *ngIf="sprint.get('startDate').invalid && sprint.get('startDate').touched">
+                  <nb-error>Start date is required</nb-error>
+                </nb-form-field>
+              </div>
+
+              <div class="form-group">
+                <label for="endDate">End Date:</label>
+                <input id="endDate" formControlName="endDate" type="date" class="form-control" />
+                <nb-form-field *ngIf="sprint.get('endDate').invalid && sprint.get('endDate').touched">
+                  <nb-error>End date is required</nb-error>
+                </nb-form-field>
+              </div>
+
+              
+              <div class="form-group">
+                <label for="reviews">Reviews:</label>
+                <input id="reviews" formControlName="reviews" class="form-control" />
+              </div>
+            </div>
+          </div>
+
+          <button nbButton status="info" type="button" (click)="addSprint()">Add Sprint</button>
+          <button nbButton status="primary" (click)="previousStep()">Previous</button>
+          <button nbButton status="success" (click)="nextStep()">Next</button>
+        </nb-step>
+
+        <!-- Step 4: Teams -->
+        <nb-step label="Teams">
+          <div formArrayName="teams">
+            <div *ngFor="let team of teams.controls; let i = index" [formGroupName]="i">
+              <div class="form-group">
+                <label for="name">Team Name:</label>
+                <input id="name" formControlName="name" class="form-control" />
+                <nb-form-field *ngIf="team.get('name').invalid && team.get('name').touched">
+                  <nb-error>Team name is required</nb-error>
+                </nb-form-field>
+              </div>
+
+              <div class="form-group">
+                <label for="roles">Roles:</label>
+                <div formArrayName="roles">
+                  <div *ngFor="let role of team.get('roles').controls; let j = index">
+                    <input [formControlName]="j" class="form-control" />
+                  </div>
+                </div>
+                <button nbButton status="info" type="button" (click)="addRole(i)">Add Role</button>
+              </div>
+
+              <div class="form-group">
+                <label for="members">Members:</label>
+                <div formArrayName="members">
+                  <div *ngFor="let member of team.get('members').controls; let j = index">
+                    <input [formControlName]="j" class="form-control" />
+                  </div>
+                </div>
+                <button nbButton status="info" type="button" (click)="addMember(i)">Add Member</button>
+              </div>
+            </div>
+          </div>
+
+          <button nbButton status="info" type="button" (click)="addTeam()">Add Team</button>
+          <button nbButton status="primary" (click)="previousStep()">Previous</button>
+          <button nbButton status="success" (click)="nextStep()">Next</button>
+        </nb-step>
+
+        <!-- Step 5: Goals -->
+        <nb-step label="Goals">
+          <div formArrayName="goals">
+            <div *ngFor="let goal of goals.controls; let i = index" [formGroupName]="i">
+              <div class="form-group">
+                <label for="content">Goal Content:</label>
+                <input id="content" formControlName="content" class="form-control" />
+                <nb-form-field *ngIf="goal.get('content').invalid && goal.get('content').touched">
+                  <nb-error>Content is required</nb-error>
+                </nb-form-field>
+              </div>
+            </div>
+          </div>
+
+          <button nbButton status="info" type="button" (click)="addGoal()">Add Goal</button>
+          <button nbButton status="primary" (click)="previousStep()">Previous</button>
+          <button nbButton status="success" type="submit">Submit</button>
+        </nb-step>
+      </nb-stepper>
+    </form>
+  </nb-card-body>
+</nb-card>

@@ -1,4 +1,5 @@
 export interface NexusProject {
+    id: string;
     projectName: string;
     description: string;
     startDate: string;  // ISO date string
@@ -20,7 +21,6 @@ export interface NexusProject {
     number: number;
     startDate: string; // ISO date string
     endDate: string;   // ISO date string
-    backlog: ProductBacklogItem[];
     reviews?: string;
   }
   

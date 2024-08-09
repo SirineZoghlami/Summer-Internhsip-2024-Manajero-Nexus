@@ -1,0 +1,165 @@
+// Base Colors
+$primary-color: #007bff;
+$secondary-color: #6c757d;
+$success-color: #28a745;
+$danger-color: #dc3545;
+$background-color: #f4f5f7;
+$card-background: #ffffff;
+$border-color: #dee2e6;
+
+// Base Font
+$font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+// Container
+.settings-container {
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: $background-color;
+  font-family: $font-family;
+}
+
+// Headings
+h2 {
+  margin-bottom: 30px;
+  font-size: 28px;
+  font-weight: 600;
+  color: #333;
+}
+
+// Form Groups
+.form-group {
+  margin-bottom: 25px;
+}
+
+// Labels
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #555;
+}
+
+// Form Controls
+.form-control {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid $border-color;
+  border-radius: 6px;
+  background-color: $card-background;
+  font-size: 16px;
+  color: #333;
+  transition: border-color 0.3s ease;
+
+  &:focus {
+    border-color: $primary-color;
+    outline: none;
+  }
+}
+
+textarea.form-control {
+  resize: vertical;
+}
+
+// Buttons
+.btn-save, .btn-delete, .btn-add, .btn-remove, .btn-submit {
+  display: inline-block;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-save {
+  background-color: $primary-color;
+  color: #fff;
+  margin-right: 12px;
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.btn-delete {
+  background-color: $danger-color;
+  color: #fff;
+
+  &:hover {
+    background-color: darken($danger-color, 10%);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.btn-add {
+  background-color: $success-color;
+  color: #fff;
+  margin: 6px;
+
+  &:hover {
+    background-color: darken($success-color, 10%);
+  }
+}
+
+.btn-remove {
+  background-color: $danger-color;
+  color: #fff;
+  margin: 6px;
+
+  &:hover {
+    background-color: darken($danger-color, 10%);
+  }
+}
+
+// Buttons Container
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px; // Adjust spacing as needed
+}
+
+.buttons-container .btn-save, 
+.buttons-container .btn-delete {
+  margin: 0 10px; // Add spacing between buttons
+}
+
+// Items Styling
+.backlog-item, .sprint-item, .team-item, .goal-item {
+  padding: 20px;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  background-color: $card-background;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .settings-container {
+    padding: 20px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .btn-save, .btn-delete, .btn-add, .btn-remove, .btn-submit {
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+
+  .form-control {
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+}

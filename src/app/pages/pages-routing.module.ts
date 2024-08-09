@@ -10,6 +10,8 @@ import { TutorialCreateComponent } from './agile/nexus/tutorial-create/tutorial-
 import { TutorialUpdateComponent } from './agile/nexus/tutorial-update/tutorial-update.component';
 import { NexusQuizComponent } from './agile/nexus/nexus-quiz/nexus-quiz.component'; // Check path
 import {NexusProjectCreateComponent} from './agile/nexus/nexus-project-create/nexus-project-create.component'
+import { ProjectListComponent } from './agile/nexus/project-list/project-list.component'
+import { ProjectSettingsComponent } from './agile/nexus/project-settings/project-settings.component'
 
 const routes: Routes = [{
   path: '',
@@ -93,6 +95,13 @@ const routes: Routes = [{
     {
       path: 'agile/nexus/project/create',
       component: NexusProjectCreateComponent
+    },
+    {
+      path: 'agile/nexus/project',
+      component: ProjectListComponent
+    },
+    { path: 'agile/project-settings/:id',
+      component: ProjectSettingsComponent 
     },
     {
       path: '',
