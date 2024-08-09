@@ -14,7 +14,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { TutorialUpdateComponent } from './agile/nexus/tutorial-update/tutorial-update.component';
 import { ConfirmationDialogComponent } from './agile/nexus//confirmation-dialog/confirmation-dialog.component';
 import { NexusQuizComponent } from './agile/nexus/nexus-quiz/nexus-quiz.component'; // Check path
-
+import {NexusProjectCreateComponent} from './agile/nexus/nexus-project-create/nexus-project-create.component'
 @NgModule({
   imports: [
     PagesRoutingModule,
@@ -37,7 +37,8 @@ import { NexusQuizComponent } from './agile/nexus/nexus-quiz/nexus-quiz.componen
     TutorialCreateComponent,
     TutorialUpdateComponent,
     ConfirmationDialogComponent,
-    NexusQuizComponent, // Ensure this component exists
+    NexusQuizComponent,
+    NexusProjectCreateComponent,
   ],
   providers: [],
 })
