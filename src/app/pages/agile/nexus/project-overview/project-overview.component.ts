@@ -10,22 +10,33 @@ import { NexusProject } from '../../../../../models/nexus-proejct-model';
 })
 export class ProjectOverviewComponent implements OnInit {
   isLoading = true;
+  projectId!: string; 
   project?: NexusProject;
 
   constructor(
-    private projectService: NexusProjectService, // Use the correct service
+    private projectService: NexusProjectService,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.loadProjectDetails();
+    // Use snapshot to get the projectId directly from the parent route
+    this.projectId = this.route.parent?.snapshot.paramMap.get('id')!;
+    console.log(`Project ID retrieved: ${this.projectId}`);
+    
+    if (this.projectId) {
+      this.loadProjectDetails();
+    } else {
+      console.warn('No project ID found in route parameters');
+    }
   }
 
   loadProjectDetails(): void {
-    const projectId = this.route.snapshot.paramMap.get('id');
-    if (projectId) {
-      this.projectService.getProjectById(projectId).subscribe(
+    console.log(`Loading project details for ID: ${this.projectId}`);
+
+    if (this.projectId) {
+      this.projectService.getProjectById(this.projectId).subscribe(
         (data) => {
+          console.log('Project data received:', data);
           this.project = data;
           this.isLoading = false;
         },
@@ -34,10 +45,14 @@ export class ProjectOverviewComponent implements OnInit {
           this.isLoading = false;
         }
       );
+    } else {
+      console.warn('No project ID found in route parameters');
+      this.isLoading = false;
     }
   }
 
   editProject(): void {
     // Implement edit project logic
+    console.log('Edit project method called');
   }
 }

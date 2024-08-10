@@ -4,13 +4,9 @@
         <li><a [routerLink]="getProjectOverviewLink()" routerLinkActive="active">Project Overview</a></li>
         <li><a [routerLink]="getSprintBacklogLink()" routerLinkActive="active">Nexus Sprint Backlog</a></li>
         <li><a [routerLink]="getSprintsListLink()" routerLinkActive="active">Sprints List</a></li>
-        <li><a [routerLink]="getNexusGoalsLink()" routerLinkActive="active">Nexus Goals</a></li> <!-- New Link -->
+        <li><a [routerLink]="getNexusGoalsLink()" routerLinkActive="active">Nexus Goals</a></li>
       </ul>
     </div>
-  </div>
-
-
-  <div>
-
+    <router-outlet></router-outlet>
   </div>
   

@@ -23,17 +23,16 @@ export class NexusGoalListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
+    this.route.parent?.paramMap.subscribe(params => {
       this.projectId = params.get('id')!;
       if (this.projectId) {
-        this.loadProjectDetails();
         this.loadGoals();
       } else {
-        console.warn('No projectId provided to NexusGoalListComponent.');
-        this.isLoading = false;
+        console.warn('No project ID found in route parameters');
       }
     });
   }
+
 
   loadProjectDetails(): void {
     this.projectService.getProjectById(this.projectId).subscribe(

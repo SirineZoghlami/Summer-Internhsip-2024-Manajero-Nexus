@@ -105,31 +105,43 @@ const routes: Routes = [{
       path: 'agile/nexus/project',
       component: ProjectListComponent
     },
-    { 
-      path: 'agile/project-settings/:id',
-      component: ProjectSettingsComponent 
-    },
-    { 
-      path: 'agile/project-settings/update/:id',
-      component: ProjectUpdateComponent 
-    },
-    { 
-      path: 'agile/sprint-list/:id',
-      component: SprintListComponent 
-    },
-    {
-      path: 'agile/nexus-golas/:id',
-      component: NexusGoalListComponent 
-    },
-    {
-      path: 'agile/project-overview/:id',
-      component: ProjectOverviewComponent 
-    },
+ 
+   
+  
+   
     {
       path: 'agile/nexus/dashboard',
       component: NexusDashboardComponent 
     },
     
+
+    {
+      path: 'agile/project-settings/:id',
+      component: ProjectSettingsComponent,
+      children: [
+        {
+          path: '',
+          redirectTo: 'project-overview',
+          pathMatch: 'full'
+        },
+        {
+          path: 'project-overview',
+          component: ProjectOverviewComponent
+        },
+        {
+          path: 'sprint-list',
+          component: SprintListComponent
+        },
+        {
+          path: 'nexus-goals',
+          component: NexusGoalListComponent
+        }
+      ]
+    }
+,    
+    
+
+
     {
       path: '',
       redirectTo: 'dashboard',

@@ -38,9 +38,11 @@ export class ProjectListComponent implements OnInit {
 
   openSettings(project: NexusProject): void {
     if (project && project.id) {
+      console.log('Navigating to:', `/pages/agile/project-settings/${project.id}`);
       this.router.navigate([`/pages/agile/project-settings/${project.id}`]);
     }
   }
+  
 
   closeDetails(): void {
     this.selectedProject = undefined;

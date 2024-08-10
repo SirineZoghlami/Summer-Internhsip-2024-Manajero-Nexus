@@ -12,24 +12,24 @@ export class ProjectSettingsComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    // Fetch the project ID from the route parameters
     this.projectId = this.route.snapshot.paramMap.get('id')!;
+    console.log(`ProjectSettingsComponent initialized with project ID: ${this.projectId}`);
   }
+  
 
   getProjectOverviewLink(): string {
-    return `/pages/agile/project-overview/${this.projectId}`;
+    return `/pages/agile/project-settings/${this.projectId}/project-overview`;
   }
 
   getSprintBacklogLink(): string {
-    return `/pages/agile/sprint-backlog/${this.projectId}`;
+    return `/pages/agile/project-settings/${this.projectId}/sprint-list`;
   }
 
- 
   getSprintsListLink(): string {
-    return `/pages/agile/sprint-list/${this.projectId}`;
+    return `/pages/agile/project-settings/${this.projectId}/sprint-list`;
   }
 
   getNexusGoalsLink(): string {
-    return `/pages/agile/nexus-golas/${this.projectId}`;
+    return `/pages/agile/project-settings/${this.projectId}/nexus-goals`;
   }
 }

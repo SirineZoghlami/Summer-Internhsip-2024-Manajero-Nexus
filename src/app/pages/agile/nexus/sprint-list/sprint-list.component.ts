@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NbDialogService } from '@nebular/theme';
 import { NexusProjectService } from '../../../../../services/nexus.project.service.service';
 import { Sprint, NexusProject } from '../../../../../models/nexus-proejct-model';
-import { SprintModalComponent } from '../sprint-modal/sprint-modal.component'; // Adjust the path accordingly
+import { SprintModalComponent } from '../sprint-modal/sprint-modal.component';
 
 @Component({
   selector: 'app-sprint-list',
@@ -22,16 +22,13 @@ export class SprintListComponent implements OnInit {
     private projectService: NexusProjectService,
     private dialogService: NbDialogService
   ) {}
-
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
+    this.route.parent?.paramMap.subscribe(params => {
       this.projectId = params.get('id')!;
       if (this.projectId) {
-        this.loadProjectDetails();
         this.loadSprints();
       } else {
-        console.warn('No projectId provided to SprintListComponent.');
-        this.isLoading = false;
+        console.warn('No project ID found in route parameters');
       }
     });
   }
@@ -39,20 +36,18 @@ export class SprintListComponent implements OnInit {
   loadProjectDetails(): void {
     this.projectService.getProjectById(this.projectId).subscribe(
       (project: NexusProject) => {
-        console.log('Project loaded successfully:', project);
         this.projectName = project.projectName;
       },
       (error) => {
         console.error('Error loading project details:', error);
+        this.isLoading = false;
       }
     );
   }
 
   loadSprints(): void {
-    console.log('Loading sprints for projectId:', this.projectId);
     this.projectService.getSprintsByProjectId(this.projectId).subscribe(
       (sprints: Sprint[]) => {
-        console.log('Sprints loaded successfully:', sprints);
         this.sprints = sprints;
         this.isLoading = false;
       },
@@ -64,15 +59,12 @@ export class SprintListComponent implements OnInit {
   }
 
   viewSprintDetails(sprint: Sprint) {
-    console.log('Viewing details for sprint:', sprint);
     alert(`Viewing details for: Sprint ${sprint.number}`);
   }
 
   markAsCompleted(sprint: Sprint) {
-    console.log('Marking sprint as completed:', sprint);
     this.projectService.markSprintAsCompleted(this.projectId, sprint.number).subscribe(
       () => {
-        console.log('Sprint marked as completed successfully');
         this.sprints = this.sprints.map(s => 
           s.number === sprint.number ? { ...s, completed: true } : s
         );
@@ -84,9 +76,7 @@ export class SprintListComponent implements OnInit {
   }
 
   getStatusClass(status: string): string {
-    const statusClass = status.toLowerCase().replace(/ /g, '-');
-    console.log('Status class for status:', status, 'is', statusClass);
-    return statusClass;
+    return status.toLowerCase().replace(/ /g, '-');
   }
 
   openSprintModal() {
@@ -99,13 +89,11 @@ export class SprintListComponent implements OnInit {
   }
 
   addSprintToProject(newSprint: Sprint) {
-    console.log('Adding new sprint to project:', newSprint);
     this.projectService.getProjectById(this.projectId).subscribe(
       (project: NexusProject) => {
         project.sprints.push(newSprint);
         this.projectService.updateProject(this.projectId, project).subscribe(
           () => {
-            console.log('Sprint added to project successfully');
             this.sprints.push(newSprint);
           },
           (error) => {
