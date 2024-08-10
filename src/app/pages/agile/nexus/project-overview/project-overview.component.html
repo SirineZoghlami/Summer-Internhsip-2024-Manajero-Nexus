@@ -1,0 +1,38 @@
+<p *ngIf="isLoading">Loading project details...</p>
+
+<nb-card *ngIf="!isLoading">
+  <nb-card-header>
+    <div class="header-content">
+      <h1>{{ project?.projectName || 'Project Overview' }}</h1>
+      <button class="edit-button" (click)="editProject()">Edit</button>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <div class="project-details">
+      <div class="detail-section">
+        <h2>Description</h2>
+        <p>{{ project?.description || 'No description available' }}</p>
+      </div>
+      <div class="detail-section">
+        <h2>Dates</h2>
+        <p><strong>Start Date:</strong> {{ project?.startDate | date }}</p>
+        <p><strong>End Date:</strong> {{ project?.endDate | date }}</p>
+      </div>
+      <div class="detail-section">
+        <h2>Goals</h2>
+        <nb-card *ngIf="project?.goals.length === 0">
+          <nb-card-body>No goals added yet.</nb-card-body>
+        </nb-card>
+        <nb-card *ngFor="let goal of project?.goals">
+          <nb-card-header>
+            <h4>{{ goal.content }}</h4> <!-- Update according to NexusGoal model -->
+          </nb-card-header>
+          <nb-card-body>
+            <p>{{ goal.content || 'No description available' }}</p> <!-- Update according to NexusGoal model -->
+            <!-- Add other goal details here if applicable -->
+          </nb-card-body>
+        </nb-card>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>

@@ -1,0 +1,18 @@
+<nb-card>
+    <nb-card-header>
+      <h3>Create New Goal</h3>
+    </nb-card-header>
+    <nb-card-body>
+      <form (ngSubmit)="save()">
+        <div class="form-group">
+          <label for="content">Goal Content</label>
+          <input nbInput id="content" [(ngModel)]="newGoal.content" name="content" required>
+        </div>
+        <div class="form-actions">
+          <button nbButton status="primary" type="submit">Save</button>
+          <button nbButton status="danger" (click)="cancel()">Cancel</button>
+        </div>
+      </form>
+    </nb-card-body>
+  </nb-card>
+  

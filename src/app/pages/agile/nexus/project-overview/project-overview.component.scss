@@ -1,0 +1,33 @@
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  
+    h1 {
+      margin: 0;
+    }
+  
+    .edit-button {
+      background-color: #007bff; // Adjust color as needed
+      color: #fff;
+      border: none;
+      border-radius: 0.25rem;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+    }
+  }
+  
+  .project-details {
+    .detail-section {
+      margin-bottom: 2rem;
+  
+      h2 {
+        margin-bottom: 0.5rem;
+      }
+  
+      p {
+        margin: 0.5rem 0;
+      }
+    }
+  }
+  

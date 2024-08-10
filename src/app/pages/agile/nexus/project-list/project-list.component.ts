@@ -38,7 +38,7 @@ export class ProjectListComponent implements OnInit {
 
   openSettings(project: NexusProject): void {
     if (project && project.id) {
-      this.router.navigate([`/pages//agile/project-settings/${project.id}`]);
+      this.router.navigate([`/pages/agile/project-settings/${project.id}`]);
     }
   }
 
@@ -46,7 +46,11 @@ export class ProjectListComponent implements OnInit {
     this.selectedProject = undefined;
   }
   createNewProject(): void {
-    // Navigate to the create project page or open a modal
-    this.router.navigate(['/pages/agile/nexus/project/create']); // Adjust the path as necessary
+   
+    this.router.navigate(['/pages/agile/nexus/project/create']); 
+  }
+  goToDashboard(): void {
+
+    this.router.navigate(['/pages/agile/nexus/dashboard']); 
   }
 }

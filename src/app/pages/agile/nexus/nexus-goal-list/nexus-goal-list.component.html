@@ -1,0 +1,19 @@
+<p *ngIf="isLoading">Loading goals...</p>
+
+<nb-card *ngIf="!isLoading">
+  <nb-card-header>
+    <div class="header-content">
+      <h1>{{ projectName ? projectName + ' - Nexus Goals List' : 'Goal List' }}</h1>
+      <button class="add-goal-button" (click)="openGoalModal()">+</button>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <div class="goal-list-container">
+      <div class="goal-item" *ngFor="let goal of goals">
+        <div class="item-header">
+          <h4>{{ goal.content }}</h4>
+        </div>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>

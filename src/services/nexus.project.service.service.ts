@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { NexusProject } from '../models/nexus-proejct-model';
+import { NexusProject, Sprint,NexusGoal } from '../models/nexus-proejct-model';
 import { catchError } from 'rxjs/operators';
 
 @Injectable({
@@ -41,5 +41,27 @@ export class NexusProjectService {
       })
     );
   }
+
+    getSprintsByProjectId(id: string): Observable<Sprint[]> {
+    return this.http.get<Sprint[]>(`${this.apiUrl}/${id}/sprints`).pipe(
+      catchError(error => {
+        console.error('Error fetching sprints:', error);
+        return throwError(() => new Error('Error fetching sprints'));
+      })
+    );
+  }
+  markSprintAsCompleted(projectId: string, sprintNumber: number): Observable<void> {
+    return this.http.patch<void>(`${this.apiUrl}/${projectId}/sprints/${sprintNumber}/complete`, {});
+  }
+
+  getGoalsByProjectId(id: string): Observable<NexusGoal[]> {
+    return this.http.get<NexusGoal[]>(`${this.apiUrl}/${id}/goals`).pipe(
+      catchError(error => {
+        console.error('Error fetching goals:', error);
+        return throwError(() => new Error('Error fetching goals'));
+      })
+    );
+  }
+  
 }
 

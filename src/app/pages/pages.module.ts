@@ -16,8 +16,14 @@ import { NexusQuizComponent } from './agile/nexus/nexus-quiz/nexus-quiz.componen
 import {NexusProjectCreateComponent} from './agile/nexus/nexus-project-create/nexus-project-create.component';
 import { ProjectListComponent } from './agile/nexus/project-list/project-list.component';
 import { ProjectDetailComponent } from './agile/nexus/project-detail/project-detail.component';
+import { ProjectUpdateComponent } from './agile/nexus/project-update/project-update.component';
+import { NexusDashboardComponent } from './agile/nexus/nexus-dashboard/nexus-dashboard.component';
 import { ProjectSettingsComponent } from './agile/nexus/project-settings/project-settings.component';
-import { NexusDashboardComponent } from './agile/nexus/nexus-dashboard/nexus-dashboard.component'
+import { SprintListComponent } from './agile/nexus/sprint-list/sprint-list.component';
+import { SprintModalComponent } from './agile/nexus/sprint-modal/sprint-modal.component';
+import { NexusGoalListComponent } from './agile/nexus/nexus-goal-list/nexus-goal-list.component';
+import { GoalModalComponent } from './agile/nexus/goal-modal/goal-modal.component';
+import { ProjectOverviewComponent } from './agile/nexus/project-overview/project-overview.component'
 @NgModule({
   imports: [
     PagesRoutingModule,
@@ -45,8 +51,14 @@ import { NexusDashboardComponent } from './agile/nexus/nexus-dashboard/nexus-das
     NexusProjectCreateComponent,
     ProjectListComponent,
     ProjectDetailComponent,
-    ProjectSettingsComponent,
+    ProjectUpdateComponent,
     NexusDashboardComponent,
+    ProjectSettingsComponent,
+    SprintListComponent,
+    SprintModalComponent,
+    NexusGoalListComponent,
+    GoalModalComponent,
+    ProjectOverviewComponent,
   ],
   providers: [],
 })

@@ -1,103 +1,16 @@
-<div class="settings-container">
-    <h2>Project Settings</h2>
-    <form [formGroup]="projectForm" (ngSubmit)="saveProject()">
-      <!-- Project Details -->
-      <div class="form-group">
-        <label for="projectName">Project Name</label>
-        <input id="projectName" formControlName="projectName" class="form-control" />
-      </div>
-      <div class="form-group">
-        <label for="description">Description</label>
-        <textarea id="description" formControlName="description" class="form-control"></textarea>
-      </div>
-      <div class="form-group">
-        <label for="startDate">Start Date</label>
-        <input id="startDate" formControlName="startDate" type="date" class="form-control" />
-      </div>
-      <div class="form-group">
-        <label for="endDate">End Date</label>
-        <input id="endDate" formControlName="endDate" type="date" class="form-control" />
-      </div>
-      
-      <!-- Backlog Items -->
-      <div formArrayName="productBacklog">
-        <div *ngFor="let item of productBacklogControls; let i = index" [formGroupName]="i" class="backlog-item">
-          <h4>Backlog Item {{ i + 1 }}</h4>
-          <div class="form-group">
-            <label for="title-{{i}}">Title</label>
-            <input id="title-{{i}}" formControlName="title" class="form-control" />
-          </div>
-          <div class="form-group">
-            <label for="description-{{i}}">Description</label>
-            <textarea id="description-{{i}}" formControlName="description" class="form-control"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="priority-{{i}}">Priority</label>
-            <select id="priority-{{i}}" formControlName="priority" class="form-control">
-              <option *ngFor="let priority of priorityOptions" [value]="priority">{{ priority }}</option>
-            </select>
-          </div>
-          <button type="button" class="btn-remove" (click)="removeBacklogItem(i)">Remove</button>
-        </div>
-      </div>
-      <button type="button" class="btn-add" (click)="addBacklogItem()">Add Backlog Item</button>
-  
-      <!-- Sprints -->
-      <div formArrayName="sprints">
-        <div *ngFor="let item of sprintsControls; let i = index" [formGroupName]="i" class="sprint-item">
-          <h4>Sprint {{ i + 1 }}</h4>
-          <div class="form-group">
-            <label for="name-{{i}}">Name</label>
-            <input id="name-{{i}}" formControlName="name" class="form-control" />
-          </div>
-          <div class="form-group">
-            <label for="startDate-{{i}}">Start Date</label>
-            <input id="startDate-{{i}}" formControlName="startDate" type="date" class="form-control" />
-          </div>
-          <div class="form-group">
-            <label for="endDate-{{i}}">End Date</label>
-            <input id="endDate-{{i}}" formControlName="endDate" type="date" class="form-control" />
-          </div>
-          <button type="button" class="btn-remove" (click)="removeSprint(i)">Remove</button>
-        </div>
-      </div>
-      <button type="button" class="btn-add" (click)="addSprint()">Add Sprint</button>
-  
-      <!-- Teams -->
-      <div formArrayName="teams">
-        <div *ngFor="let item of teamsControls; let i = index" [formGroupName]="i" class="team-item">
-          <h4>Team {{ i + 1 }}</h4>
-          <div class="form-group">
-            <label for="teamName-{{i}}">Name</label>
-            <input id="teamName-{{i}}" formControlName="name" class="form-control" />
-          </div>
-          <div class="form-group">
-            <label for="members-{{i}}">Members</label>
-            <input id="members-{{i}}" formControlName="members" class="form-control" />
-          </div>
-          <button type="button" class="btn-remove" (click)="removeTeam(i)">Remove</button>
-        </div>
-      </div>
-      <button type="button" class="btn-add" (click)="addTeam()">Add Team</button>
-  
-      <!-- Goals -->
-      <div formArrayName="goals">
-        <div *ngFor="let item of goalsControls; let i = index" [formGroupName]="i" class="goal-item">
-          <h4>Goal {{ i + 1 }}</h4>
-          <div class="form-group">
-            <label for="goalDescription-{{i}}">Description</label>
-            <textarea id="goalDescription-{{i}}" formControlName="description" class="form-control"></textarea>
-          </div>
-          <button type="button" class="btn-remove" (click)="removeGoal(i)">Remove</button>
-        </div>
-      </div>
-      <button type="button" class="btn-add" (click)="addGoal()">Add Goal</button>
-  
-      <!-- Action Buttons -->
-      <div class="buttons-container">
-        <button type="submit" class="btn-save">Save Project</button>
-        <button type="button" class="btn-delete" (click)="deleteProject()">Delete Project</button>
-      </div>
-    </form>
+<div class="nexus-board">
+    <div class="navbar">
+      <ul class="nav-menu">
+        <li><a [routerLink]="getProjectOverviewLink()" routerLinkActive="active">Project Overview</a></li>
+        <li><a [routerLink]="getSprintBacklogLink()" routerLinkActive="active">Nexus Sprint Backlog</a></li>
+        <li><a [routerLink]="getSprintsListLink()" routerLinkActive="active">Sprints List</a></li>
+        <li><a [routerLink]="getNexusGoalsLink()" routerLinkActive="active">Nexus Goals</a></li> <!-- New Link -->
+      </ul>
+    </div>
+  </div>
+
+
+  <div>
+
   </div>
   

@@ -9,10 +9,15 @@ import { TutorialComponent } from './agile/nexus/tutorial.component';
 import { TutorialCreateComponent } from './agile/nexus/tutorial-create/tutorial-create.component';
 import { TutorialUpdateComponent } from './agile/nexus/tutorial-update/tutorial-update.component';
 import { NexusQuizComponent } from './agile/nexus/nexus-quiz/nexus-quiz.component'; // Check path
-import {NexusProjectCreateComponent} from './agile/nexus/nexus-project-create/nexus-project-create.component'
-import { ProjectListComponent } from './agile/nexus/project-list/project-list.component'
-import { ProjectSettingsComponent } from './agile/nexus/project-settings/project-settings.component'
-import { NexusDashboardComponent } from './agile/nexus/nexus-dashboard/nexus-dashboard.component'
+import { NexusProjectCreateComponent } from './agile/nexus/nexus-project-create/nexus-project-create.component';
+import { ProjectListComponent } from './agile/nexus/project-list/project-list.component';
+import { ProjectUpdateComponent } from './agile/nexus/project-update/project-update.component';
+import { NexusDashboardComponent } from './agile/nexus/nexus-dashboard/nexus-dashboard.component';
+import { ProjectSettingsComponent } from './agile/nexus/project-settings/project-settings.component';
+import { SprintListComponent } from './agile/nexus/sprint-list/sprint-list.component';
+import { NexusGoalListComponent } from './agile/nexus/nexus-goal-list/nexus-goal-list.component'; // Import the new component
+import { GoalModalComponent } from './agile/nexus/goal-modal/goal-modal.component';
+import { ProjectOverviewComponent } from './agile/nexus/project-overview/project-overview.component'
 
 const routes: Routes = [{
   path: '',
@@ -77,10 +82,9 @@ const routes: Routes = [{
         .then(m => m.MiscellaneousModule),
     },
     {
-      path: 'agile/nexus/tutorial',  
+      path: 'agile/nexus',  
       component: TutorialComponent
     },
-  
     {
       path: 'agile/nexus/tutorial/create',  
       component: TutorialCreateComponent
@@ -101,12 +105,31 @@ const routes: Routes = [{
       path: 'agile/nexus/project',
       component: ProjectListComponent
     },
-    { path: 'agile/project-settings/:id',
+    { 
+      path: 'agile/project-settings/:id',
       component: ProjectSettingsComponent 
     },
-    { path: 'agile/nexus/dashboard',
+    { 
+      path: 'agile/project-settings/update/:id',
+      component: ProjectUpdateComponent 
+    },
+    { 
+      path: 'agile/sprint-list/:id',
+      component: SprintListComponent 
+    },
+    {
+      path: 'agile/nexus-golas/:id',
+      component: NexusGoalListComponent 
+    },
+    {
+      path: 'agile/project-overview/:id',
+      component: ProjectOverviewComponent 
+    },
+    {
+      path: 'agile/nexus/dashboard',
       component: NexusDashboardComponent 
     },
+    
     {
       path: '',
       redirectTo: 'dashboard',

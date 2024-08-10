@@ -1,0 +1,30 @@
+<p *ngIf="isLoading">Loading sprints...</p>
+<nb-card *ngIf="!isLoading">
+  <nb-card-header>
+    <div class="header-content">
+      <h1>{{ projectName ? projectName + ' - Sprint List' : 'Sprint List' }}</h1>
+      <button class="add-sprint-button" (click)="openSprintModal()">+</button>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <div class="sprint-list-container">
+      <div class="sprint-item" *ngFor="let sprint of sprints">
+        <div class="item-header">
+          <h4>{{ 'Sprint ' + sprint.number }}</h4>
+          <span class="status" [ngClass]="getStatusClass(sprint.status || 'Pending')">
+            {{ sprint.status || 'Pending' }}
+          </span>
+        </div>
+        <p class="item-dates">Start Date: {{ sprint.startDate }} | End Date: {{ sprint.endDate }}</p>
+        <div class="item-footer">
+          <button nbButton status="primary" (click)="viewSprintDetails(sprint)">
+            View Details
+          </button>
+          <button nbButton status="success" (click)="markAsCompleted(sprint)" [disabled]="sprint.completed">
+            Mark as Completed
+          </button>
+        </div>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>
