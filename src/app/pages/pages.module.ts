@@ -16,7 +16,7 @@ import { NexusQuizComponent } from './agile/nexus/nexus-quiz/nexus-quiz.componen
 import {NexusProjectCreateComponent} from './agile/nexus/nexus-project-create/nexus-project-create.component';
 import { ProjectListComponent } from './agile/nexus/project-list/project-list.component';
 import { ProjectDetailComponent } from './agile/nexus/project-detail/project-detail.component';
-import { ProjectUpdateComponent } from './agile/nexus/project-update/project-update.component';
+import { ProjectUpdateComponent } from './agile/nexus/project-updtae/project-update.component';
 import { NexusDashboardComponent } from './agile/nexus/nexus-dashboard/nexus-dashboard.component';
 import { ProjectSettingsComponent } from './agile/nexus/project-settings/project-settings.component';
 import { SprintListComponent } from './agile/nexus/sprint-list/sprint-list.component';

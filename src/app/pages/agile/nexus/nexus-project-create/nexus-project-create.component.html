@@ -37,7 +37,9 @@
             </nb-form-field>
           </div>
 
-          <button nbButton status="success" (click)="nextStep()">Next</button>
+          <div class="button-group">
+            <button nbButton status="success" (click)="stepper.next()">Next</button>
+          </div>
         </nb-step>
 
         <!-- Step 2: Product Backlog -->
@@ -69,15 +71,22 @@
 
               <div class="form-group">
                 <label for="status">Status:</label>
-                <input id="status" formControlName="status" class="form-control" />
+                <select id="status" formControlName="status" class="form-control">
+                  <option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
+                </select>
               </div>
-              <button nbButton status="info" type="button" (click)="addProductBacklogItem()">Add Backlog Item</button>
 
+              <div class="button-group">
+                <button nbButton status="danger" (click)="productBacklog.removeAt(i)">Remove</button>
+              </div>
             </div>
           </div>
-
-          <button nbButton status="primary" (click)="previousStep()">Previous</button>
-          <button nbButton status="success" (click)="nextStep()">Next</button>
+          
+          <div class="button-group">
+            <button nbButton status="success" (click)="addProductBacklogItem()">Add Item</button>
+            <button nbButton status="info" (click)="stepper.previous()">Previous</button>
+            <button nbButton status="success" (click)="stepper.next()">Next</button>
+          </div>
         </nb-step>
 
         <!-- Step 3: Sprints -->
@@ -89,40 +98,29 @@
                 <select id="number" formControlName="number" class="form-control">
                   <option *ngFor="let number of sprintNumbers" [value]="number">{{ number }}</option>
                 </select>
-                <nb-form-field *ngIf="sprint.get('number').invalid && sprint.get('number').touched">
-                  <nb-error>Sprint number is required</nb-error>
-                </nb-form-field>
               </div>
 
               <div class="form-group">
                 <label for="startDate">Start Date:</label>
                 <input id="startDate" formControlName="startDate" type="date" class="form-control" />
-                <nb-form-field *ngIf="sprint.get('startDate').invalid && sprint.get('startDate').touched">
-                  <nb-error>Start date is required</nb-error>
-                </nb-form-field>
               </div>
 
               <div class="form-group">
                 <label for="endDate">End Date:</label>
                 <input id="endDate" formControlName="endDate" type="date" class="form-control" />
-                <nb-form-field *ngIf="sprint.get('endDate').invalid && sprint.get('endDate').touched">
-                  <nb-error>End date is required</nb-error>
-                </nb-form-field>
               </div>
 
-              
-              <div class="form-group">
-                <label for="reviews">Reviews:</label>
-                <input id="reviews" formControlName="reviews" class="form-control" />
+              <div class="button-group">
+                <button nbButton status="danger" (click)="sprints.removeAt(i)">Remove Sprint</button>
               </div>
-              <button nbButton status="info" type="button" (click)="addSprint()">Add Sprint</button>
-
             </div>
-
           </div>
 
-          <button nbButton status="primary" (click)="previousStep()">Previous</button>
-          <button nbButton status="success" (click)="nextStep()">Next</button>
+          <div class="button-group">
+            <button nbButton status="success" (click)="addSprint()">Add Sprint</button>
+            <button nbButton status="info" (click)="stepper.previous()">Previous</button>
+            <button nbButton status="success" (click)="stepper.next()">Next</button>
+          </div>
         </nb-step>
 
         <!-- Step 4: Teams -->
@@ -132,37 +130,43 @@
               <div class="form-group">
                 <label for="name">Team Name:</label>
                 <input id="name" formControlName="name" class="form-control" />
-                <nb-form-field *ngIf="team.get('name').invalid && team.get('name').touched">
-                  <nb-error>Team name is required</nb-error>
-                </nb-form-field>
               </div>
 
               <div class="form-group">
-                <label for="roles">Roles:</label>
-                <div formArrayName="roles">
-                  <div *ngFor="let role of team.get('roles').controls; let j = index">
-                    <input [formControlName]="j" class="form-control" />
-                  </div>
-                </div>
-                <button nbButton status="info" type="button" (click)="addRole(i)">Add Role</button>
+                <label for="description">Description:</label>
+                <textarea id="description" formControlName="description" class="form-control"></textarea>
               </div>
 
-              <div class="form-group">
-                <label for="members">Members:</label>
-                <div formArrayName="members">
-                  <div *ngFor="let member of team.get('members').controls; let j = index">
-                    <input [formControlName]="j" class="form-control" />
+              <div formArrayName="members">
+                <div *ngFor="let member of team.get('members').controls; let j = index" [formGroupName]="j">
+                  <div class="form-group">
+                    <label for="name">Member Name:</label>
+                    <input id="name" formControlName="name" class="form-control" />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="role">Role:</label>
+                    <input id="role" formControlName="role" class="form-control" />
+                  </div>
+
+                  <div class="button-group">
+                    <button nbButton status="danger" (click)="team.get('members').removeAt(j)">Remove Member</button>
                   </div>
                 </div>
-                <button nbButton status="info" type="button" (click)="addMember(i)">Add Member</button>
+              </div>
+
+              <div class="button-group">
+                <button nbButton status="success" (click)="addMember(i)">Add Member</button>
+                <button nbButton status="danger" (click)="teams.removeAt(i)">Remove Team</button>
               </div>
             </div>
-            <button nbButton status="info" type="button" (click)="addTeam()">Add Team</button>
-
           </div>
 
-          <button nbButton status="primary" (click)="previousStep()">Previous</button>
-          <button nbButton status="success" (click)="nextStep()">Next</button>
+          <div class="button-group">
+            <button nbButton status="success" (click)="addTeam()">Add Team</button>
+            <button nbButton status="info" (click)="stepper.previous()">Previous</button>
+            <button nbButton status="success" (click)="stepper.next()">Next</button>
+          </div>
         </nb-step>
 
         <!-- Step 5: Goals -->
@@ -170,19 +174,21 @@
           <div formArrayName="goals">
             <div *ngFor="let goal of goals.controls; let i = index" [formGroupName]="i">
               <div class="form-group">
-                <label for="content">Goal Content:</label>
+                <label for="content">Goal:</label>
                 <input id="content" formControlName="content" class="form-control" />
-                <nb-form-field *ngIf="goal.get('content').invalid && goal.get('content').touched">
-                  <nb-error>Content is required</nb-error>
-                </nb-form-field>
+              </div>
+
+              <div class="button-group">
+                <button nbButton status="danger" (click)="goals.removeAt(i)">Remove Goal</button>
               </div>
             </div>
-            <button nbButton status="info" type="button" (click)="addGoal()">Add Goal</button>
-
           </div>
 
-          <button nbButton status="primary" (click)="previousStep()">Previous</button>
-          <button nbButton status="success" type="submit">Submit</button>
+          <div class="button-group">
+            <button nbButton status="success" (click)="addGoal()">Add Goal</button>
+            <button nbButton status="info" (click)="stepper.previous()">Previous</button>
+            <button nbButton status="success" type="submit">Submit</button>
+          </div>
         </nb-step>
       </nb-stepper>
     </form>

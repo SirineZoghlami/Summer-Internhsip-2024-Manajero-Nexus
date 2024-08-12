@@ -11,7 +11,7 @@ import { TutorialUpdateComponent } from './agile/nexus/tutorial-update/tutorial-
 import { NexusQuizComponent } from './agile/nexus/nexus-quiz/nexus-quiz.component'; // Check path
 import { NexusProjectCreateComponent } from './agile/nexus/nexus-project-create/nexus-project-create.component';
 import { ProjectListComponent } from './agile/nexus/project-list/project-list.component';
-import { ProjectUpdateComponent } from './agile/nexus/project-update/project-update.component';
+import { ProjectUpdateComponent } from './agile/nexus/project-updtae/project-update.component';
 import { NexusDashboardComponent } from './agile/nexus/nexus-dashboard/nexus-dashboard.component';
 import { ProjectSettingsComponent } from './agile/nexus/project-settings/project-settings.component';
 import { SprintListComponent } from './agile/nexus/sprint-list/sprint-list.component';

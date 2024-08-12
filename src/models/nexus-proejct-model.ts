@@ -21,17 +21,26 @@ export interface NexusProject {
     number: number;
     startDate: string; // ISO date string
     endDate: string;   // ISO date string
-    reviews?: string;
+    reviews?: Review[];
     completed: boolean; 
   }
   
   export interface Team {
-    name: string;
-    roles: string[];
-    members: string[];
+    id: string;           // Unique identifier for the team
+    name: string;         // Name of the team
+    description?: string; // Optional description of the team
+    members: TeamMember[]; // List of team members
+  }
+  export interface TeamMember {
+    id: string;           // Unique identifier for the team member
+    name: string;         // Name of the team member
+    role: string;         // Role of the team member within the team
   }
   
   export interface NexusGoal {
     content: string;
   }
-  
+  export interface Review {
+    reviewDate: string;  // ISO date string
+    reviewContent: string;
+  }

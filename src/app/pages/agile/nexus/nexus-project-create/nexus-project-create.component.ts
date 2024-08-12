@@ -14,6 +14,7 @@ export class NexusProjectCreateComponent implements OnInit {
   projectForm: FormGroup;
   priorities = ['High', 'Medium', 'Low'];
   sprintNumbers = Array.from({ length: 10 }, (_, i) => i + 1); // Numbers 1 to 10
+  statuses = ['Done', 'In Progress', 'Not Done', 'Review']; // Status options
   @ViewChild('stepper', { static: false }) stepper: NbStepperComponent;
 
   constructor(
@@ -62,7 +63,7 @@ export class NexusProjectCreateComponent implements OnInit {
       title: ['', Validators.required],
       description: [''],
       priority: ['', Validators.required],
-      status: [''],
+      status: ['']  // Initialize status as an empty string
     }));
   }
 
@@ -71,15 +72,16 @@ export class NexusProjectCreateComponent implements OnInit {
       number: ['', Validators.required],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
-      backlog: this.fb.array([]),
-      reviews: [''],
+      reviews: this.fb.array([]),  // Initialize reviews as an empty FormArray
+      completed: [false],  // Default value for completed
     }));
   }
 
   addTeam(): void {
     this.teams.push(this.fb.group({
+      id: [''],  // Initialize id as an empty string
       name: ['', Validators.required],
-      roles: this.fb.array([]),
+      description: [''],
       members: this.fb.array([]),
     }));
   }
@@ -91,12 +93,25 @@ export class NexusProjectCreateComponent implements OnInit {
 
   addMember(teamIndex: number): void {
     const members = (this.teams.at(teamIndex).get('members') as FormArray);
-    members.push(this.fb.control(''));
+    members.push(this.fb.group({
+      id: [''],  // Initialize id as an empty string
+      name: ['', Validators.required],
+      role: ['', Validators.required],
+    }));
   }
 
   addGoal(): void {
     this.goals.push(this.fb.group({
       content: ['', Validators.required],
+    }));
+  }
+
+  addReview(sprintIndex: number): void {
+    const nowDate = new Date().toISOString().split('T')[0]; // ISO format date string without time
+    const reviews = (this.sprints.at(sprintIndex).get('reviews') as FormArray);
+    reviews.push(this.fb.group({
+      reviewDate: [nowDate], // Set the current date as the default value
+      reviewContent: [''],
     }));
   }
 
@@ -111,25 +126,29 @@ export class NexusProjectCreateComponent implements OnInit {
       this.stepper.next();
     }
   }
-
   onSubmit(): void {
     if (this.projectForm.valid) {
-      const newProject: NexusProject = this.projectForm.value;
+      const newProject = {
+        ...this.projectForm.value,
+        sprints: this.projectForm.value.sprints.map(sprint => ({
+          ...sprint,
+          reviews: []  // Pass empty array for reviews
+        }))
+      };
+  
       this.nexusProjectService.createProject(newProject).subscribe(
         response => {
           this.toastrService.success('Project created successfully!', 'Success');
-          this.router.navigate(['/pages/agile/nexus/project']); // Adjust the route as needed
+          this.router.navigate(['/pages/agile/nexus/project']);
         },
         error => {
           console.error('Error creating project:', error);
           this.toastrService.danger('Failed to create project. Please try again.', 'Error');
         }
       );
-    } else {
-      this.toastrService.danger('Please fill in all required fields.', 'Validation Error');
-      this.markAllAsTouched();
-    }
+    } 
   }
+  
 
   private markAllAsTouched(): void {
     this.projectForm.markAllAsTouched();

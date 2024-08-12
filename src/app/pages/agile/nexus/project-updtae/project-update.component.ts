@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router'; // Import Router
+import { ActivatedRoute, Router } from '@angular/router';
 import { NexusProjectService } from '../../../../../services/nexus.project.service.service';
 import { NbDialogService, NbToastrService } from '@nebular/theme';
-import { NexusProject } from '../../../../../models/nexus-proejct-model'; // Adjust the path accordingly
-import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component'; // Adjust the path if necessary
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-project-update',
@@ -24,10 +23,9 @@ export class ProjectUpdateComponent implements OnInit {
     private fb: FormBuilder,
     private projectService: NexusProjectService,
     private route: ActivatedRoute,
-    private router: Router, // Inject Router
+    private router: Router,
     private toastrService: NbToastrService,
-    private dialogService: NbDialogService // Add this
-
+    private dialogService: NbDialogService
   ) {}
 
   ngOnInit(): void {
@@ -65,26 +63,22 @@ export class ProjectUpdateComponent implements OnInit {
 
   private setProductBacklog(backlog: any[]): void {
     const backlogFGs = backlog.map(item => this.fb.group(item));
-    const backlogFormArray = this.fb.array(backlogFGs);
-    this.projectForm.setControl('productBacklog', backlogFormArray);
+    this.projectForm.setControl('productBacklog', this.fb.array(backlogFGs));
   }
 
   private setSprints(sprints: any[]): void {
     const sprintsFGs = sprints.map(item => this.fb.group(item));
-    const sprintsFormArray = this.fb.array(sprintsFGs);
-    this.projectForm.setControl('sprints', sprintsFormArray);
+    this.projectForm.setControl('sprints', this.fb.array(sprintsFGs));
   }
 
   private setTeams(teams: any[]): void {
     const teamsFGs = teams.map(item => this.fb.group(item));
-    const teamsFormArray = this.fb.array(teamsFGs);
-    this.projectForm.setControl('teams', teamsFormArray);
+    this.projectForm.setControl('teams', this.fb.array(teamsFGs));
   }
 
   private setGoals(goals: any[]): void {
     const goalsFGs = goals.map(item => this.fb.group(item));
-    const goalsFormArray = this.fb.array(goalsFGs);
-    this.projectForm.setControl('goals', goalsFormArray);
+    this.projectForm.setControl('goals', this.fb.array(goalsFGs));
   }
 
   get productBacklogControls() {
@@ -161,33 +155,13 @@ export class ProjectUpdateComponent implements OnInit {
       const project = this.projectForm.value;
       this.projectService.updateProject(this.projectId!, project).subscribe(() => {
         this.toastrService.success('Project updated successfully');
-        this.router.navigate(['pages/agile/nexus/project']); // Redirect after successful update
+        this.router.navigate(['pages/agile/nexus/project']);
       });
     } else {
       this.toastrService.danger('Please fill out all required fields');
     }
   }
 
-  deleteProject(): void {
-    this.dialogService.open(ConfirmationDialogComponent, {
-      context: {
-        title: 'Confirm Deletion',
-        message: 'Are you sure you want to delete this project? This action cannot be undone.'
-      }
-    }).onClose.subscribe(confirmed => {
-      if (confirmed) {
-        if (this.projectId) {
-          this.projectService.deleteProject(this.projectId).subscribe(
-            () => {
-              this.toastrService.success('Project deleted successfully', 'Success');
-              this.router.navigate(['pages/agile/nexus/project']); // Navigate to project page after deletion
-            },
-            error => {
-              this.toastrService.danger('Error deleting project', 'Error');
-            }
-          );
-        }
-      }
-    });
-  }
+ 
+  
 }
