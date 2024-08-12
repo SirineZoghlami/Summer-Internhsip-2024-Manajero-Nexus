@@ -1,0 +1,38 @@
+<nb-card>
+    <nb-card-header>
+      <h3>Create New Backlog Item</h3>
+    </nb-card-header>
+    <nb-card-body>
+      <form>
+        <div class="form-group">
+          <label for="title">Title:</label>
+          <input nbInput id="title" [(ngModel)]="newBacklog.title" name="title" required>
+        </div>
+        <div class="form-group">
+          <label for="description">Description:</label>
+          <textarea nbInput id="description" [(ngModel)]="newBacklog.description" name="description"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="priority">Priority:</label>
+          <select nbSelect id="priority" [(ngModel)]="newBacklog.priority" name="priority">
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="status">Status:</label>
+          <select nbSelect id="status" [(ngModel)]="newBacklog.status" name="status">
+            <option value="Pending">Pending</option>
+            <option value="In Progress">In Progress</option>
+            <option value="completed">completed</option>
+          </select>
+        </div>
+        <div class="form-actions">
+          <button nbButton status="primary" (click)="save()">Save</button>
+          <button nbButton status="danger" (click)="cancel()">Cancel</button>
+        </div>
+      </form>
+    </nb-card-body>
+  </nb-card>
+  

@@ -1,0 +1,25 @@
+<p *ngIf="isLoading">Loading backlogs...</p>
+<nb-card *ngIf="!isLoading">
+  <nb-card-header>
+    <div class="header-content">
+      <h1>{{ projectName ? projectName + ' - Backlog List' : 'Backlog List' }}</h1>
+      <button class="add-backlog-button" (click)="openBacklogModal()">+</button>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <div class="backlog-list-container">
+      <div class="backlog-item" *ngFor="let backlog of backlogs">
+        <div class="item-header">
+          <h4>{{ backlog.title }}</h4>
+          <span class="priority" [ngClass]="getPriorityClass(backlog.priority)">
+            {{ backlog.priority }}
+          </span>
+        </div>
+        <p class="item-description">{{ backlog.description }}</p>
+        <span class="status" [ngClass]="getStatusClass(backlog.status)">
+          {{ backlog.status }}
+        </span>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>

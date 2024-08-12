@@ -21,8 +21,8 @@ export class ProjectSettingsComponent implements OnInit {
     return `/pages/agile/project-settings/${this.projectId}/project-overview`;
   }
 
-  getSprintBacklogLink(): string {
-    return `/pages/agile/project-settings/${this.projectId}/sprint-list`;
+  getProductBacklogLink(): string {
+    return `/pages/agile/project-settings/${this.projectId}/nexus-product-backlog`;
   }
 
   getSprintsListLink(): string {

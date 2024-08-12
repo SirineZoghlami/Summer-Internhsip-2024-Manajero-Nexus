@@ -18,6 +18,7 @@ import { SprintListComponent } from './agile/nexus/sprint-list/sprint-list.compo
 import { NexusGoalListComponent } from './agile/nexus/nexus-goal-list/nexus-goal-list.component'; // Import the new component
 import { GoalModalComponent } from './agile/nexus/goal-modal/goal-modal.component';
 import { ProjectOverviewComponent } from './agile/nexus/project-overview/project-overview.component'
+import { NexusProductBacklogComponent } from './agile/nexus/nexus-product-backlog/nexus-product-backlog.component'
 
 const routes: Routes = [{
   path: '',
@@ -135,6 +136,10 @@ const routes: Routes = [{
         {
           path: 'nexus-goals',
           component: NexusGoalListComponent
+        },
+        {
+          path: 'nexus-product-backlog',
+          component: NexusProductBacklogComponent
         }
       ]
     }
