@@ -38,7 +38,7 @@
           </div>
 
           <div class="button-group">
-            <button nbButton status="success" (click)="stepper.next()">Next</button>
+            <button nbButton status="info" (click)="stepper.next()">Next</button>
           </div>
         </nb-step>
 
@@ -85,7 +85,7 @@
           <div class="button-group">
             <button nbButton status="success" (click)="addProductBacklogItem()">Add Item</button>
             <button nbButton status="info" (click)="stepper.previous()">Previous</button>
-            <button nbButton status="success" (click)="stepper.next()">Next</button>
+            <button nbButton status="info" (click)="stepper.next()">Next</button>
           </div>
         </nb-step>
 
@@ -119,7 +119,7 @@
           <div class="button-group">
             <button nbButton status="success" (click)="addSprint()">Add Sprint</button>
             <button nbButton status="info" (click)="stepper.previous()">Previous</button>
-            <button nbButton status="success" (click)="stepper.next()">Next</button>
+            <button nbButton status="info" (click)="stepper.next()">Next</button>
           </div>
         </nb-step>
 
@@ -165,7 +165,7 @@
           <div class="button-group">
             <button nbButton status="success" (click)="addTeam()">Add Team</button>
             <button nbButton status="info" (click)="stepper.previous()">Previous</button>
-            <button nbButton status="success" (click)="stepper.next()">Next</button>
+            <button nbButton status="info" (click)="stepper.next()">Next</button>
           </div>
         </nb-step>
 
@@ -186,6 +186,50 @@
 
           <div class="button-group">
             <button nbButton status="success" (click)="addGoal()">Add Goal</button>
+            <button nbButton status="info" (click)="stepper.previous()">Previous</button>
+            <button nbButton status="info" (click)="stepper.next()">Next</button>
+          </div>
+        </nb-step>
+
+        <!-- Step 6: Summary -->
+        <nb-step label="Summary">
+          <div>
+            <p><strong>Project Name:</strong> {{ projectForm.get('projectName').value }}</p>
+            <p><strong>Description:</strong> {{ projectForm.get('description').value }}</p>
+            <p><strong>Start Date:</strong> {{ projectForm.get('startDate').value }}</p>
+            <p><strong>End Date:</strong> {{ projectForm.get('endDate').value }}</p>
+            <p><strong>Product Backlog:</strong></p>
+            <ul>
+              <li *ngFor="let item of productBacklog.controls">
+                {{ item.get('title').value }} - {{ item.get('priority').value }}
+              </li>
+            </ul>
+            <p><strong>Sprints:</strong></p>
+            <ul>
+              <li *ngFor="let sprint of sprints.controls">
+                Sprint {{ sprint.get('number').value }}: {{ sprint.get('startDate').value }} to {{ sprint.get('endDate').value }}
+              </li>
+            </ul>
+            <p><strong>Teams:</strong></p>
+            <ul>
+              <li *ngFor="let team of teams.controls">
+                {{ team.get('name').value }} - {{ team.get('description').value }}
+                <ul>
+                  <li *ngFor="let member of team.get('members').controls">
+                    {{ member.get('name').value }} ({{ member.get('role').value }})
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <p><strong>Goals:</strong></p>
+            <ul>
+              <li *ngFor="let goal of goals.controls">
+                {{ goal.get('content').value }}
+              </li>
+            </ul>
+          </div>
+
+          <div class="button-group">
             <button nbButton status="info" (click)="stepper.previous()">Previous</button>
             <button nbButton status="success" type="submit">Submit</button>
           </div>

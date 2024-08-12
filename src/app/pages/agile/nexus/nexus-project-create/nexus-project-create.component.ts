@@ -83,6 +83,7 @@ export class NexusProjectCreateComponent implements OnInit {
       name: ['', Validators.required],
       description: [''],
       members: this.fb.array([]),
+      roles: this.fb.array([])  // Initialize roles as an empty FormArray
     }));
   }
 
@@ -122,10 +123,12 @@ export class NexusProjectCreateComponent implements OnInit {
   }
 
   nextStep(): void {
-    if (this.stepper && this.stepper.next) {
+    this.markAllAsTouched(); // Ensure all controls are marked as touched
+    if (this.projectForm.valid && this.stepper) {
       this.stepper.next();
     }
   }
+
   onSubmit(): void {
     if (this.projectForm.valid) {
       const newProject = {
@@ -148,7 +151,6 @@ export class NexusProjectCreateComponent implements OnInit {
       );
     } 
   }
-  
 
   private markAllAsTouched(): void {
     this.projectForm.markAllAsTouched();
