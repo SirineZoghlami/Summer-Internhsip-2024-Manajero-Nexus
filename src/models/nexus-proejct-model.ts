@@ -25,6 +25,10 @@ export interface NexusProject {
     completed: boolean; 
   }
   
+  export interface Review {
+    reviewDate: string;  // ISO date string
+    reviewContent: string;
+  }
   export interface Team {
     id: string;           // Unique identifier for the team
     name: string;         // Name of the team
@@ -39,8 +43,4 @@ export interface NexusProject {
   
   export interface NexusGoal {
     content: string;
-  }
-  export interface Review {
-    reviewDate: string;  // ISO date string
-    reviewContent: string;
   }

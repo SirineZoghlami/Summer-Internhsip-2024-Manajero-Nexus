@@ -90,10 +90,22 @@ nb-card {
 }
 
 nb-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-size: 1.5rem;
   font-weight: bold;
   color: #004d40; // Dark Teal for the header
+
+  span {
+    flex-grow: 1;
+  }
+
+  .go-to-project-button {
+    margin-left: auto;
+  }
 }
+
 
 nb-card-body {
   padding: 20px;

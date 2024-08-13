@@ -1,4 +1,3 @@
-<p *ngIf="isLoading">Loading sprints...</p>
 <nb-card *ngIf="!isLoading">
   <nb-card-header>
     <div class="header-content">
@@ -11,17 +10,29 @@
       <div class="sprint-item" *ngFor="let sprint of sprints">
         <div class="item-header">
           <h4>{{ 'Sprint ' + sprint.number }}</h4>
-          <span class="status" [ngClass]="getStatusClass(sprint.status || 'Pending')">
-            {{ sprint.status || 'Pending' }}
+          <span class="status" [ngClass]="getStatusClass(sprint.completed)">
+            {{ sprint.completed ? 'Completed' : 'Pending' }}
           </span>
         </div>
         <p class="item-dates">Start Date: {{ sprint.startDate }} | End Date: {{ sprint.endDate }}</p>
+        <div class="item-reviews">
+          <h5>Reviews:</h5>
+          <ul>
+            <li *ngFor="let review of sprint.reviews">
+              <div class="review-content">{{ review.reviewContent }}</div>
+              <div class="review-date">{{ review.reviewDate | date:'short' }}</div>
+            </li>
+          </ul>
+        </div>
         <div class="item-footer">
-          <button nbButton status="primary" (click)="viewSprintDetails(sprint)">
-            View Details
+          <button nbButton status="primary" (click)="openReviewModal(sprint)">
+            Add Review
           </button>
           <button nbButton status="success" (click)="markAsCompleted(sprint)" [disabled]="sprint.completed">
             Mark as Completed
+          </button>
+          <button nbButton status="danger" (click)="confirmDelete(sprint.number)">
+            Delete Sprint
           </button>
         </div>
       </div>

@@ -25,7 +25,8 @@ import { NexusGoalListComponent } from './agile/nexus/nexus-goal-list/nexus-goal
 import { GoalModalComponent } from './agile/nexus/goal-modal/goal-modal.component';
 import { ProjectOverviewComponent } from './agile/nexus/project-overview/project-overview.component';
 import { NexusProductBacklogComponent } from './agile/nexus/nexus-product-backlog/nexus-product-backlog.component';
-import { NexusProductBacklogModalComponent } from './agile/nexus/nexus-product-backlog-modal/nexus-product-backlog-modal.component'
+import { NexusProductBacklogModalComponent } from './agile/nexus/nexus-product-backlog-modal/nexus-product-backlog-modal.component';
+import { ReviewModalComponent } from './agile/nexus/review-modal/review-modal.component'
 @NgModule({
   imports: [
     PagesRoutingModule,
@@ -63,6 +64,7 @@ import { NexusProductBacklogModalComponent } from './agile/nexus/nexus-product-b
     ProjectOverviewComponent,
     NexusProductBacklogComponent,
     NexusProductBacklogModalComponent,
+    ReviewModalComponent,
   ],
   providers: [],
 })

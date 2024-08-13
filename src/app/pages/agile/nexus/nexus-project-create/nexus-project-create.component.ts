@@ -15,7 +15,7 @@ export class NexusProjectCreateComponent implements OnInit {
   priorities = ['High', 'Medium', 'Low'];
   sprintNumbers = Array.from({ length: 10 }, (_, i) => i + 1); // Numbers 1 to 10
   statuses = ['Done', 'In Progress', 'Not Done', 'Review']; // Status options
-  @ViewChild('stepper', { static: false }) stepper: NbStepperComponent;
+  @ViewChild(NbStepperComponent) stepper: NbStepperComponent;
 
   constructor(
     private fb: FormBuilder,
@@ -123,8 +123,15 @@ export class NexusProjectCreateComponent implements OnInit {
   }
 
   nextStep(): void {
-    this.markAllAsTouched(); // Ensure all controls are marked as touched
-    if (this.projectForm.valid && this.stepper) {
+    if (this.stepper && this.stepper.selectedIndex === this.stepper.steps.length - 1) {
+      // If on the last step, mark all controls as touched and check validity
+      this.markAllAsTouched();
+      if (!this.projectForm.valid) {
+        this.toastrService.warning('Please correct the errors before proceeding.', 'Validation Error');
+        return;
+      }
+    }
+    if (this.stepper) {
       this.stepper.next();
     }
   }
@@ -154,5 +161,8 @@ export class NexusProjectCreateComponent implements OnInit {
 
   private markAllAsTouched(): void {
     this.projectForm.markAllAsTouched();
+  }
+  navigateToProjects(): void {
+    this.router.navigate(['pages/agile/nexus/project']);
   }
 }

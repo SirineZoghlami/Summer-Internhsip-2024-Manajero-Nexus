@@ -1,5 +1,9 @@
 <nb-card>
-  <nb-card-header>Create Nexus Project</nb-card-header>
+  <nb-card-header>
+    <span>Create Nexus Project</span>
+    <button nbButton class="go-to-project-button" status="primary" (click)="navigateToProjects()">Go to Projects</button>
+   
+   </nb-card-header>
   <nb-card-body>
     <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
       <nb-stepper #stepper>
@@ -8,7 +12,7 @@
           <div class="form-group">
             <label for="projectName">Project Name:</label>
             <input id="projectName" formControlName="projectName" class="form-control" />
-            <nb-form-field *ngIf="projectForm.get('projectName').invalid && projectForm.get('projectName').touched">
+            <nb-form-field *ngIf="stepper.selectedIndex === 0 && projectForm.get('projectName').invalid && (projectForm.get('projectName').touched || stepper.selectedIndex === 5)">
               <nb-error>Project name is required</nb-error>
             </nb-form-field>
           </div>
@@ -16,7 +20,7 @@
           <div class="form-group">
             <label for="description">Description:</label>
             <textarea id="description" formControlName="description" class="form-control"></textarea>
-            <nb-form-field *ngIf="projectForm.get('description').invalid && projectForm.get('description').touched">
+            <nb-form-field *ngIf="stepper.selectedIndex === 0 && projectForm.get('description').invalid && (projectForm.get('description').touched || stepper.selectedIndex === 5)">
               <nb-error>Description is required</nb-error>
             </nb-form-field>
           </div>
@@ -24,7 +28,7 @@
           <div class="form-group">
             <label for="startDate">Start Date:</label>
             <input id="startDate" formControlName="startDate" type="date" class="form-control" />
-            <nb-form-field *ngIf="projectForm.get('startDate').invalid && projectForm.get('startDate').touched">
+            <nb-form-field *ngIf="stepper.selectedIndex === 0 && projectForm.get('startDate').invalid && (projectForm.get('startDate').touched || stepper.selectedIndex === 5)">
               <nb-error>Start date is required</nb-error>
             </nb-form-field>
           </div>
@@ -32,7 +36,7 @@
           <div class="form-group">
             <label for="endDate">End Date:</label>
             <input id="endDate" formControlName="endDate" type="date" class="form-control" />
-            <nb-form-field *ngIf="projectForm.get('endDate').invalid && projectForm.get('endDate').touched">
+            <nb-form-field *ngIf="stepper.selectedIndex === 0 && projectForm.get('endDate').invalid && (projectForm.get('endDate').touched || stepper.selectedIndex === 5)">
               <nb-error>End date is required</nb-error>
             </nb-form-field>
           </div>
@@ -49,7 +53,7 @@
               <div class="form-group">
                 <label for="title">Title:</label>
                 <input id="title" formControlName="title" class="form-control" />
-                <nb-form-field *ngIf="item.get('title').invalid && item.get('title').touched">
+                <nb-form-field *ngIf="stepper.selectedIndex === 1 && item.get('title').invalid && (item.get('title').touched || stepper.selectedIndex === 5)">
                   <nb-error>Title is required</nb-error>
                 </nb-form-field>
               </div>
@@ -64,7 +68,7 @@
                 <select id="priority" formControlName="priority" class="form-control">
                   <option *ngFor="let priority of priorities" [value]="priority">{{ priority }}</option>
                 </select>
-                <nb-form-field *ngIf="item.get('priority').invalid && item.get('priority').touched">
+                <nb-form-field *ngIf="stepper.selectedIndex === 1 && item.get('priority').invalid && (item.get('priority').touched || stepper.selectedIndex === 5)">
                   <nb-error>Priority is required</nb-error>
                 </nb-form-field>
               </div>
@@ -81,7 +85,7 @@
               </div>
             </div>
           </div>
-          
+
           <div class="button-group">
             <button nbButton status="success" (click)="addProductBacklogItem()">Add Item</button>
             <button nbButton status="info" (click)="stepper.previous()">Previous</button>
@@ -191,6 +195,7 @@
           </div>
         </nb-step>
 
+        <!-- Step 6: Summary -->
         <!-- Step 6: Summary -->
         <nb-step label="Summary">
           <div>

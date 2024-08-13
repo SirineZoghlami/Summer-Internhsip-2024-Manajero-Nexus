@@ -53,6 +53,11 @@ export class NexusProjectService {
   markSprintAsCompleted(projectId: string, sprintNumber: number): Observable<void> {
     return this.http.patch<void>(`${this.apiUrl}/${projectId}/sprints/${sprintNumber}/complete`, {});
   }
+  
+  updateProjectStatusIfCompleted(projectId: string): Observable<void> {
+    return this.http.patch<void>(`${this.apiUrl}/${projectId}/status`, {});
+  }
+  
 
   getGoalsByProjectId(id: string): Observable<NexusGoal[]> {
     return this.http.get<NexusGoal[]>(`${this.apiUrl}/${id}/goals`).pipe(
@@ -66,6 +71,11 @@ export class NexusProjectService {
     return this.http.post<NexusProject>(`${this.apiUrl}/${projectId}/backlog-items`, backlogItem);
   }
   
+ 
+  deleteSprint(projectId: string, sprintNumber: number): Observable<void> {
+    const url = `${this.apiUrl}/${projectId}/sprints/${sprintNumber}`;
+    return this.http.delete<void>(url);
+  }
   
 }
 
