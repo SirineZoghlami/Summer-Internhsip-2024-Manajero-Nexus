@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NexusProjectService } from '../../../../../services/nexus.project.service.service';
 import { NexusProject } from '../../../../../models/nexus-proejct-model';
+import { NbDialogService,NbToastrService } from '@nebular/theme';
+import { ProjectEditModalComponent } from '../project-edit-modal/project-edit-modal.component';
+import { ConfirmationDialogComponent } from '../../../agile/nexus/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'ngx-project-overview',
@@ -22,7 +25,9 @@ export class ProjectOverviewComponent implements OnInit {
   constructor(
     private projectService: NexusProjectService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private dialogService: NbDialogService,
+    private toastrService: NbToastrService
   ) {}
 
   ngOnInit(): void {
@@ -87,13 +92,58 @@ export class ProjectOverviewComponent implements OnInit {
     }
   }
 
-  editProject(): void {
-    // Implement edit project logic
-    console.log('Edit project method called');
-  }
+
 
   navigateToProjects(): void {
     this.router.navigate(['pages/agile/nexus/project']); 
   }
 
+  editProject(): void {
+    if (this.project) {
+      const dialogRef = this.dialogService.open(ProjectEditModalComponent);
+
+      // Pass project data to modal
+      dialogRef.componentRef.instance.setProjectData(this.project);
+
+      dialogRef.onClose.subscribe((updated: boolean) => {
+        if (updated) {
+          this.loadProjectDetails(); // Reload project details if updated
+          this.toastrService.success('Project updated successfully!', 'Success', {
+            status: 'success',
+            destroyByClick: true
+          }); // Show success toast
+        } else {
+          this.toastrService.danger('Failed to update project.', 'Error', {
+            status: 'danger',
+            destroyByClick: true
+          }); // Show error toast
+        }
+      });
+    }
+  }
+  confirmDelete(): void {
+    this.dialogService.open(ConfirmationDialogComponent, {
+      context: {
+        title: 'Confirm Delete',
+        message: 'Are you sure you want to delete this project?'
+      }
+    }).onClose.subscribe((confirmed: boolean) => {
+      if (confirmed) this.deleteProject();
+    });
+  }
+
+  deleteProject(): void {
+    if (this.projectId) {
+      this.projectService.deleteProject(this.projectId).subscribe(
+        () => {
+          this.toastrService.success('Project deleted successfully');
+          this.router.navigate(['/pages/agile/nexus/project']); // Navigate back to the project list or another page
+        },
+        error => {
+          console.error('Error deleting project:', error);
+          this.toastrService.danger('Failed to delete project');
+        }
+      );
+    }
+  }
 }

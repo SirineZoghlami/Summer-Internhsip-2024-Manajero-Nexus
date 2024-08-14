@@ -11,9 +11,14 @@
     <div *ngIf="isLoading" class="loading">
       <span>Loading Projects...</span>
     </div>
-  
+    <div *ngIf="projects.length === 0" class="no-projects-message">
+      <h2>Welcome to Nexus!</h2>
+      <p>Start by creating your first Nexus project to get started.</p>
+    </div>
     <!-- Project Cards Container -->
     <div *ngIf="!isLoading" class="project-card-container">
+   
+
       <div *ngFor="let project of projects" class="project-card">
         <div class="project-card-header">
           <h2>{{ project.projectName }}</h2>

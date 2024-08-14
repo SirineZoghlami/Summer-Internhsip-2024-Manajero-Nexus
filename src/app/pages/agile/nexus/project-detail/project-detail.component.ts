@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { NexusProject } from '../../../../../models/nexus-proejct-model'; // Adjust the path accordingly
+import { NexusProject, Sprint, TeamMember } from '../../../../../models/nexus-proejct-model';
 
 @Component({
   selector: 'app-project-detail',
@@ -12,5 +12,13 @@ export class ProjectDetailComponent {
 
   onClose(): void {
     this.close.emit();
+  }
+
+  getSprintReviews(sprint: Sprint): string {
+    return sprint.reviews?.map(review => review.reviewContent).join(', ') || 'No reviews';
+  }
+
+  getFormattedMembers(members: TeamMember[] | undefined): string {
+    return members?.map(member => member.name).join(', ') || 'No members';
   }
 }

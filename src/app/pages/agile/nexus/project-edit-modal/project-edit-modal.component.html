@@ -1,0 +1,32 @@
+<nb-card>
+    <nb-card-header>Edit Project</nb-card-header>
+    <nb-card-body>
+      <form [formGroup]="editForm" (ngSubmit)="saveChanges()">
+        <div class="form-group">
+          <label for="projectName">Project Name</label>
+          <input id="projectName" type="text" class="form-control" formControlName="projectName" required>
+        </div>
+  
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea id="description" class="form-control" formControlName="description" required></textarea>
+        </div>
+  
+        <div class="form-group">
+          <label for="startDate">Start Date</label>
+          <input id="startDate" type="date" class="form-control" formControlName="startDate" required>
+        </div>
+  
+        <div class="form-group">
+          <label for="endDate">End Date</label>
+          <input id="endDate" type="date" class="form-control" formControlName="endDate" required>
+        </div>
+  
+        <div class="form-group">
+          <button type="submit" nbButton status="success">Save</button>
+          <button type="button" nbButton status="basic" (click)="close()">Cancel</button>
+        </div>
+      </form>
+    </nb-card-body>
+  </nb-card>
+  

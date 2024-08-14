@@ -1,49 +1,78 @@
 <div class="project-detail-overlay" (click)="onClose()">
-    <div class="project-detail-modal" (click)="$event.stopPropagation()">
-      <button class="close-button" (click)="onClose()">&times;</button>
-      <h2>{{ project?.projectName }}</h2>
-      <p class="description">{{ project?.description }}</p>
-      
-      <div class="details-section">
+  <div class="project-detail-modal" (click)="$event.stopPropagation()">
+    <button class="close-button" (click)="onClose()">&times;</button>
+    
+    <h2>{{ project?.projectName || 'Project Details' }}</h2>
+    <p class="description">{{ project?.description || 'No description available' }}</p>
+    
+    <div class="details-container">
+      <div class="details-box">
         <h3>Product Backlog</h3>
-        <ul>
-          <li *ngFor="let item of project?.productBacklog">
-            <strong>{{ item.title }}</strong>: {{ item.description }} ({{ item.priority }} - {{ item.status }})
-          </li>
-        </ul>
+        <div *ngIf="project?.productBacklog.length > 0; else noBacklog">
+          <ul>
+            <li *ngFor="let item of project?.productBacklog">
+              <div class="backlog-item">
+                <strong>{{ item.title || 'No title' }}</strong>
+                <span class="badge priority-{{ item.priority || 'low' }}">{{ item.priority || 'No priority' }}</span>
+                <span class="status status-{{ item.status || 'pending' }}">{{ item.status || 'No status' }}</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <ng-template #noBacklog>
+          <p>No items in product backlog.</p>
+        </ng-template>
       </div>
-  
-      <div class="details-section">
+
+      <div class="details-box">
         <h3>Sprints</h3>
-        <ul>
-          <li *ngFor="let sprint of project?.sprints">
-            <strong>Sprint {{ sprint.number }}</strong>
-            <div>Start: {{ sprint.startDate | date }}</div>
-            <div>End: {{ sprint.endDate | date }}</div>
-            <div>Reviews: {{ sprint.reviews }}</div>
-          </li>
-        </ul>
+        <div *ngIf="project?.sprints.length > 0; else noSprints">
+          <ul>
+            <li *ngFor="let sprint of project?.sprints">
+              <div class="sprint-item">
+                <strong>Sprint {{ sprint.number }}</strong>
+                <div>Start: {{ sprint.startDate | date }}</div>
+                <div>End: {{ sprint.endDate | date }}</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <ng-template #noSprints>
+          <p>No sprints available.</p>
+        </ng-template>
       </div>
-  
-      <div class="details-section">
+
+      <div class="details-box">
         <h3>Teams</h3>
-        <ul>
-          <li *ngFor="let team of project?.teams">
-            <strong>{{ team.name }}</strong>
-            <div>Roles: {{ team.roles.join(', ') }}</div>
-            <div>Members: {{ team.members.join(', ') }}</div>
-          </li>
-        </ul>
+        <div *ngIf="project?.teams.length > 0; else noTeams">
+          <ul>
+            <li *ngFor="let team of project?.teams">
+              <div class="team-item">
+                <strong>{{ team.name || 'No team name' }}</strong>
+                <div>Roles: {{ team.roles?.length > 0 ? team.roles.join(', ') : 'No roles' }}</div>
+                <div>Members: {{ getFormattedMembers(team.members) || 'No members' }}</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <ng-template #noTeams>
+          <p>No teams available.</p>
+        </ng-template>
       </div>
-  
-      <div class="details-section">
+
+      <div class="details-box">
         <h3>Goals</h3>
-        <ul>
-          <li *ngFor="let goal of project?.goals">
-            {{ goal.content }}
-          </li>
-        </ul>
+        <div *ngIf="project?.goals.length > 0; else noGoals">
+          <ul>
+            <li *ngFor="let goal of project?.goals">
+              {{ goal.content || 'No goal content' }}
+            </li>
+          </ul>
+        </div>
+        <ng-template #noGoals>
+          <p>No goals available.</p>
+        </ng-template>
       </div>
     </div>
   </div>
-  
+</div>
