@@ -1,14 +1,18 @@
 <div class="nexus-board">
-    <div class="navbar">
-      <ul class="nav-menu">
-        <li><a [routerLink]="getProjectOverviewLink()" routerLinkActive="active">Project Overview</a></li>
-        <li><a [routerLink]="getProductBacklogLink()" routerLinkActive="active">Nexus Product Backlog</a></li>
-        <li><a [routerLink]="getSprintsListLink()" routerLinkActive="active">Nexus Sprints List</a></li>
-        <li><a [routerLink]="getNexusGoalsLink()" routerLinkActive="active">Nexus Goals</a></li>
-      </ul>
-    </div>
-    <div class="content">
-      <router-outlet></router-outlet>
-    </div>
+  <div class="navbar">
+    <ul class="nav-menu">
+      <li><a [routerLink]="getProjectOverviewLink()" routerLinkActive="active">Project Overview</a></li>
+      <li><a [routerLink]="getProductBacklogLink()" routerLinkActive="active">Nexus Product Backlog</a></li>
+      <li><a [routerLink]="getSprintsListLink()" routerLinkActive="active">Nexus Sprints List</a></li>
+      <li><a [routerLink]="getNexusGoalsLink()" routerLinkActive="active">Nexus Goals</a></li>
+      <li class="back-button-container">
+        <button class="back-button" (click)="navigateToProjects()">Back to Projects</button>
+      </li>
+    </ul>
   </div>
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
   

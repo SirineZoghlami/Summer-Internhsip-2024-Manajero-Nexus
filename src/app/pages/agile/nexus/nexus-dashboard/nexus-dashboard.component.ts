@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NexusProjectService } from '../../../../../services/nexus.project.service.service';
 import { Chart } from 'chart.js';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nexus-dashboard',
@@ -10,7 +11,7 @@ import { Chart } from 'chart.js';
 export class NexusDashboardComponent implements OnInit {
   kpis: any = {};
 
-  constructor(private nexusProjectService: NexusProjectService) {}
+  constructor(private nexusProjectService: NexusProjectService, private router: Router) {}
 
   ngOnInit(): void {
     this.loadKpis();
@@ -42,7 +43,7 @@ export class NexusDashboardComponent implements OnInit {
         }
       });
     }
-
+  
     const goalsChartCtx = (document.getElementById('goalsChart') as HTMLCanvasElement).getContext('2d');
     if (goalsChartCtx) {
       new Chart(goalsChartCtx, {
@@ -58,4 +59,11 @@ export class NexusDashboardComponent implements OnInit {
       });
     }
   }
-}
+
+
+    navigateToProjects(): void {
+      this.router.navigate(['pages/agile/nexus/project']); 
+    }
+
+  }
+

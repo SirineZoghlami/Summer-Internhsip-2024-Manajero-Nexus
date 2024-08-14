@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NbDialogService } from '@nebular/theme';
+import { NbDialogService, NbToastrService } from '@nebular/theme';
 import { NexusProjectService } from '../../../../../services/nexus.project.service.service';
 import { Sprint, NexusProject } from '../../../../../models/nexus-proejct-model';
-import { ReviewModalComponent } from '../review-modal/review-modal.component'; // Import the review modal component
+import { ReviewModalComponent } from '../review-modal/review-modal.component'; 
 import { SprintModalComponent } from '../sprint-modal/sprint-modal.component';
 import { ConfirmationDialogComponent } from '../../../agile/nexus/confirmation-dialog/confirmation-dialog.component';
-import {  NbToastrService } from '@nebular/theme';
 
 @Component({
   selector: 'app-sprint-list',
@@ -18,14 +17,14 @@ export class SprintListComponent implements OnInit {
   sprints: Sprint[] = [];
   isLoading = true;
   isModalVisible = false;
-  projectName?: string;
+    projectName?: string;
 
   constructor(
     private route: ActivatedRoute,
     private projectService: NexusProjectService,
     private dialogService: NbDialogService,
     private toastrService: NbToastrService,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -33,6 +32,7 @@ export class SprintListComponent implements OnInit {
       this.projectId = params.get('id')!;
       if (this.projectId) {
         this.loadSprints();
+        this.loadProjectDetails(); // Load project details if needed
       } else {
         console.warn('No project ID found in route parameters');
       }
@@ -64,42 +64,34 @@ export class SprintListComponent implements OnInit {
     );
   }
 
-  viewSprintDetails(sprint: Sprint) {
-    alert(`Viewing details for: Sprint ${sprint.number}`);
+  confirmDelete(sprintNumber: number): void {
+    console.log('Opening confirmation dialog for sprint number:', sprintNumber); // Debug statement
+    this.dialogService.open(ConfirmationDialogComponent, {
+      context: {
+        title: 'Confirm Delete',
+        message: 'Are you sure you want to delete this sprint?'
+      }
+    }).onClose.subscribe((confirmed: boolean) => {
+      console.log('Confirmation dialog result:', confirmed); // Debug statement
+      if (confirmed) {
+        this.deleteSprint(sprintNumber);
+      }
+    });
   }
 
-  markAsCompleted(sprint: Sprint) {
-    this.projectService.markSprintAsCompleted(this.projectId, sprint.number).subscribe(
+  deleteSprint(sprintNumber: number): void {
+    console.log('Deleting sprint number:', sprintNumber); // Debug statement
+    this.projectService.deleteSprint(this.projectId, sprintNumber).subscribe(
       () => {
-        // Update sprint status locally
-        this.sprints = this.sprints.map(s => 
-          s.number === sprint.number ? { ...s, completed: true } : s
-        );
-  
-        // Check if all sprints are completed and update the project status
-        const allSprintsCompleted = this.sprints.every(s => s.completed);
-        if (allSprintsCompleted) {
-          this.projectService.updateProjectStatusIfCompleted(this.projectId).subscribe(
-            () => {
-              console.log('Project status updated to completed.');
-            },
-            (error) => {
-              console.error('Error updating project status:', error);
-            }
-          );
-        }
+        this.sprints = this.sprints.filter(sprint => sprint.number !== sprintNumber);
+        this.toastrService.success('Sprint deleted successfully');
       },
-      (error) => {
-        console.error('Error marking sprint as completed:', error);
+      error => {
+        console.error('Error deleting sprint:', error);
+        this.toastrService.danger('Failed to delete sprint');
       }
     );
   }
-  
-  
-  getStatusClass(completed: boolean): string {
-    return completed ? 'completed' : 'pending';
-  }
-  
 
   openReviewModal(sprint: Sprint) {
     this.dialogService.open(ReviewModalComponent)
@@ -135,8 +127,6 @@ export class SprintListComponent implements OnInit {
     );
   }
 
-
-  
   openSprintModal() {
     this.dialogService.open(SprintModalComponent)
       .onClose.subscribe((newSprint: Sprint | null) => {
@@ -165,30 +155,39 @@ export class SprintListComponent implements OnInit {
     );
   }
   
-confirmDelete(sprintNumber: number): void {
-  this.dialogService.open(ConfirmationDialogComponent, {
-    context: {
-      title: 'Confirm Delete',
-      message: 'Are you sure you want to delete this sprint?'
-    }
-  }).onClose.subscribe((confirmed: boolean) => {
-    if (confirmed) {
-      this.deleteSprint(sprintNumber);
-    }
-  });
-}
+  
+  
+  markAsCompleted(sprint: Sprint) {
+    this.projectService.markSprintAsCompleted(this.projectId, sprint.number).subscribe(
+      () => {
+        // Update sprint status locally
+        this.sprints = this.sprints.map(s => 
+          s.number === sprint.number ? { ...s, completed: true } : s
+        );
+  
+        // Check if all sprints are completed and update the project status
+        const allSprintsCompleted = this.sprints.every(s => s.completed);
+        if (allSprintsCompleted) {
+          this.projectService.updateProjectStatusIfCompleted(this.projectId).subscribe(
+            () => {
+              console.log('Project status updated to completed.');
+            },
+            (error) => {
+              console.error('Error updating project status:', error);
+            }
+          );
+        }
+      },
+      (error) => {
+        console.error('Error marking sprint as completed:', error);
+      }
+    );
+  }
+  
+  
+  getStatusClass(completed: boolean): string {
+    return completed ? 'completed' : 'pending';
+  }
+  
 
-deleteSprint(sprintNumber: number): void {
-  this.projectService.deleteSprint(this.projectId, sprintNumber).subscribe(
-    () => {
-      this.sprints = this.sprints.filter(sprint => sprint.number !== sprintNumber);
-      this.toastrService.success('Sprint deleted successfully');
-      // Optionally navigate or refresh the UI
-      // this.router.navigate(['/desired/path']); // Use if needed
-    },
-    error => {
-      console.error('Error deleting sprint:', error);
-      this.toastrService.danger('Failed to delete sprint');
-    }
-  );
-}}
+}

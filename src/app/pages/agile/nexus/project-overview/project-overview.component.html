@@ -1,35 +1,85 @@
 <p *ngIf="isLoading">Loading project details...</p>
 
 <nb-card *ngIf="!isLoading">
-  <nb-card-header>
+  <  <nb-card-header>
     <div class="header-content">
       <h1>{{ project?.projectName || 'Project Overview' }}</h1>
-      <button class="edit-button" (click)="editProject()">Edit</button>
+      <div class="button-group">
+        <button class="edit-button" (click)="editProject()">Edit</button>
+      </div>
     </div>
   </nb-card-header>
   <nb-card-body>
     <div class="project-details">
+      <!-- Project Description -->
       <div class="detail-section">
         <h2>Description</h2>
         <p>{{ project?.description || 'No description available' }}</p>
       </div>
+
+      <!-- Project Dates -->
       <div class="detail-section">
         <h2>Dates</h2>
         <p><strong>Start Date:</strong> {{ project?.startDate | date }}</p>
         <p><strong>End Date:</strong> {{ project?.endDate | date }}</p>
       </div>
+
+      <!-- Sprint Progress -->
+      <div class="detail-section">
+        <h2>Sprint Progress</h2>
+        <p>Total Sprints: {{ project?.sprints.length }}</p>
+        <p>Completed Sprints: {{ completedSprintsCount }}</p>
+        <p>In Progress Sprints: {{ inProgressSprintsCount }}</p>
+        <p>Remaining Days in Current Sprint: {{ currentSprintRemainingDays }}</p>
+      </div>
+
+      <!-- Teams Information -->
+      <div class="detail-section">
+        <h2>Teams</h2>
+        <p>Total Teams: {{ project?.teams.length }}</p>
+        <p>Total Team Members: {{ totalTeamMembersCount }}</p>
+        <div *ngFor="let team of project?.teams">
+          <h3>{{ team.name }}</h3>
+          <p>{{ team.description || 'No description available' }}</p>
+          <p><strong>Members:</strong></p>
+          <ul>
+            <li *ngFor="let member of team.members">{{ member.name }} - {{ member.role }}</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Goals -->
       <div class="detail-section">
         <h2>Goals</h2>
+        <p>Completed Goals: {{ completedGoalsCount }}</p>
         <nb-card *ngIf="project?.goals.length === 0">
           <nb-card-body>No goals added yet.</nb-card-body>
         </nb-card>
         <nb-card *ngFor="let goal of project?.goals">
           <nb-card-header>
-            <h4>{{ goal.content }}</h4> <!-- Update according to NexusGoal model -->
+            <h4>{{ goal.content }}</h4>
           </nb-card-header>
           <nb-card-body>
-            <p>{{ goal.content || 'No description available' }}</p> <!-- Update according to NexusGoal model -->
-            <!-- Add other goal details here if applicable -->
+            <p>{{ goal.content || 'No description available' }}</p>
+          </nb-card-body>
+        </nb-card>
+      </div>
+
+      <!-- Product Backlog -->
+      <div class="detail-section">
+        <h2>Product Backlog</h2>
+        <p>Total Backlog Items: {{ totalBacklogItemsCount }}</p>
+        <nb-card *ngIf="project?.productBacklog.length === 0">
+          <nb-card-body>No backlog items available.</nb-card-body>
+        </nb-card>
+        <nb-card *ngFor="let item of project?.productBacklog">
+          <nb-card-header>
+            <h4>{{ item.title }}</h4>
+          </nb-card-header>
+          <nb-card-body>
+            <p>{{ item.description || 'No description available' }}</p>
+            <p><strong>Priority:</strong> {{ item.priority }}</p>
+            <p><strong>Status:</strong> {{ item.status }}</p>
           </nb-card-body>
         </nb-card>
       </div>

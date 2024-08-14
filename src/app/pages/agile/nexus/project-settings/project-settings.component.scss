@@ -1,47 +1,50 @@
 .nexus-board {
+  .navbar {
+    padding: 10px;
     display: flex;
-    flex-direction: column; // Column layout to position nav at the top
-   
-    overflow: hidden; // Prevent horizontal scrolling
-  
-    .navbar {
+    justify-content: center; // Center the navbar content horizontally
+
+    .nav-menu {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
       display: flex;
-      justify-content: center; // Center nav items horizontally
-      background-color: #f0f0f0; // Slightly off-white for a modern look
-      padding: 0.5rem 1rem; // Padding for the navbar
-      z-index: 10; // Ensure navbar is above content
-  
-      .nav-menu {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex; // Flexbox for horizontal layout
-  
-        li {
-          margin: 0 1rem; // Margin between nav items
-        }
-  
+      align-items: center;
+
+      li {
+        margin: 0 15px; // Add margin on both sides
+
         a {
           text-decoration: none;
-          color: #007bff; // Blue color for the links
-          font-size: 0.9rem; // Slightly smaller font size
-          display: block;
-          padding: 0.75rem 1rem; // Padding for the links
-          border-radius: 4px;
-          transition: background-color 0.3s, color 0.3s; // Smooth transition for hover
-  
+          color: #007bff;
+          font-size: 16px;
+
           &.active {
             font-weight: bold;
-            background-color: #e6f0ff; // Light blue background for active link
-            color: #0056b3; // Darker blue for active link text
-          }
-  
-          &:hover {
-            background-color: #f0f0f0; // Light grey background on hover
-            text-decoration: none;
+            color: #0056b3;
           }
         }
       }
+
+      .back-button-container {
+        display: flex;
+        align-items: center;
+        margin-left: 15px;
+
+        .back-button {
+          background-color: #007bff;
+          color: #fff;
+          border: none;
+          padding: 8px 16px;
+          border-radius: 4px;
+          cursor: pointer;
+          font-size: 16px;
+        }
+      }
     }
-  
+  }
+
+  .content {
+    padding: 20px;
+  }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-project-settings',
@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 export class ProjectSettingsComponent implements OnInit {
   projectId!: string;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     this.projectId = this.route.snapshot.paramMap.get('id')!;
@@ -32,4 +32,10 @@ export class ProjectSettingsComponent implements OnInit {
   getNexusGoalsLink(): string {
     return `/pages/agile/project-settings/${this.projectId}/nexus-goals`;
   }
+
+
+  navigateToProjects(): void {
+    this.router.navigate(['pages/agile/nexus/project']); 
+  }
+
 }
