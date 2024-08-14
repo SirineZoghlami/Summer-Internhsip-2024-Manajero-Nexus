@@ -1,7 +1,8 @@
+// nexus-dashboard.component.ts
 import { Component, OnInit } from '@angular/core';
 import { NexusProjectService } from '../../../../../services/nexus.project.service.service';
-import { Chart } from 'chart.js';
 import { Router } from '@angular/router';
+import { Chart } from 'chart.js';
 
 @Component({
   selector: 'app-nexus-dashboard',
@@ -9,12 +10,30 @@ import { Router } from '@angular/router';
   styleUrls: ['./nexus-dashboard.component.scss']
 })
 export class NexusDashboardComponent implements OnInit {
+  projects: any[] = [];
   kpis: any = {};
+  performanceData: any = {};
+  efficiencyData: any = {};
 
   constructor(private nexusProjectService: NexusProjectService, private router: Router) {}
 
   ngOnInit(): void {
+    this.loadProjects();
     this.loadKpis();
+    this.loadPerformanceData();
+    this.loadEfficiencyData();
+  }
+
+  loadProjects(): void {
+    this.nexusProjectService.getAllProjects().subscribe(
+      (projects) => {
+        this.projects = projects;
+        this.renderCharts();
+      },
+      (error) => {
+        console.error('Error loading projects', error);
+      }
+    );
   }
 
   loadKpis(): void {
@@ -29,7 +48,32 @@ export class NexusDashboardComponent implements OnInit {
     );
   }
 
+  loadPerformanceData(): void {
+    this.nexusProjectService.getPerformanceData().subscribe(
+      (data) => {
+        this.performanceData = data;
+        this.renderCharts();
+      },
+      (error) => {
+        console.error('Error loading performance data', error);
+      }
+    );
+  }
+
+  loadEfficiencyData(): void {
+    this.nexusProjectService.getEfficiencyData().subscribe(
+      (data) => {
+        this.efficiencyData = data;
+        this.renderCharts();
+      },
+      (error) => {
+        console.error('Error loading efficiency data', error);
+      }
+    );
+  }
+
   renderCharts(): void {
+    // Status Chart
     const statusChartCtx = (document.getElementById('statusChart') as HTMLCanvasElement).getContext('2d');
     if (statusChartCtx) {
       new Chart(statusChartCtx, {
@@ -43,7 +87,8 @@ export class NexusDashboardComponent implements OnInit {
         }
       });
     }
-  
+
+    // Goals Chart
     const goalsChartCtx = (document.getElementById('goalsChart') as HTMLCanvasElement).getContext('2d');
     if (goalsChartCtx) {
       new Chart(goalsChartCtx, {
@@ -58,12 +103,49 @@ export class NexusDashboardComponent implements OnInit {
         }
       });
     }
-  }
 
-
-    navigateToProjects(): void {
-      this.router.navigate(['pages/agile/nexus/project']); 
+    // Performance Chart
+    const performanceChartCtx = (document.getElementById('performanceChart') as HTMLCanvasElement).getContext('2d');
+    if (performanceChartCtx) {
+      new Chart(performanceChartCtx, {
+        type: 'line',
+        data: {
+          labels: Object.keys(this.performanceData || {}),
+          datasets: [{
+            label: 'Performance Data',
+            data: Object.values(this.performanceData || {}),
+            borderColor: '#FF5733',
+            backgroundColor: 'rgba(255, 87, 51, 0.2)',
+            fill: true
+          }]
+        }
+      });
     }
 
+    // Efficiency Chart
+    const efficiencyChartCtx = (document.getElementById('efficiencyChart') as HTMLCanvasElement).getContext('2d');
+    if (efficiencyChartCtx) {
+      new Chart(efficiencyChartCtx, {
+        type: 'doughnut',
+        data: {
+          labels: Object.keys(this.efficiencyData || {}),
+          datasets: [{
+            data: Object.values(this.efficiencyData || {}),
+            backgroundColor: ['#FFC300', '#FF5733']
+          }]
+        }
+      });
+    }
+
+
+    
   }
 
+
+
+
+  navigateToProjects(): void {
+    this.router.navigate(['pages/agile/nexus/project']); 
+}
+
+}

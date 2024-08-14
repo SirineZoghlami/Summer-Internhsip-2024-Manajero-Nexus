@@ -1,77 +1,72 @@
 <div class="nexus-board">
-    <div class="content">
-      <!-- Dashboard Header -->
-      <header class="dashboard-header">
-        <h1>Project Overview Dashboard</h1>
-        <button nbButton class="go-to-project-button" status="primary" (click)="navigateToProjects()">Go to Projects</button>
+  <div class="content">
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+      <h1>Project Overview Dashboard</h1>
+      <button nbButton class="go-to-project-button" status="primary" (click)="navigateToProjects()">Go to Projects</button>
+    </header>
 
-      </header>
-  
-      <!-- Key Metrics Section -->
-      <section class="key-metrics">
-        <div class="metric-card">
-          <h2>Total Projects</h2>
-          <p class="count">{{ kpis.totalProjects }}</p>
-        </div>
-        <div class="metric-card">
-          <h2>Average Sprint Duration</h2>
-          <p class="count">{{ kpis.averageSprintDuration | number:'1.0-0' }} Days</p>
-        </div>
-        <div class="metric-card">
-          <h2>Total Backlog Items</h2>
-          <p class="count">{{ kpis.totalBacklogItems }}</p>
-        </div>
-      </section>
-  
-      <!-- Status Count Chart -->
-      <section class="charts-section">
-        <div class="chart-card">
-          <h3>Status Count</h3>
-          <canvas id="statusChart"></canvas>
-        </div>
-        <div class="chart-card">
-          <h3>Goals Count</h3>
-          <canvas id="goalsChart"></canvas>
-        </div>
-      </section>
-  
-      <!-- Recent Activities Section -->
-      <section class="recent-activities">
-        <h2>Recent Activities</h2>
-        <ul>
-          <li>Activity 1: Updated project documentation</li>
-          <li>Activity 2: Completed sprint review meeting</li>
-          <li>Activity 3: Added new backlog items</li>
-          <!-- Add more activities as needed -->
-        </ul>
-      </section>
-  
-      <!-- Upcoming Sprints Section -->
-      <section class="upcoming-sprints">
-        <h2>Upcoming Sprints</h2>
-        <ul>
-          <li>Sprint 1: Kick-off on Aug 15, 2024</li>
-          <li>Sprint 2: Kick-off on Sep 5, 2024</li>
-          <li>Sprint 3: Kick-off on Oct 1, 2024</li>
-          <!-- Add more sprints as needed -->
-        </ul>
-      </section>
-  
-      <!-- Team Performance Section -->
-      <section class="team-performance">
-        <h2>Team Performance</h2>
-        <div class="performance-card">
-          <h3>Team Member 1</h3>
-          <p>Tasks Completed: 15</p>
-          <p>Average Task Duration: 3 Days</p>
-        </div>
-        <div class="performance-card">
-          <h3>Team Member 2</h3>
-          <p>Tasks Completed: 10</p>
-          <p>Average Task Duration: 4 Days</p>
-        </div>
-        <!-- Add more performance cards as needed -->
-      </section>
-    </div>
+    <!-- Key Metrics Section -->
+    <section class="key-metrics">
+      <div class="metric-card">
+        <h2>Total Projects</h2>
+        <p class="count">{{ kpis.totalProjects }}</p>
+      </div>
+      <div class="metric-card">
+        <h2>Average Sprint Duration</h2>
+        <p class="count">{{ kpis.averageSprintDuration | number:'1.0-0' }} Days</p>
+      </div>
+      <div class="metric-card">
+        <h2>Total Backlog Items</h2>
+        <p class="count">{{ kpis.totalBacklogItems }}</p>
+      </div>
+    </section>
+
+    <!-- Project Details Section -->
+    <section class="project-details">
+      <h2>Project Details</h2>
+      <table class="projects-table">
+        <thead>
+          <tr>
+            <th>Project Name</th>
+            <th>Description</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Total Backlog Items</th>
+            <th>Total Sprints</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let project of projects">
+            <td>{{ project.projectName }}</td>
+            <td>{{ project.description }}</td>
+            <td>{{ project.startDate | date:'shortDate' }}</td>
+            <td>{{ project.endDate | date:'shortDate' }}</td>
+            <td>{{ project.productBacklog.length }}</td>
+            <td>{{ project.sprints.length }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Charts Section -->
+    <section class="charts-section">
+      <div class="chart-card">
+        <h3>Status Count</h3>
+        <canvas id="statusChart"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3>Goals Count</h3>
+        <canvas id="goalsChart"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3>Performance Over Time</h3>
+        <canvas id="performanceChart"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3>Team Efficiency</h3>
+        <canvas id="efficiencyChart"></canvas>
+      </div>
+    </section>
   </div>
-  
+</div>

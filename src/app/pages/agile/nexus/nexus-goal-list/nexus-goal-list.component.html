@@ -12,6 +12,7 @@
       <div class="goal-item" *ngFor="let goal of goals">
         <div class="item-header">
           <h4>{{ goal.content }}</h4>
+          <button nbButton status="danger" (click)="deleteGoal(goal.id)" >Delete</button>
         </div>
       </div>
     </div>

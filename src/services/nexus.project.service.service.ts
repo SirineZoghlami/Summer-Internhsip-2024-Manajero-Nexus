@@ -76,6 +76,17 @@ export class NexusProjectService {
     const url = `${this.apiUrl}/${projectId}/sprints/${sprintNumber}`;
     return this.http.delete<void>(url);
   }
+  deleteGoal(projectId: string, goalId: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/projects/${projectId}/goals/${goalId}`);
+  }
+    getPerformanceData(): Observable<Map<string, number>> {
+      return this.http.get<Map<string, number>>(`${this.apiUrl}/performance`);
+    }
+  
+    getEfficiencyData(): Observable<Map<string, number>> {
+      return this.http.get<Map<string, number>>(`${this.apiUrl}/efficiency`);
+    }
+  
   
 }
 

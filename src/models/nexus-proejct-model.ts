@@ -42,5 +42,7 @@ export interface NexusProject {
   }
   
   export interface NexusGoal {
+    id?: string; 
+    
     content: string;
   }

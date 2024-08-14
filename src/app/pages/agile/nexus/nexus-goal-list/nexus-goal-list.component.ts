@@ -90,4 +90,17 @@ export class NexusGoalListComponent implements OnInit {
       }
     );
   }
+  deleteGoal(goalId: string) {
+    if (confirm('Are you sure you want to delete this goal?')) {
+      this.projectService.deleteGoal(this.projectId, goalId).subscribe(
+        () => {
+          console.log('Goal deleted successfully');
+          this.goals = this.goals.filter(goal => goal.id !== goalId);
+        },
+        (error) => {
+          console.error('Error deleting goal:', error);
+        }
+      );
+    }
+  }
 }

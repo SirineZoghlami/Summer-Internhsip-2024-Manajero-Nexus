@@ -9,6 +9,7 @@ import { NexusGoal } from '../../../../../models/nexus-proejct-model'; // Adjust
 })
 export class GoalModalComponent {
   newGoal: NexusGoal = {
+  
     content: ''
   };
 
