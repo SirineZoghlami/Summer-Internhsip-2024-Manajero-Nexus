@@ -27,7 +27,9 @@ import { ProjectOverviewComponent } from './agile/nexus/project-overview/project
 import { NexusProductBacklogComponent } from './agile/nexus/nexus-product-backlog/nexus-product-backlog.component';
 import { NexusProductBacklogModalComponent } from './agile/nexus/nexus-product-backlog-modal/nexus-product-backlog-modal.component';
 import { ReviewModalComponent } from './agile/nexus/review-modal/review-modal.component';
-import { ProjectEditModalComponent } from './agile/nexus/project-edit-modal/project-edit-modal.component'
+import { ProjectEditModalComponent } from './agile/nexus/project-edit-modal/project-edit-modal.component';
+import { NgxEchartsModule } from 'ngx-echarts';
+import { ChartModule } from 'angular2-chartjs';
 @NgModule({
   imports: [
     PagesRoutingModule,
@@ -44,6 +46,9 @@ import { ProjectEditModalComponent } from './agile/nexus/project-edit-modal/proj
     CKEditorModule, 
     NbButtonModule,
     NbFormFieldModule,
+    NgxEchartsModule,
+    ChartModule,
+
   ],
   declarations: [
     PagesComponent,

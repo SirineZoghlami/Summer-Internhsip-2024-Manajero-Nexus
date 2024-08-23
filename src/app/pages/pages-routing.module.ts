@@ -19,7 +19,6 @@ import { NexusGoalListComponent } from './agile/nexus/nexus-goal-list/nexus-goal
 import { GoalModalComponent } from './agile/nexus/goal-modal/goal-modal.component';
 import { ProjectOverviewComponent } from './agile/nexus/project-overview/project-overview.component'
 import { NexusProductBacklogComponent } from './agile/nexus/nexus-product-backlog/nexus-product-backlog.component'
-
 const routes: Routes = [{
   path: '',
   component: PagesComponent,

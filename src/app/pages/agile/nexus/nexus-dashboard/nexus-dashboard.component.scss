@@ -4,7 +4,7 @@
     background-color: #f4f6f9;
     border-radius: 12px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    
+
     .dashboard-header {
       margin-bottom: 20px;
       display: flex;
@@ -18,13 +18,21 @@
         margin-left: auto;
         padding: 10px 20px;
         font-size: 0.875rem;
-        
+        background-color: #3498db;
+        color: #ffffff;
+        border: none;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: #2980b9;
+        }
       }
     }
 
     .key-metrics {
       display: flex;
-      justify-content: space-between;
+      flex-wrap: wrap;
       gap: 20px;
       margin-bottom: 20px;
 
