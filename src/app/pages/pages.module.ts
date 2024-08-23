@@ -7,7 +7,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { ECommerceModule } from './e-commerce/e-commerce.module';
 import { PagesRoutingModule } from './pages-routing.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
-import { TutorialComponent } from './agile/nexus/tutorial.component';
+import { TutorialComponent } from './agile/nexus/tutorial/tutorial.component';  
 import { TutorialCreateComponent } from './agile/nexus/tutorial-create/tutorial-create.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { TutorialUpdateComponent } from './agile/nexus/tutorial-update/tutorial-update.component';

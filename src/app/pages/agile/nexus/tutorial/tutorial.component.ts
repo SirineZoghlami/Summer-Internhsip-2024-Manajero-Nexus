@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Tutorial } from '../../../../models/tutorial.model';
-import { TutorialService } from '../../../../services/tutorial.service';
+import { Tutorial } from '../../../../../models/tutorial.model';
+import { TutorialService } from '../../../../../services/tutorial.service';
 import { Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NbDialogService, NbToastrService } from '@nebular/theme';
-import { ConfirmationDialogComponent } from '../../agile/nexus/confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationDialogComponent } from '../../../agile/nexus/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'ngx-tutorial',

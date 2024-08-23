@@ -5,7 +5,7 @@ import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ECommerceComponent } from './e-commerce/e-commerce.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
-import { TutorialComponent } from './agile/nexus/tutorial.component';  
+import { TutorialComponent } from './agile/nexus/tutorial/tutorial.component';  
 import { TutorialCreateComponent } from './agile/nexus/tutorial-create/tutorial-create.component';
 import { TutorialUpdateComponent } from './agile/nexus/tutorial-update/tutorial-update.component';
 import { NexusQuizComponent } from './agile/nexus/nexus-quiz/nexus-quiz.component'; // Check path

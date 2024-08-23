@@ -12,11 +12,16 @@ module.exports = function (config) {
       require('karma-coverage-istanbul-reporter'),
       require('@angular-devkit/build-angular/plugins/karma')
     ],
-    client:{
+    files: [
+      { pattern: 'src/test.ts', watched: false, type: 'module' }, // Specify the type as 'module'
+      { pattern: '**/*.spec.ts', watched: false, type: 'module' }, // Specify the type as 'module'
+    ],
+    client: {
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
     coverageIstanbulReporter: {
-      dir: require('path').join(__dirname, 'coverage'), reports: [ 'html', 'lcovonly' ],
+      dir: require('path').join(__dirname, 'coverage'),
+      reports: ['html', 'lcovonly'],
       fixWebpackSourcePaths: true
     },
     angularCli: {
