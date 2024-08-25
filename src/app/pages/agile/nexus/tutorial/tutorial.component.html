@@ -20,10 +20,11 @@
           <h2>{{ step.title }}</h2>
           <div [innerHTML]="getSanitizedContent(lastCreatedTutorial[step.contentField])"></div>
           
-          <!-- Conditionally render the image for the step before the conclusion -->
-          <div *ngIf="i === tutorialSteps.length - 2 && lastCreatedTutorial.imageUrl" class="img-container">
-            <img *ngIf="lastCreatedTutorial?.imageUrl" [src]="'http://localhost:8080' + lastCreatedTutorial.imageUrl" alt="Tutorial Image">          </div>
-
+          <!-- Conditionally render the image for the step -->
+          <div *ngIf="step.imageField && lastCreatedTutorial[step.imageField]" class="img-container">
+            <img [src]="getImageUrl(lastCreatedTutorial[step.imageField])" alt="{{ step.title }} Image">
+          </div>
+          
           <div class="button-container">
             <button nbButton class="prev" (click)="previousStep()" *ngIf="currentStepIndex > 0">Previous</button>
             <button nbButton (click)="nextStep()" *ngIf="currentStepIndex < tutorialSteps.length - 1">Next</button>

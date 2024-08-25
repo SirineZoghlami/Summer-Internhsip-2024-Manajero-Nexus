@@ -100,12 +100,25 @@
             </div>
           </nb-step>
 
+          <!-- Conclusion Step -->
+         
+
           <!-- Image Upload Step -->
-          <nb-step [label]="'Upload Image'">
+          <nb-step [label]="'Upload Images'">
             <div class="step-content">
-              <h2>Upload Tutorial Image</h2>
-              <input type="file" id="file" (change)="onFileSelected($event)">
-              <img *ngIf="selectedImage" [src]="selectedImage" alt="Selected Image" class="preview-image"/>
+              <h2>Upload Images</h2>
+              <div>
+                <label for="roleImage">Upload Role Image:</label>
+                <input type="file" id="roleImage" (change)="onRoleImageSelected($event)" />
+                <img *ngIf="roleImagePreview" [src]="roleImagePreview" alt="Role Image Preview" />
+              </div>
+
+              <div>
+                <label for="processImage">Upload Process Image:</label>
+                <input type="file" id="processImage" (change)="onProcessImageSelected($event)" />
+                <img *ngIf="processImagePreview" [src]="processImagePreview" alt="Process Image Preview" />
+              </div>
+              
               <div class="button-group">
                 <button nbButton nbStepperPrevious>Previous</button>
                 <button nbButton nbStepperNext>Next</button>
@@ -113,7 +126,6 @@
             </div>
           </nb-step>
 
-          <!-- Conclusion Step -->
           <nb-step [label]="'Conclusion'">
             <div class="step-content">
               <h2>Conclusion</h2>
@@ -124,7 +136,9 @@
               ></ckeditor>
               <div class="button-group">
                 <button nbButton nbStepperPrevious>Previous</button>
-                <button nbButton type="submit">Create Tutorial</button>
+                <button nbButton type="submit">Submit</button>
+
+
               </div>
             </div>
           </nb-step>

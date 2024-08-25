@@ -15,8 +15,10 @@ export class TutorialCreateComponent implements OnInit {
   public Editor = ClassicEditor;
   tutorialForm: FormGroup;
   editorConfig: any;
-  selectedFile: File | null = null;
-  selectedImage: string | ArrayBuffer | null = null;
+  selectedRoleImage: File | null = null;
+  selectedProcessImage: File | null = null;
+  roleImagePreview: string | ArrayBuffer | null = null;
+  processImagePreview: string | ArrayBuffer | null = null;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -66,21 +68,32 @@ export class TutorialCreateComponent implements OnInit {
       limitations: [''],
       applyingNexus: [''],
       conclusion: [''],
-      imageUrl: ['']  // Add imageUrl field here
+      roleImageUrl: [''],
+      processImageUrl: ['']
     });
   }
-
   createTutorial(): void {
     if (this.tutorialForm.invalid) {
       this.toastrService.danger('Please fill in all required fields.', 'Error');
       return;
     }
-
-    const tutorial: Tutorial = this.tutorialForm.value;
-
-    this.tutorialService.createTutorial(tutorial, this.selectedFile).subscribe(
+  
+    const formData = new FormData();
+    formData.append('tutorial', new Blob([JSON.stringify(this.tutorialForm.value)], { type: 'application/json' }));
+  
+    if (this.selectedRoleImage) {
+      formData.append('roleImage', this.selectedRoleImage);
+    }
+  
+    if (this.selectedProcessImage) {
+      formData.append('processImage', this.selectedProcessImage);
+    }
+  
+    this.tutorialService.createTutorial(formData).subscribe(
       response => {
+        const tutorialId = response.id;
         this.toastrService.success('Tutorial created successfully!', 'Success');
+        this.router.navigate(['/pages/agile/nexus']);
       },
       error => {
         this.toastrService.danger('Failed to create tutorial.', 'Error');
@@ -88,40 +101,67 @@ export class TutorialCreateComponent implements OnInit {
     );
   }
 
-
-  uploadImage(tutorialId: string): void {
-    if (this.selectedFile) {
+  uploadRoleImage(tutorialId: string): void {
+    if (this.selectedRoleImage) {
       const formData = new FormData();
-      formData.append('file', this.selectedFile);
+      formData.append('file', this.selectedRoleImage);
 
-      this.tutorialService.uploadImage(tutorialId, formData).subscribe(
+      this.tutorialService.uploadImage(tutorialId, 'roleImage', formData).subscribe(
         (imageUrl: string) => {
-          this.tutorialForm.patchValue({ imageUrl });  // Update form with imageUrl
-          this.toastrService.success('Image uploaded successfully!', 'Success');
-          this.resetForm();
-          this.router.navigate(['/pages/agile/nexus/tutorial']);
+          this.tutorialForm.patchValue({ roleImageUrl: imageUrl });
+          this.uploadProcessImage(tutorialId);
         },
         error => {
-          this.toastrService.danger('Failed to upload image: ' + error.message, 'Error');
+          this.toastrService.danger('Failed to upload role image: ' + error.message, 'Error');
         }
       );
+    } else {
+      this.uploadProcessImage(tutorialId);
     }
   }
 
-  resetForm(): void {
-    this.tutorialForm.reset();
-    this.selectedFile = null;
-    this.selectedImage = null;
+  uploadProcessImage(tutorialId: string): void {
+    if (this.selectedProcessImage) {
+      const formData = new FormData();
+      formData.append('file', this.selectedProcessImage);
+
+      this.tutorialService.uploadImage(tutorialId, 'processImage', formData).subscribe(
+        (imageUrl: string) => {
+          this.tutorialForm.patchValue({ processImageUrl: imageUrl });
+          this.toastrService.success('Tutorial created successfully!', 'Success');
+          this.router.navigate(['/pages/agile/nexus/tutorial']);
+        },
+        error => {
+          this.toastrService.danger('Failed to upload process image: ' + error.message, 'Error');
+        }
+      );
+    } else {
+      this.toastrService.success('Tutorial created successfully!', 'Success');
+      this.router.navigate(['/pages/agile/nexus/tutorial']);
+    }
   }
 
-  onFileSelected(event: any): void {
+  onRoleImageSelected(event: any): void {
     const file: File = event.target.files[0];
     if (file) {
-      this.selectedFile = file;
+      this.selectedRoleImage = file;
 
       const reader = new FileReader();
       reader.onload = () => {
-        this.selectedImage = reader.result;
+        this.roleImagePreview = reader.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  onProcessImageSelected(event: any): void {
+    const file: File = event.target.files[0];
+    if (file) {
+      this.selectedProcessImage = file;
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.processImagePreview = reader.result;
       };
       reader.readAsDataURL(file);
     }

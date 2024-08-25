@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
 import { Tutorial } from '../models/tutorial.model';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,15 +12,14 @@ export class TutorialService {
 
   constructor(private http: HttpClient) {}
 
-  // Create a new tutorial
-  createTutorial(tutorial: Tutorial, file: File): Observable<Tutorial> {
-    const formData: FormData = new FormData();
-    formData.append('tutorial', new Blob([JSON.stringify(tutorial)], { type: 'application/json' }));
-    if (file) {
-      formData.append('file', file);
-    }
-    return this.http.post<Tutorial>(`${this.apiUrl}/create`, formData);
+  createTutorial(tutorialData: FormData): Observable<Tutorial> {
+    return this.http.post<Tutorial>('http://localhost:8080/api/tutorials/create', tutorialData);
   }
+
+  uploadImage(tutorialId: string, imageType: string, formData: FormData): Observable<string> {
+    return this.http.post<string>(`${this.apiUrl}/${tutorialId}/uploadImage/${imageType}`, formData);
+  }
+
 
   // Fetch all tutorials
   getTutorials(): Observable<Tutorial[]> {
@@ -39,15 +38,7 @@ export class TutorialService {
       );
   }
 
-  // Upload image for a tutorial
-  uploadImage(tutorialId: string, formData: FormData): Observable<any> {
-    const uploadUrl = `${this.apiUrl}/${tutorialId}/uploadImage`;
 
-    return this.http.post<any>(uploadUrl, formData)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
 
   // Update an existing tutorial
   updateTutorial(tutorial: Tutorial): Observable<Tutorial> {

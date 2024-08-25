@@ -5,13 +5,12 @@
 }
 
 .tutorial-component {
-  max-width: 1200px;
+  max-width: 1600px;
   margin: 0 auto;
   padding: 1rem;
   background-color: #fff;
   border-radius: 0.5rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-  
 }
 
 .button-container {
@@ -52,11 +51,11 @@
   margin: 1rem 0;
 }
 
-.img {
-  display: block;
+.img-container img {
   max-width: 100%;
   height: auto;
   border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .button-container button {
@@ -114,11 +113,58 @@
     flex-direction: column;
     align-items: center;
   }
+
+  .step-content {
+    padding: 0.5rem;
+  }
+
+  .step-content h2 {
+    font-size: 1.25rem;
+  }
+
+  .step-content p {
+    font-size: 0.875rem;
+  }
 }
 
-/* Media query to hide step labels on smaller screens */
 @media (max-width: 1300px) {
   ::ng-deep nb-stepper .step-label,
   ::ng-deep nb-stepper .label {
     display: none !important;
-  }}
+  }
+}
+
+/* Larger stepper styles */
+::ng-deep nb-stepper {
+  font-size: 1.125rem; /* Increase font size */
+}
+
+::ng-deep nb-stepper nb-step {
+  min-height: 4rem; /* Increase height of each step */
+}
+
+::ng-deep nb-stepper nb-step .step-label {
+  font-size: 1.125rem; /* Increase font size of step labels */
+}
+
+::ng-deep nb-stepper nb-step .step-content {
+  padding: 2rem; /* Increase padding inside step content */
+}
+
+@media (max-width: 1200px) {
+  ::ng-deep nb-stepper {
+    font-size: 1rem; /* Adjust font size for medium screens */
+  }
+
+  ::ng-deep nb-stepper nb-step {
+    min-height: 3rem; /* Adjust step height for medium screens */
+  }
+
+  ::ng-deep nb-stepper nb-step .step-label {
+    font-size: 1rem; /* Adjust font size of step labels for medium screens */
+  }
+
+  ::ng-deep nb-stepper nb-step .step-content {
+    padding: 1.5rem; /* Adjust padding for medium screens */
+  }
+}

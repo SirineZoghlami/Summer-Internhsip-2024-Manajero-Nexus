@@ -35,8 +35,11 @@ export class TutorialComponent implements OnInit {
     { label: 'How Does It Work?', title: 'How Does It Work?', contentField: 'howDoesItWork' },
     { label: 'Limitations', title: 'Limitations', contentField: 'limitations' },
     { label: 'Applying Nexus in the Real World', title: 'Applying Nexus in the Real World', contentField: 'applyingNexus' },
+    { label: 'Role Image', title: 'Role Image', imageField: 'roleImageUrl'}, // Add this step for the role image
+    { label: 'Process Image', title: 'Process Image', imageField: 'processImageUrl'}, // Add this step for the process image
     { label: 'Conclusion', title: 'Conclusion', contentField: 'conclusion'}
   ];
+  
 
   constructor(
     private router: Router,
@@ -116,4 +119,10 @@ export class TutorialComponent implements OnInit {
       );
     }
   }
+
+
+  getImageUrl(imagePath: string): string {
+    return `http://localhost:8080${imagePath}`;
+  }
+  
 }
