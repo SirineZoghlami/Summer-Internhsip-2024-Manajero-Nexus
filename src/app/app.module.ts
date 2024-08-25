@@ -22,10 +22,11 @@ import {
   NbSidebarModule,
   NbToastrModule,
   NbWindowModule,
+
 } from '@nebular/theme';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ],
   imports: [
     NbIconModule, 
     BrowserModule,
@@ -44,6 +45,7 @@ import {
     }),
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
+
   ],
   
   bootstrap: [AppComponent],

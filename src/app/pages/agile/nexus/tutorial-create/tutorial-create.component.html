@@ -1,79 +1,103 @@
 <div class="nexus-page">
-    <h1 style="text-align: center">Nexus Agile Framework Tutorial</h1>
-  
-    <nb-card class="col-md-12 col-lg-12 col-xxxl-12">
-      <nb-card-body>
-        <nb-stepper orientation="horizontal">
+  <h1 class="text-center">Nexus Agile Framework Tutorial</h1>
+
+  <nb-card class="col-md-12 col-lg-12 col-xxxl-12">
+    <nb-card-body>
+      <form [formGroup]="tutorialForm" (ngSubmit)="createTutorial()">
+        <nb-stepper [selectedIndex]="currentStepIndex" orientation="horizontal">
+
+          <!-- Introduction Step -->
           <nb-step [label]="'Introduction'">
             <div class="step-content">
               <h2>Introduction</h2>
-              <textarea [(ngModel)]="tutorial.introduction" name="introduction" placeholder="Enter Introduction" class="custom-textarea"></textarea>
-              <div class="button-group">
-                <button nbButton nbStepperNext>Next</button>
+              <ckeditor #introductionEditor formControlName="introduction" [editor]="Editor" [config]="editorConfig" (ready)="onReady('introduction')"></ckeditor>
+              <app-error-message [control]="tutorialForm.get('introduction')"></app-error-message>
+              <div class="button-container">
+                <button nbButton status="primary" (click)="nextStep()">Next</button>
               </div>
             </div>
           </nb-step>
+
+          <!-- Why Use Step -->
           <nb-step [label]="'Why Use the Nexus Agile Framework?'">
             <div class="step-content">
               <h2>Why Use the Nexus Agile Framework?</h2>
-              <textarea [(ngModel)]="tutorial.whyUse" name="whyUse" placeholder="Enter Why Use the Nexus Agile Framework" class="custom-textarea"></textarea>
-              <div class="button-group">
-                <button nbButton nbStepperPrevious>Previous</button>
-                <button nbButton nbStepperNext>Next</button>
+              <ckeditor #whyUseEditor formControlName="whyUse" [editor]="Editor" [config]="editorConfig" (ready)="onReady('whyUse')"></ckeditor>
+              <app-error-message [control]="tutorialForm.get('whyUse')"></app-error-message>
+              <div class="button-container">
+                <button nbButton status="primary" (click)="previousStep()" [disabled]="currentStepIndex === 0">Previous</button>
+                <button nbButton status="primary" (click)="nextStep()">Next</button>
               </div>
             </div>
           </nb-step>
+
+          <!-- What is Nexus Step -->
           <nb-step [label]="'What is Nexus?'">
             <div class="step-content">
               <h2>What is Nexus?</h2>
-              <textarea [(ngModel)]="tutorial.whatIsNexus" name="whatIsNexus" placeholder="Enter What is Nexus" class="custom-textarea"></textarea>
-              <div class="button-group">
-                <button nbButton nbStepperPrevious>Previous</button>
-                <button nbButton nbStepperNext>Next</button>
+              <ckeditor #whatIsNexusEditor formControlName="whatIsNexus" [editor]="Editor" [config]="editorConfig" (ready)="onReady('whatIsNexus')"></ckeditor>
+              <app-error-message [control]="tutorialForm.get('whatIsNexus')"></app-error-message>
+              <div class="button-container">
+                <button nbButton status="primary" (click)="previousStep()">Previous</button>
+                <button nbButton status="primary" (click)="nextStep()">Next</button>
               </div>
             </div>
           </nb-step>
+
+          <!-- How Does It Work Step -->
           <nb-step [label]="'How Does It Work?'">
             <div class="step-content">
               <h2>How Does It Work?</h2>
-              <textarea [(ngModel)]="tutorial.howDoesItWork" name="howDoesItWork" placeholder="Enter How Does It Work" class="custom-textarea"></textarea>
-              <div class="button-group">
-                <button nbButton nbStepperPrevious>Previous</button>
-                <button nbButton nbStepperNext>Next</button>
+              <ckeditor #howDoesItWorkEditor formControlName="howDoesItWork" [editor]="Editor" [config]="editorConfig" (ready)="onReady('howDoesItWork')"></ckeditor>
+              <app-error-message [control]="tutorialForm.get('howDoesItWork')"></app-error-message>
+              <div class="button-container">
+                <button nbButton status="primary" (click)="previousStep()">Previous</button>
+                <button nbButton status="primary" (click)="nextStep()">Next</button>
               </div>
             </div>
           </nb-step>
+
+          <!-- Limitations Step -->
           <nb-step [label]="'Limitations'">
             <div class="step-content">
               <h2>Limitations</h2>
-              <textarea [(ngModel)]="tutorial.limitations" name="limitations" placeholder="Enter Limitations" class="custom-textarea"></textarea>
-              <div class="button-group">
-                <button nbButton nbStepperPrevious>Previous</button>
-                <button nbButton nbStepperNext>Next</button>
+              <ckeditor #limitationsEditor formControlName="limitations" [editor]="Editor" [config]="editorConfig" (ready)="onReady('limitations')"></ckeditor>
+              <app-error-message [control]="tutorialForm.get('limitations')"></app-error-message>
+              <div class="button-container">
+                <button nbButton status="primary" (click)="previousStep()">Previous</button>
+                <button nbButton status="primary" (click)="nextStep()">Next</button>
               </div>
             </div>
           </nb-step>
+
+          <!-- Applying Nexus Step -->
           <nb-step [label]="'Applying Nexus in the Real World'">
             <div class="step-content">
               <h2>Applying Nexus in the Real World</h2>
-              <textarea [(ngModel)]="tutorial.applyingNexus" name="applyingNexus" placeholder="Enter Applying Nexus in the Real World" class="custom-textarea"></textarea>
-              <div class="button-group">
-                <button nbButton nbStepperPrevious>Previous</button>
-                <button nbButton nbStepperNext>Next</button>
+              <ckeditor #applyingNexusEditor formControlName="applyingNexus" [editor]="Editor" [config]="editorConfig" (ready)="onReady('applyingNexus')"></ckeditor>
+              <app-error-message [control]="tutorialForm.get('applyingNexus')"></app-error-message>
+              <div class="button-container">
+                <button nbButton status="primary" (click)="previousStep()">Previous</button>
+                <button nbButton status="primary" (click)="nextStep()">Next</button>
               </div>
             </div>
           </nb-step>
+
+          <!-- Conclusion Step -->
           <nb-step [label]="'Conclusion'">
             <div class="step-content">
               <h2>Conclusion</h2>
-              <textarea [(ngModel)]="tutorial.conclusion" name="conclusion" placeholder="Enter Conclusion" class="custom-textarea"></textarea>
-              <div class="button-group">
-                <button nbButton nbStepperPrevious>Previous</button>
-                <button nbButton (click)="createTutorial()">Create Tutorial</button>
-            </div>
+              <ckeditor #conclusionEditor formControlName="conclusion" [editor]="Editor" [config]="editorConfig" (ready)="onReady('conclusion')"></ckeditor>
+              <app-error-message [control]="tutorialForm.get('conclusion')"></app-error-message>
+              <div class="button-container">
+                <button nbButton status="primary" (click)="previousStep()">Previous</button>
+                <button nbButton status="success" type="submit">Create Tutorial</button>
+              </div>
             </div>
           </nb-step>
+
         </nb-stepper>
-      </nb-card-body>
-    </nb-card>
-  </div>
+      </form>
+    </nb-card-body>
+  </nb-card>
+</div>

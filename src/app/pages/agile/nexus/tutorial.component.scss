@@ -2,140 +2,145 @@
   display: block;
   padding: 1rem;
   background-color: #f7f9fc;
+}
 
-  ::ng-deep nb-card {
-    margin: 1rem 0;
-    border-radius: 0.5rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-    background-color: #ffffff;
+.tutorial-component {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 
-    ::ng-deep nb-card-header {
-      background-color: #f7f9fc;
-      border-bottom: 1px solid #e6e9f0;
-      font-weight: bold;
-      text-align: center;
-      padding: 1rem 0;
-    }
 
-    ::ng-deep nb-card-body {
-      background-color: #ffffff;
-      text-align: center;
-      padding: 1.5rem;
-      font-size: 1rem;
-      color: #4a4a4a;
-
-      .custom-textarea {
-        width: 80%;
-        margin: 1rem auto; /* Center the textarea */
-        padding: 0.5rem;
-        border: 1px solid #e6e9f0;
-        border-radius: 0.25rem;
-        text-align: center; /* Center the text within the textarea */
-        font-size: 1rem;
-        resize: vertical; /* Allow vertical resizing */
-      }
-
-      .validation-error {
-        color: #ff0000; /* Red color for error message */
-        margin-top: 0.5rem;
-        font-size: 0.875rem;
-      }
-
-      .button-group {
-        display: flex;
-        justify-content: center;
-        gap: 1rem;
-        margin-top: 1rem;
-      }
-
-      button {
-        cursor: pointer;
-        padding: 0.5rem 1rem;
-        border: none;
-        border-radius: 0.25rem;
-        background-color: #3366ff;
-        color: #ffffff;
-        font-size: 1rem;
-        transition: background-color 0.3s ease;
-
-        &:hover {
-          background-color: #274bb7;
-        }
-
-        &.prev {
-          background-color: #f7f9fc;
-          color: #3366ff;
-
-          &:hover {
-            background-color: #e6e9f0;
-          }
-        }
-      }
-    }
-
-    ::ng-deep nb-card-footer {
-      background-color: #f7f9fc;
-      border-top: 1px solid #e6e9f0;
-      text-align: center; /* Center align footer content */
-      padding: 1rem 0;
-
-      button {
-        margin-left: 0.5rem;
-      }
-    }
-  }
-
-  .step-content {
+  .static-message {
     text-align: center;
-    padding: 1rem;
+    margin-top: 20px;
 
     h2 {
-      font-size: 1.5rem;
-      font-weight: bold;
-      margin-bottom: 1rem;
+      font-size: 24px;
+      color: #ff6b6b;
+      margin-bottom: 10px;
     }
 
     p {
-      font-size: 1rem;
-      margin-bottom: 1rem;
-      color: #4a4a4a;
-    }
-
-    .button-container {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      margin-top: 1rem;
+      font-size: 18px;
+      color: #6c757d;
     }
 
     button {
-      cursor: pointer;
-      padding: 0.5rem 1rem;
-      border: none;
-      border-radius: 0.25rem;
-      background-color: #3366ff;
-      color: #ffffff;
-      font-size: 1rem;
-      transition: background-color 0.3s ease;
-
-      &:hover {
-        background-color: #274bb7;
-      }
-
-      &.prev {
-        background-color: #f7f9fc;
-        color: #3366ff;
-
-        &:hover {
-          background-color: #e6e9f0;
-        }
-      }
+      margin-top: 15px;
     }
   }
+}
 
-  .img {
-    width: 100%;
-    height: auto;
-    max-width: 100%;
+
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #3366ff;
+}
+
+.step-content {
+  padding: 1rem;
+  background-color: #f7f9fc;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.step-content h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.step-content p {
+  font-size: 1rem;
+  color: #4a4a4a;
+}
+
+.img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+}
+
+.button-container button {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  background-color: #3366ff;
+  color: #ffffff;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.button-container button:hover {
+  background-color: #274bb7;
+}
+
+.button-container .prev {
+  background-color: #f7f9fc;
+  color: #3366ff;
+}
+
+.button-container .prev:hover {
+  background-color: #e6e9f0;
+}
+
+#create-tutorial {
+  background-color: #4caf50;
+}
+
+#modify-tutorial {
+  background-color: #ffa000;
+  color: #ffffff;
+}
+
+#delete-tutorial {
+  background-color: #f44336;
+  color: #ffffff;
+}
+
+#delete-tutorial:hover {
+  background-color: #c62828;
+}
+
+#modify-tutorial:hover {
+  background-color: #ff6f00;
+}
+
+#create-tutorial:hover {
+  background-color: #388e3c;
+}
+
+@media (max-width: 768px) {
+  .button-container {
+    flex-direction: column;
+    align-items: center;
   }
 }
+
+/* Media query to hide step labels on smaller screens */
+@media (max-width: 1300px) {
+  ::ng-deep nb-stepper .step-label,
+  ::ng-deep nb-stepper .label {
+    display: none !important;
+  }}

@@ -7,5 +7,7 @@ export interface Tutorial {
     limitations: string;
     applyingNexus: string;
     conclusion: string;
+    structureDiagramImageUrl?: string; 
+    lifecycleDiagramImageUrl?: string; 
   }
   

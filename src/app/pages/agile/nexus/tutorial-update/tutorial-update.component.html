@@ -1,0 +1,115 @@
+<div class="nexus-page">
+  <h1 style="text-align: center">Nexus Agile Framework Tutorial</h1>
+
+  <nb-card class="col-md-12 col-lg-12 col-xxxl-12">
+    <nb-card-body>
+      <form [formGroup]="tutorialForm" (ngSubmit)="updateTutorial()">
+        <nb-stepper orientation="horizontal">
+          <nb-step [label]="'Introduction'">
+            <div class="step-content">
+              <h2>Introduction</h2>
+              <ckeditor
+                formControlName="introduction"
+                [editor]="Editor"
+                [config]="editorConfig"
+              ></ckeditor>
+              <div class="button-container">
+                <button nbButton nbStepperNext>Next</button>
+              </div>
+            </div>
+          </nb-step>
+
+          <nb-step [label]="'Why Use the Nexus Agile Framework?'">
+            <div class="step-content">
+              <h2>Why Use the Nexus Agile Framework?</h2>
+              <ckeditor
+                formControlName="whyUse"
+                [editor]="Editor"
+                [config]="editorConfig"
+              ></ckeditor>
+              <div class="button-container">
+                <button nbButton nbStepperPrevious>Previous</button>
+                <button nbButton nbStepperNext>Next</button>
+              </div>
+            </div>
+          </nb-step>
+
+          <nb-step [label]="'What is Nexus?'">
+            <div class="step-content">
+              <h2>What is Nexus?</h2>
+              <ckeditor
+                formControlName="whatIsNexus"
+                [editor]="Editor"
+                [config]="editorConfig"
+              ></ckeditor>
+              <div class="button-container">
+                <button nbButton nbStepperPrevious>Previous</button>
+                <button nbButton nbStepperNext>Next</button>
+              </div>
+            </div>
+          </nb-step>
+
+          <nb-step [label]="'How Does It Work?'">
+            <div class="step-content">
+              <h2>How Does It Work?</h2>
+              <ckeditor
+                formControlName="howDoesItWork"
+                [editor]="Editor"
+                [config]="editorConfig"
+              ></ckeditor>
+              <div class="button-container">
+                <button nbButton nbStepperPrevious>Previous</button>
+                <button nbButton nbStepperNext>Next</button>
+              </div>
+            </div>
+          </nb-step>
+
+          <nb-step [label]="'Limitations'">
+            <div class="step-content">
+              <h2>Limitations</h2>
+              <ckeditor
+                formControlName="limitations"
+                [editor]="Editor"
+                [config]="editorConfig"
+              ></ckeditor>
+              <div class="button-container">
+                <button nbButton nbStepperPrevious>Previous</button>
+                <button nbButton nbStepperNext>Next</button>
+              </div>
+            </div>
+          </nb-step>
+
+          <nb-step [label]="'Applying Nexus in the Real World'">
+            <div class="step-content">
+              <h2>Applying Nexus in the Real World</h2>
+              <ckeditor
+                formControlName="applyingNexus"
+                [editor]="Editor"
+                [config]="editorConfig"
+              ></ckeditor>
+              <div class="button-container">
+                <button nbButton nbStepperPrevious>Previous</button>
+                <button nbButton nbStepperNext>Next</button>
+              </div>
+            </div>
+          </nb-step>
+
+          <nb-step [label]="'Conclusion'">
+            <div class="step-content">
+              <h2>Conclusion</h2>
+              <ckeditor
+                formControlName="conclusion"
+                [editor]="Editor"
+                [config]="editorConfig"
+              ></ckeditor>
+              <div class="button-container">
+                <button nbButton nbStepperPrevious>Previous</button>
+                <button nbButton status="primary" type="submit">Update Tutorial</button>
+              </div>
+            </div>
+          </nb-step>
+        </nb-stepper>
+      </form>
+    </nb-card-body>
+  </nb-card>
+</div>
