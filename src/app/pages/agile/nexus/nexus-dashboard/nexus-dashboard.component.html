@@ -53,20 +53,22 @@
     <section class="charts-section">
       <div class="chart-card">
         <h3>Status Count</h3>
-        <canvas id="statusChart"></canvas>
+        <div echarts [options]="statusChartOption" class="chart"></div>
       </div>
       <div class="chart-card">
         <h3>Goals Count</h3>
-        <canvas id="goalsChart"></canvas>
+        <div echarts [options]="goalsChartOption" class="chart"></div>
       </div>
+      
       <div class="chart-card">
         <h3>Performance Over Time</h3>
-        <canvas id="performanceChart"></canvas>
+        <div echarts [options]="performanceChartOption" class="chart"></div>
       </div>
       <div class="chart-card">
         <h3>Team Efficiency</h3>
-        <canvas id="efficiencyChart"></canvas>
+        <div echarts [options]="efficiencyChartOption" class="chart"></div>
       </div>
+      
     </section>
   </div>
 </div>

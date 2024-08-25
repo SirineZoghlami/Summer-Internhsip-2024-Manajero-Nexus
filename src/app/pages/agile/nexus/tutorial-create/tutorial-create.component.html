@@ -100,6 +100,19 @@
             </div>
           </nb-step>
 
+          <!-- Image Upload Step -->
+          <nb-step [label]="'Upload Image'">
+            <div class="step-content">
+              <h2>Upload Tutorial Image</h2>
+              <input type="file" id="file" (change)="onFileSelected($event)">
+              <img *ngIf="selectedImage" [src]="selectedImage" alt="Selected Image" class="preview-image"/>
+              <div class="button-group">
+                <button nbButton nbStepperPrevious>Previous</button>
+                <button nbButton nbStepperNext>Next</button>
+              </div>
+            </div>
+          </nb-step>
+
           <!-- Conclusion Step -->
           <nb-step [label]="'Conclusion'">
             <div class="step-content">

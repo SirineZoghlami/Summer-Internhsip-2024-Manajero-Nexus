@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Tutorial } from '../../../../models/tutorial.model';
-import { TutorialService } from '../../../../services/tutorial.service';
+import { Tutorial } from '../../../../../models/tutorial.model';
+import { TutorialService } from '../../../../../services/tutorial.service';
 import { Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NbDialogService, NbToastrService } from '@nebular/theme';
-import { ConfirmationDialogComponent } from '../../agile/nexus/confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationDialogComponent } from '../../../agile/nexus/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'ngx-tutorial',
@@ -20,19 +20,22 @@ export class TutorialComponent implements OnInit {
     howDoesItWork: '',
     limitations: '',
     applyingNexus: '',
-    conclusion: ''
+    conclusion: '',
+    processImageUrl: '',
+    roleImageUrl: ''
+
   };
   currentStepIndex: number = 0;
   isDatabaseEmpty: boolean = false;
 
   tutorialSteps = [
-    { label: 'Introduction', title: 'Introduction', contentField: 'introduction', imageField: '', imageAlt: '' },
-    { label: 'Why Use the Nexus Agile Framework?', title: 'Why Use the Nexus Agile Framework?', contentField: 'whyUse', imageField: '', imageAlt: '' },
-    { label: 'What is Nexus?', title: 'What is Nexus?', contentField: 'whatIsNexus', imageField: 'whatIsNexusImageUrl', imageAlt: 'What is Nexus image' },
-    { label: 'How Does It Work?', title: 'How Does It Work?', contentField: 'howDoesItWork', imageField: 'howDoesItWorkImageUrl', imageAlt: 'How does it work image' },
-    { label: 'Limitations', title: 'Limitations', contentField: 'limitations', imageField: '', imageAlt: '' },
-    { label: 'Applying Nexus in the Real World', title: 'Applying Nexus in the Real World', contentField: 'applyingNexus', imageField: '', imageAlt: '' },
-    { label: 'Conclusion', title: 'Conclusion', contentField: 'conclusion', imageField: '', imageAlt: '' }
+    { label: 'Introduction', title: 'Introduction', contentField: 'introduction'},
+    { label: 'Why Use the Nexus Agile Framework?', title: 'Why Use the Nexus Agile Framework?', contentField: 'whyUse' },
+    { label: 'What is Nexus?', title: 'What is Nexus?', contentField: 'whatIsNexus', imageField: 'whatIsNexusImageUrl'},
+    { label: 'How Does It Work?', title: 'How Does It Work?', contentField: 'howDoesItWork' },
+    { label: 'Limitations', title: 'Limitations', contentField: 'limitations' },
+    { label: 'Applying Nexus in the Real World', title: 'Applying Nexus in the Real World', contentField: 'applyingNexus' },
+    { label: 'Conclusion', title: 'Conclusion', contentField: 'conclusion'}
   ];
 
   constructor(
@@ -62,6 +65,7 @@ export class TutorialComponent implements OnInit {
       }
     );
   }
+  
 
   navigateToQuiz(): void {
     this.router.navigate(['/pages/agile/nexus/quizz']);

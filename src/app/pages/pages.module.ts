@@ -7,7 +7,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { ECommerceModule } from './e-commerce/e-commerce.module';
 import { PagesRoutingModule } from './pages-routing.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
-import { TutorialComponent } from './agile/nexus/tutorial.component';
+import { TutorialComponent } from './agile/nexus/tutorial/tutorial.component';
 import { TutorialCreateComponent } from './agile/nexus/tutorial-create/tutorial-create.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { TutorialUpdateComponent } from './agile/nexus/tutorial-update/tutorial-update.component';
@@ -30,6 +30,8 @@ import { ReviewModalComponent } from './agile/nexus/review-modal/review-modal.co
 import { ProjectEditModalComponent } from './agile/nexus/project-edit-modal/project-edit-modal.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { ChartModule } from 'angular2-chartjs';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { TestComponent } from './agile/nexus/test/test.component';
 @NgModule({
   imports: [
     PagesRoutingModule,
@@ -48,6 +50,7 @@ import { ChartModule } from 'angular2-chartjs';
     NbFormFieldModule,
     NgxEchartsModule,
     ChartModule,
+    NgxChartsModule,
 
   ],
   declarations: [
@@ -72,6 +75,7 @@ import { ChartModule } from 'angular2-chartjs';
     NexusProductBacklogModalComponent,
     ReviewModalComponent,
     ProjectEditModalComponent,
+    TestComponent,
   ],
   providers: [],
 })

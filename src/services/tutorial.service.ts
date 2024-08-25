@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Tutorial } from '../models/tutorial.model';
 
@@ -13,55 +13,39 @@ export class TutorialService {
   constructor(private http: HttpClient) {}
 
   // Create a new tutorial
-  createTutorial(tutorial: Tutorial): Observable<Tutorial> {
-    return this.http.post<Tutorial>(`${this.apiUrl}/create`, tutorial)
-      .pipe(
-        catchError(error => {
-          console.error('Error creating tutorial:', error);
-          throw error;
-        })
-      );
+  createTutorial(tutorial: Tutorial, file: File): Observable<Tutorial> {
+    const formData: FormData = new FormData();
+    formData.append('tutorial', new Blob([JSON.stringify(tutorial)], { type: 'application/json' }));
+    if (file) {
+      formData.append('file', file);
+    }
+    return this.http.post<Tutorial>(`${this.apiUrl}/create`, formData);
   }
 
   // Fetch all tutorials
   getTutorials(): Observable<Tutorial[]> {
     return this.http.get<Tutorial[]>(this.apiUrl)
       .pipe(
-        catchError(error => {
-          console.error('Error fetching tutorials:', error);
-          throw error;
-        })
+        catchError(this.handleError)
       );
   }
 
   // Fetch the last created tutorial
-  getLastCreatedTutorial(): Observable<Tutorial> {
+  getLastCreatedTutorial(): Observable<Tutorial | null> {
     return this.http.get<Tutorial[]>(this.apiUrl)
       .pipe(
         map(tutorials => tutorials.length > 0 ? tutorials[tutorials.length - 1] : null),
-        catchError(error => {
-          console.error('Error fetching tutorials:', error);
-          throw error;
-        })
+        catchError(this.handleError)
       );
   }
 
   // Upload image for a tutorial
-  uploadImage(tutorialId: string, file: File): Observable<Tutorial> {
-    const formData = new FormData();
-    formData.append('file', file);
-
+  uploadImage(tutorialId: string, formData: FormData): Observable<any> {
     const uploadUrl = `${this.apiUrl}/${tutorialId}/uploadImage`;
-    const httpOptions = {
-      headers: new HttpHeaders({ 'enctype': 'multipart/form-data' })
-    };
 
-    return this.http.post<Tutorial>(uploadUrl, formData, httpOptions)
+    return this.http.post<any>(uploadUrl, formData)
       .pipe(
-        catchError(error => {
-          console.error('Error uploading image:', error);
-          throw error;
-        })
+        catchError(this.handleError)
       );
   }
 
@@ -69,10 +53,7 @@ export class TutorialService {
   updateTutorial(tutorial: Tutorial): Observable<Tutorial> {
     return this.http.put<Tutorial>(`${this.apiUrl}/${tutorial.id}`, tutorial)
       .pipe(
-        catchError(error => {
-          console.error('Error updating tutorial:', error);
-          throw error;
-        })
+        catchError(this.handleError)
       );
   }
 
@@ -80,10 +61,13 @@ export class TutorialService {
   deleteTutorial(id: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`)
       .pipe(
-        catchError(error => {
-          console.error('Error deleting tutorial:', error);
-          throw error;
-        })
+        catchError(this.handleError)
       );
+  }
+
+  // Generic error handling
+  private handleError(error: HttpErrorResponse): Observable<never> {
+    console.error(`Backend returned code ${error.status}, body was: `, error.error);
+    return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 }

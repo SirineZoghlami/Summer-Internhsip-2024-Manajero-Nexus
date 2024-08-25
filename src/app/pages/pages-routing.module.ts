@@ -5,7 +5,7 @@ import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ECommerceComponent } from './e-commerce/e-commerce.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
-import { TutorialComponent } from './agile/nexus/tutorial.component';  
+import { TutorialComponent } from './agile/nexus/tutorial/tutorial.component';  
 import { TutorialCreateComponent } from './agile/nexus/tutorial-create/tutorial-create.component';
 import { TutorialUpdateComponent } from './agile/nexus/tutorial-update/tutorial-update.component';
 import { NexusQuizComponent } from './agile/nexus/nexus-quiz/nexus-quiz.component'; // Check path
@@ -18,7 +18,10 @@ import { SprintListComponent } from './agile/nexus/sprint-list/sprint-list.compo
 import { NexusGoalListComponent } from './agile/nexus/nexus-goal-list/nexus-goal-list.component'; // Import the new component
 import { GoalModalComponent } from './agile/nexus/goal-modal/goal-modal.component';
 import { ProjectOverviewComponent } from './agile/nexus/project-overview/project-overview.component'
+
 import { NexusProductBacklogComponent } from './agile/nexus/nexus-product-backlog/nexus-product-backlog.component'
+import { TestComponent } from './agile/nexus/test/test.component';
+
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
@@ -105,6 +108,11 @@ const routes: Routes = [{
       path: 'agile/nexus/project',
       component: ProjectListComponent
     },
+    {
+      path: 'agile/nexus/test',
+      component: TestComponent
+    },
+ 
  
    
   

@@ -1,8 +1,7 @@
-// nexus-dashboard.component.ts
 import { Component, OnInit } from '@angular/core';
 import { NexusProjectService } from '../../../../../services/nexus.project.service.service';
 import { Router } from '@angular/router';
-import { Chart } from 'chart.js';
+import { EChartsOption } from 'echarts';
 
 @Component({
   selector: 'app-nexus-dashboard',
@@ -14,6 +13,11 @@ export class NexusDashboardComponent implements OnInit {
   kpis: any = {};
   performanceData: any = {};
   efficiencyData: any = {};
+
+  statusChartOption: EChartsOption = {};
+  goalsChartOption: EChartsOption = {};
+  performanceChartOption: EChartsOption = {};
+  efficiencyChartOption: EChartsOption = {};
 
   constructor(private nexusProjectService: NexusProjectService, private router: Router) {}
 
@@ -28,7 +32,6 @@ export class NexusDashboardComponent implements OnInit {
     this.nexusProjectService.getAllProjects().subscribe(
       (projects) => {
         this.projects = projects;
-        this.renderCharts();
       },
       (error) => {
         console.error('Error loading projects', error);
@@ -40,7 +43,7 @@ export class NexusDashboardComponent implements OnInit {
     this.nexusProjectService.getProjectKpis().subscribe(
       (data) => {
         this.kpis = data;
-        this.renderCharts();
+        this.updateCharts();
       },
       (error) => {
         console.error('Error loading KPIs', error);
@@ -52,7 +55,7 @@ export class NexusDashboardComponent implements OnInit {
     this.nexusProjectService.getPerformanceData().subscribe(
       (data) => {
         this.performanceData = data;
-        this.renderCharts();
+        this.updateCharts();
       },
       (error) => {
         console.error('Error loading performance data', error);
@@ -64,88 +67,126 @@ export class NexusDashboardComponent implements OnInit {
     this.nexusProjectService.getEfficiencyData().subscribe(
       (data) => {
         this.efficiencyData = data;
-        this.renderCharts();
+        this.updateCharts();
       },
       (error) => {
         console.error('Error loading efficiency data', error);
       }
     );
   }
-
-  renderCharts(): void {
+  
+  updateCharts(): void {
     // Status Chart
-    const statusChartCtx = (document.getElementById('statusChart') as HTMLCanvasElement).getContext('2d');
-    if (statusChartCtx) {
-      new Chart(statusChartCtx, {
-        type: 'pie',
-        data: {
-          labels: Object.keys(this.kpis.statusCount || {}),
-          datasets: [{
-            data: Object.values(this.kpis.statusCount || {}),
-            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
-          }]
+    this.statusChartOption = {
+      tooltip: {},
+      legend: {
+        data: ['Status']
+      },
+      series: [
+        {
+          name: 'Status',
+          type: 'pie',
+          radius: '50%',
+          data: Object.entries(this.kpis.statusCount || {}).map(([key, value]) => ({
+            name: key,
+            value: value
+          })),
+          emphasis: {
+            itemStyle: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+          }
         }
-      });
-    }
-
+      ]
+    };
+  
     // Goals Chart
-    const goalsChartCtx = (document.getElementById('goalsChart') as HTMLCanvasElement).getContext('2d');
-    if (goalsChartCtx) {
-      new Chart(goalsChartCtx, {
-        type: 'bar',
-        data: {
-          labels: Object.keys(this.kpis.goalsCount || {}),
-          datasets: [{
-            label: 'Goals Count',
-            data: Object.values(this.kpis.goalsCount || {}),
-            backgroundColor: '#4BC0C0'
-          }]
+    this.goalsChartOption = {
+      tooltip: {},
+      legend: {
+        data: ['Goals Count']
+      },
+      xAxis: {
+        type: 'category',
+        data: Object.keys(this.kpis.goalsCount || {})
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: [
+        {
+          name: 'Goals Count',
+          type: 'bar',
+          data: Object.values(this.kpis.goalsCount || {}),
+          itemStyle: {
+            color: '#4BC0C0'
+          }
         }
-      });
-    }
-
+      ]
+    };
+  
     // Performance Chart
-    const performanceChartCtx = (document.getElementById('performanceChart') as HTMLCanvasElement).getContext('2d');
-    if (performanceChartCtx) {
-      new Chart(performanceChartCtx, {
-        type: 'line',
-        data: {
-          labels: Object.keys(this.performanceData || {}),
-          datasets: [{
-            label: 'Performance Data',
-            data: Object.values(this.performanceData || {}),
-            borderColor: '#FF5733',
-            backgroundColor: 'rgba(255, 87, 51, 0.2)',
-            fill: true
-          }]
+    this.performanceChartOption = {
+      tooltip: {
+        trigger: 'axis'
+      },
+      legend: {
+        data: ['Performance Data']
+      },
+      xAxis: {
+        type: 'category',
+        data: Object.keys(this.performanceData || {})
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: [
+        {
+          name: 'Performance Data',
+          type: 'line',
+          data: Object.values(this.performanceData || {}),
+          itemStyle: {
+            color: '#FF5733'
+          },
+          areaStyle: {}
         }
-      });
+      ]
+    };
+  
+   
+  // Efficiency Chart (Radar Chart)
+this.efficiencyChartOption = {
+  tooltip: {
+    trigger: 'axis'
+  },
+  legend: {
+    data: ['Efficiency']
+  },
+  xAxis: {
+    type: 'category',
+    data: Object.keys(this.efficiencyData)
+  },
+  yAxis: {
+    type: 'value'
+  },
+  series: [
+    {
+      name: 'Efficiency',
+      type: 'line',
+      data: Object.values(this.efficiencyData),
+      itemStyle: {
+        color: '#FF5733'
+      }
     }
+  ]
+};
 
-    // Efficiency Chart
-    const efficiencyChartCtx = (document.getElementById('efficiencyChart') as HTMLCanvasElement).getContext('2d');
-    if (efficiencyChartCtx) {
-      new Chart(efficiencyChartCtx, {
-        type: 'doughnut',
-        data: {
-          labels: Object.keys(this.efficiencyData || {}),
-          datasets: [{
-            data: Object.values(this.efficiencyData || {}),
-            backgroundColor: ['#FFC300', '#FF5733']
-          }]
-        }
-      });
-    }
-
-
-    
+  
   }
-
-
-
 
   navigateToProjects(): void {
     this.router.navigate(['pages/agile/nexus/project']); 
-}
-
+  }
 }

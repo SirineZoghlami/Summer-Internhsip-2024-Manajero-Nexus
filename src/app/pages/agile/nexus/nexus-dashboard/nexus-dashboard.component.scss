@@ -1,7 +1,7 @@
 .nexus-board {
   .content {
     padding: 20px;
-    background-color: #f4f6f9;
+    background-color: #f8f9fc; /* Light background for a fresher look */
     border-radius: 12px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 
@@ -12,20 +12,21 @@
       align-items: center;
       font-size: 1.5rem;
       font-weight: 600;
-      color: #2c3e50;
+      color: #34495e; /* Darker text color for better contrast */
 
       .go-to-project-button {
         margin-left: auto;
         padding: 10px 20px;
         font-size: 0.875rem;
-        background-color: #3498db;
+        background-color: #3498db; /* Primary color */
         color: #ffffff;
         border: none;
         border-radius: 8px;
         transition: background-color 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
         &:hover {
-          background-color: #2980b9;
+          background-color: #2980b9; /* Darker shade for hover effect */
         }
       }
     }
@@ -47,14 +48,14 @@
 
         h2 {
           font-size: 1.25rem;
-          color: #34495e;
+          color: #2c3e50; /* Darker text color for headers */
           margin-bottom: 10px;
           font-weight: 500;
         }
 
         .count {
           font-size: 1.5rem;
-          color: #27ae60;
+          color: #27ae60; /* Accent color for metrics */
           font-weight: 700;
         }
       }
@@ -81,11 +82,12 @@
         }
 
         th {
-          background-color: #f8f9fa;
+          background-color: #ecf0f1; /* Light background for table headers */
+          color: #2c3e50; /* Dark text color for table headers */
         }
 
         tr:hover {
-          background-color: #e9ecef;
+          background-color: #f5f5f5; /* Light gray background for row hover */
         }
       }
     }
@@ -105,7 +107,7 @@
 
         h3 {
           font-size: 1.25rem;
-          color: #34495e;
+          color: #2c3e50;
           margin-bottom: 10px;
           font-weight: 500;
         }
