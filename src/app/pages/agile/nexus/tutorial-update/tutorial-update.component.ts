@@ -8,7 +8,7 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { ConfirmationDialogComponent } from '../../../agile/nexus/confirmation-dialog/confirmation-dialog.component'; // Corrected import path
 
 @Component({
-  selector: 'app-tutorial-update',
+  selector: 'ngx-tutorial-update',
   templateUrl: './tutorial-update.component.html',
   styleUrls: ['./tutorial-update.component.scss']
 })

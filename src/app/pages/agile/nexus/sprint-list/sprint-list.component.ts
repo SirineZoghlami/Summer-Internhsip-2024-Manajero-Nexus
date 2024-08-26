@@ -8,7 +8,7 @@ import { SprintModalComponent } from '../sprint-modal/sprint-modal.component';
 import { ConfirmationDialogComponent } from '../../../agile/nexus/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
-  selector: 'app-sprint-list',
+  selector: 'ngx-sprint-list',
   templateUrl: './sprint-list.component.html',
   styleUrls: ['./sprint-list.component.scss']
 })

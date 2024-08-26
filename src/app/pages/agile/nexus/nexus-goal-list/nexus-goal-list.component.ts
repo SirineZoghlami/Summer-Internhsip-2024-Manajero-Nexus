@@ -6,7 +6,7 @@ import { NexusProject, NexusGoal } from '../../../../../models/nexus-proejct-mod
 import { GoalModalComponent } from '../goal-modal/goal-modal.component'; // Adjust the path accordingly
 
 @Component({
-  selector: 'app-nexus-goal-list',
+  selector: 'ngx-nexus-goal-list',
   templateUrl: './nexus-goal-list.component.html',
   styleUrls: ['./nexus-goal-list.component.scss']
 })

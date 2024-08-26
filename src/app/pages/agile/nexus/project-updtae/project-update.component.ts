@@ -6,7 +6,7 @@ import { NbDialogService, NbToastrService } from '@nebular/theme';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
-  selector: 'app-project-update',
+  selector: 'ngx-project-update',
   templateUrl: './project-update.component.html',
   styleUrls: ['./project-update.component.scss']
 })

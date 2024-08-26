@@ -8,7 +8,7 @@ interface Question {
 }
 
 @Component({
-  selector: 'app-nexus-quiz',
+  selector: 'ngx-nexus-quiz',
   templateUrl: './nexus-quiz.component.html',
   styleUrls: ['./nexus-quiz.component.scss']
 })

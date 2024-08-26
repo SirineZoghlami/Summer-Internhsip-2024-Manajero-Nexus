@@ -5,7 +5,7 @@ import { NexusProjectService } from '../../../../../services/nexus.project.servi
 import { NexusProject } from '../../../../../models/nexus-proejct-model';
 
 @Component({
-  selector: 'app-project-edit-modal',
+  selector: 'ngx-project-edit-modal',
   templateUrl: './project-edit-modal.component.html',
   styleUrls: ['./project-edit-modal.component.scss']
 })

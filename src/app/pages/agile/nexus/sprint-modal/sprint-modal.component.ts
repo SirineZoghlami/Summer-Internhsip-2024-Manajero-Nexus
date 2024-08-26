@@ -3,7 +3,7 @@ import { NbDialogRef } from '@nebular/theme';
 import { Sprint } from '../../../../../models/nexus-proejct-model'; // Adjust the path accordingly
 
 @Component({
-  selector: 'app-sprint-modal',
+  selector: 'ngx-sprint-modal',
   templateUrl: './sprint-modal.component.html',
   styleUrls: ['./sprint-modal.component.scss']
 })

@@ -3,7 +3,7 @@ import { NbDialogRef } from '@nebular/theme';
 import { NexusProjectService } from '../../../../../services/nexus.project.service.service';
 
 @Component({
-  selector: 'app-review-modal',
+  selector: 'ngx-review-modal',
   templateUrl: './review-modal.component.html',
   styleUrls: ['./review-modal.component.scss']
 })

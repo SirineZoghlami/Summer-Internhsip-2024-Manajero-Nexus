@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { NbDialogRef } from '@nebular/theme';
 
 @Component({
-  selector: 'app-confirmation-dialog',
+  selector: 'ngx-confirmation-dialog',
   template: `
     <nb-card>
       <nb-card-header>{{ title }}</nb-card-header>

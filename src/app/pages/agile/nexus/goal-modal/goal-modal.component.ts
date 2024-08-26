@@ -3,7 +3,7 @@ import { NbDialogRef } from '@nebular/theme';
 import { NexusGoal } from '../../../../../models/nexus-proejct-model'; // Adjust the path accordingly
 
 @Component({
-  selector: 'app-goal-modal',
+  selector: 'ngx-goal-modal',
   templateUrl: './goal-modal.component.html',
   styleUrls: ['./goal-modal.component.scss']
 })

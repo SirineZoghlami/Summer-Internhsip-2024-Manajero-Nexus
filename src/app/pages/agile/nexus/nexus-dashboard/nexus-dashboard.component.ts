@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { EChartsOption } from 'echarts';
 
 @Component({
-  selector: 'app-nexus-dashboard',
+  selector: 'ngx-nexus-dashboard',
   templateUrl: './nexus-dashboard.component.html',
   styleUrls: ['./nexus-dashboard.component.scss']
 })
