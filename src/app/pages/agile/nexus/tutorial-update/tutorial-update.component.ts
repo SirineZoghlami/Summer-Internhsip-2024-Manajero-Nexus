@@ -15,6 +15,10 @@ import { ConfirmationDialogComponent } from '../../../agile/nexus/confirmation-d
 export class TutorialUpdateComponent implements OnInit {
   tutorialForm: FormGroup;
   tutorialId: string;
+  roleImagePreview: string | ArrayBuffer;
+  processImagePreview: string | ArrayBuffer;
+  selectedRoleImage: File; // Added property
+  selectedProcessImage: File; // Added property
   Editor = ClassicEditor;
   editorConfig = {
     // Your CKEditor configuration
@@ -22,17 +26,21 @@ export class TutorialUpdateComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private tutorialService: TutorialService,
-    private route: ActivatedRoute,
     private router: Router,
+    private route: ActivatedRoute,
+    private tutorialService: TutorialService,
     private dialogService: NbDialogService,
     private toastrService: NbToastrService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    this.tutorialId = this.route.snapshot.paramMap.get('id');
     this.initializeForm();
-    this.loadTutorial();
+    this.route.paramMap.subscribe(params => {
+      this.tutorialId = params.get('id');
+      if (this.tutorialId) {
+        this.loadTutorial(this.tutorialId);
+      }
+    });
   }
 
   initializeForm() {
@@ -43,14 +51,15 @@ export class TutorialUpdateComponent implements OnInit {
       howDoesItWork: [''],
       limitations: [''],
       applyingNexus: [''],
-      conclusion: ['']
+      conclusion: [''],
+      roleImageUrl: [null],
+      processImageUrl: [null]
     });
   }
 
-  loadTutorial() {
-    this.tutorialService.getTutorials().subscribe(tutorials => {
-      const tutorial = tutorials.find(t => t.id === this.tutorialId);
-      if (tutorial) {
+  loadTutorial(id: string) {
+    this.tutorialService.getTutorialById(id).subscribe(
+      (tutorial: Tutorial) => {
         this.tutorialForm.patchValue({
           introduction: tutorial.introduction,
           whyUse: tutorial.whyUse,
@@ -60,37 +69,71 @@ export class TutorialUpdateComponent implements OnInit {
           applyingNexus: tutorial.applyingNexus,
           conclusion: tutorial.conclusion
         });
+        this.roleImagePreview = tutorial.roleImageUrl ? `http://localhost:8080${tutorial.roleImageUrl}` : '';
+        this.processImagePreview = tutorial.processImageUrl ? `http://localhost:8080${tutorial.processImageUrl}` : '';
+      },
+      error => {
+        console.error('Error loading tutorial:', error);
+        this.toastrService.danger('Failed to load tutorial: ' + error.message, 'Error');
       }
-    });
+    );
+  }
+  onRoleImageSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      const file: File = input.files[0];
+      this.selectedRoleImage = file; // Set the selected file
+      this.tutorialForm.patchValue({ roleImage: file });
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.roleImagePreview = reader.result;
+      };
+      reader.readAsDataURL(file);
+    }
   }
 
-  updateTutorial() {
-    if (this.tutorialForm.valid) {
-      const dialogRef = this.dialogService.open(ConfirmationDialogComponent, {
-        context: {
-          title: 'Confirm Update',
-          message: 'Are you sure you want to modify this tutorial?'
-        }
-      });
+  onProcessImageSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      const file: File = input.files[0];
+      this.selectedProcessImage = file; // Set the selected file
+      this.tutorialForm.patchValue({ processImage: file });
 
-      dialogRef.onClose.subscribe(confirmed => {
-        if (confirmed) {
-          const updatedTutorial: Tutorial = {
-            ...this.tutorialForm.value,
-            id: this.tutorialId
-          };
-          this.tutorialService.updateTutorial(updatedTutorial).subscribe(
-            () => {
-              this.toastrService.success('Tutorial updated successfully!', 'Success');
-              this.router.navigate(['pages/agile/nexus/tutorial']);
-            },
-            error => {
-              console.error('Error updating tutorial:', error);
-              this.toastrService.danger('Failed to update tutorial: ' + error.message, 'Error');
-            }
-          );
-        }
-      });
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.processImagePreview = reader.result;
+      };
+      reader.readAsDataURL(file);
     }
+  }
+
+  updateTutorial(): void {
+    if (this.tutorialForm.invalid) {
+      this.toastrService.danger('Please fill in all required fields.', 'Error');
+      return;
+    }
+  
+    const formData = new FormData();
+    formData.append('tutorial', new Blob([JSON.stringify(this.tutorialForm.value)], { type: 'application/json' }));
+  
+    if (this.selectedRoleImage) {
+      formData.append('roleImage', this.selectedRoleImage);
+    }
+  
+    if (this.selectedProcessImage) {
+      formData.append('processImage', this.selectedProcessImage);
+    }
+  
+    this.tutorialService.updateTutorial(this.tutorialId, formData).subscribe(
+      response => {
+        this.toastrService.success('Tutorial updated successfully!', 'Success');
+        this.router.navigate(['/pages/agile/nexus']);
+      },
+      error => {
+        this.toastrService.danger('Failed to update tutorial.', 'Error');
+        console.error('Error updating tutorial:', error);
+      }
+    );
   }
 }

@@ -1,113 +1,53 @@
 :host {
-    display: block;
-    padding: 1rem;
-    background-color: #f7f9fc;
-  
-    ::ng-deep nb-card {
-      margin: 1rem 0;
-      border-radius: 0.5rem;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-      background-color: #ffffff;
-  
-      ::ng-deep nb-card-header {
-        background-color: #f7f9fc;
-        border-bottom: 1px solid #e6e9f0;
-        font-weight: bold;
-        text-align: center;
-        padding: 1rem 0;
-      }
-  
-      ::ng-deep nb-card-body {
-        background-color: #ffffff;
-        text-align: center;
-        padding: 1.5rem;
-        font-size: 1rem;
-        color: #4a4a4a;
-  
-        .custom-textarea {
-          width: 80%;
-          margin: 1rem auto; /* Center the textarea */
-          padding: 0.5rem;
-          border: 1px solid #e6e9f0;
-          border-radius: 0.25rem;
-          text-align: center; /* Center the text within the textarea */
-          font-size: 1rem;
-          resize: vertical; /* Allow vertical resizing */
-        }
-  
-        .validation-error {
-          color: #ff0000; /* Red color for error message */
-          margin-top: 0.5rem;
-          font-size: 0.875rem;
-        }
-  
-        .button-group {
-          display: flex;
-          justify-content: center;
-          gap: 1rem;
-          margin-top: 1rem;
-        }
-  
-        button {
-          cursor: pointer;
-          padding: 0.5rem 1rem;
-          border: none;
-          border-radius: 0.25rem;
-          background-color: #3366ff;
-          color: #ffffff;
-          font-size: 1rem;
-          transition: background-color 0.3s ease;
-  
-          &:hover {
-            background-color: #274bb7;
-          }
-  
-          &.prev {
-            background-color: #f7f9fc;
-            color: #3366ff;
-  
-            &:hover {
-              background-color: #e6e9f0;
-            }
-          }
-        }
-      }
-  
-      ::ng-deep nb-card-footer {
-        background-color: #f7f9fc;
-        border-top: 1px solid #e6e9f0;
-        text-align: right;
-        padding: 1rem 0;
-  
-        button {
-          margin-left: 0.5rem;
-        }
-      }
-    }
-  
-    .step-content {
+  display: block;
+  padding: 1rem;
+  background-color: #f7f9fc;
+
+  ::ng-deep nb-card {
+    margin: 1rem 0;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+
+    ::ng-deep nb-card-header {
+      background-color: #f7f9fc;
+      border-bottom: 1px solid #e6e9f0;
+      font-weight: bold;
       text-align: center;
-      padding: 1rem;
-  
-      h2 {
-        font-size: 1.5rem;
-        font-weight: bold;
-        margin-bottom: 1rem;
-      }
-  
-      p {
+      padding: 1rem 0;
+    }
+
+    ::ng-deep nb-card-body {
+      background-color: #ffffff;
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 1rem;
+      color: #4a4a4a;
+
+      .custom-textarea {
+        width: 80%;
+        margin: 1rem auto; /* Center the textarea */
+        padding: 0.5rem;
+        border: 1px solid #e6e9f0;
+        border-radius: 0.25rem;
+        text-align: center; /* Center the text within the textarea */
         font-size: 1rem;
-        margin-bottom: 1rem;
-        color: #4a4a4a;
+        resize: vertical; /* Allow vertical resizing */
       }
-  
+
+      .validation-error {
+        color: #ff0000; /* Red color for error message */
+        margin-top: 0.5rem;
+        font-size: 0.875rem;
+      }
+
       .button-group {
         display: flex;
         justify-content: center;
         gap: 1rem;
         margin-top: 1rem;
       }
-  
+
       button {
         cursor: pointer;
         padding: 0.5rem 1rem;
@@ -117,26 +57,157 @@
         color: #ffffff;
         font-size: 1rem;
         transition: background-color 0.3s ease;
-  
+
         &:hover {
           background-color: #274bb7;
         }
-  
+
         &.prev {
           background-color: #f7f9fc;
           color: #3366ff;
-  
+
           &:hover {
             background-color: #e6e9f0;
           }
         }
       }
     }
-  
-    .img {
-      width: 100%;
-      height: auto;
-      max-width: 100%;
+
+    ::ng-deep nb-card-footer {
+      background-color: #f7f9fc;
+      border-top: 1px solid #e6e9f0;
+      text-align: right;
+      padding: 1rem 0;
+
+      button {
+        margin-left: 0.5rem;
+      }
     }
   }
-  
+
+  .step-content {
+    text-align: center;
+    padding: 1rem;
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      color: #4a4a4a;
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    button {
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 0.25rem;
+      background-color: #3366ff;
+      color: #ffffff;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #274bb7;
+      }
+
+      &.prev {
+        background-color: #f7f9fc;
+        color: #3366ff;
+
+        &:hover {
+          background-color: #e6e9f0;
+        }
+      }
+    }
+  }
+
+  .img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    overflow: hidden; /* Ensure the image does not overflow */
+  }
+
+  /* Media Queries for responsiveness */
+  @media (max-width: 768px) {
+    .step-content {
+      h2 {
+        font-size: 1.25rem;
+      }
+
+      p {
+        font-size: 0.875rem;
+      }
+
+      .button-group {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      button {
+        font-size: 0.875rem;
+      }
+    }
+
+    /* Adjust stepper styles here */
+    .stepper-container {
+      display: flex;
+      flex-direction: column;
+
+      .stepper-step {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 1rem;
+
+        .stepper-number {
+          display: none; /* Hide step numbers on small screens */
+        }
+
+        .stepper-label {
+          font-size: 0.875rem; /* Adjust font size */
+        }
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .step-content {
+      h2 {
+        font-size: 1rem;
+      }
+
+      p {
+        font-size: 0.75rem;
+      }
+
+      .button-group {
+        gap: 0.25rem;
+      }
+
+      button {
+        font-size: 0.75rem;
+      }
+    }
+
+    .stepper-container {
+      .stepper-step {
+        .stepper-label {
+          font-size: 0.75rem; /* Further reduce font size on very small screens */
+        }
+      }
+    }
+  }
+}

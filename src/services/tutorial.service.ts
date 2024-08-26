@@ -40,14 +40,11 @@ export class TutorialService {
 
 
 
-  // Update an existing tutorial
-  updateTutorial(tutorial: Tutorial): Observable<Tutorial> {
-    return this.http.put<Tutorial>(`${this.apiUrl}/${tutorial.id}`, tutorial)
-      .pipe(
-        catchError(this.handleError)
-      );
+  updateTutorial(id: string, formData: FormData): Observable<Tutorial> {
+    const headers = { 'enctype': 'multipart/form-data' };
+    return this.http.put<Tutorial>(`${this.apiUrl}/${id}`, formData, { headers });
   }
-
+  
   // Delete a tutorial
   deleteTutorial(id: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`)
@@ -61,4 +58,12 @@ export class TutorialService {
     console.error(`Backend returned code ${error.status}, body was: `, error.error);
     return throwError(() => new Error('Something bad happened; please try again later.'));
   }
+
+   // Fetch a specific tutorial by ID
+   getTutorialById(id: string): Observable<Tutorial> {
+    return this.http.get<Tutorial>(`${this.apiUrl}/${id}`)
+      .pipe(
+        catchError(this.handleError)
+      );
+    }
 }
