@@ -122,7 +122,7 @@ export class TutorialComponent implements OnInit {
 
 
   getImageUrl(imagePath: string): string {
-    return `http://localhost:8080${imagePath}`;
+    return `http://localhost:8085/ManajeroBackend${imagePath}`;
   }
   
 }

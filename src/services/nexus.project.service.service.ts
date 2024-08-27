@@ -8,7 +8,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class NexusProjectService {
-  private apiUrl = 'http://localhost:8080/api/projects';
+  private apiUrl = 'http://localhost:8085/ManajeroBackend/api/projects';
 
   constructor(private http: HttpClient) {}
 

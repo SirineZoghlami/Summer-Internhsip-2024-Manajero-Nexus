@@ -8,12 +8,12 @@ import { catchError, map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class TutorialService {
-  private apiUrl = 'http://localhost:8080/api/tutorials';
+  private apiUrl = 'http://localhost:8085/ManajeroBackend/api/tutorials';
 
   constructor(private http: HttpClient) {}
 
   createTutorial(tutorialData: FormData): Observable<Tutorial> {
-    return this.http.post<Tutorial>('http://localhost:8080/api/tutorials/create', tutorialData);
+    return this.http.post<Tutorial>('http://localhost:8085/ManajeroBackend/api/tutorials/create', tutorialData);
   }
 
   uploadImage(tutorialId: string, imageType: string, formData: FormData): Observable<string> {

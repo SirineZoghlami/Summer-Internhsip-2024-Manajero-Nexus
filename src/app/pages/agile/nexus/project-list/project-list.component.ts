@@ -4,7 +4,7 @@ import { NexusProjectService } from '../../../../../services/nexus.project.servi
 import { NexusProject } from '../../../../../models/nexus-proejct-model'; // Adjust the path accordingly
 
 @Component({
-  selector: 'ngx-project-list',
+  selector: 'app-project-list',
   templateUrl: './project-list.component.html',
   styleUrls: ['./project-list.component.scss']
 })

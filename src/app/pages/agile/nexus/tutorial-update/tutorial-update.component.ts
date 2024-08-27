@@ -69,8 +69,8 @@ export class TutorialUpdateComponent implements OnInit {
           applyingNexus: tutorial.applyingNexus,
           conclusion: tutorial.conclusion
         });
-        this.roleImagePreview = tutorial.roleImageUrl ? `http://localhost:8080${tutorial.roleImageUrl}` : '';
-        this.processImagePreview = tutorial.processImageUrl ? `http://localhost:8080${tutorial.processImageUrl}` : '';
+        this.roleImagePreview = tutorial.roleImageUrl ? `http://localhost:8085/ManajeroBackend${tutorial.roleImageUrl}` : '';
+        this.processImagePreview = tutorial.processImageUrl ? `http://localhost:8085/ManajeroBackend${tutorial.processImageUrl}` : '';
       },
       error => {
         console.error('Error loading tutorial:', error);

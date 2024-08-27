@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NexusProject, Sprint, TeamMember } from '../../../../../models/nexus-proejct-model';
 
 @Component({
-  selector: 'ngx-project-detail',
+  selector: 'app-project-detail',
   templateUrl: './project-detail.component.html',
   styleUrls: ['./project-detail.component.scss']
 })
