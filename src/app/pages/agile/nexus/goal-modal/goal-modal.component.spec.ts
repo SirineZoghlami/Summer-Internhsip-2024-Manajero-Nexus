@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { NbDialogRef, NbThemeModule } from '@nebular/theme';
 import { GoalModalComponent } from './goal-modal.component';
-import { NexusGoal } from '../../../../../models/nexus-proejct-model'; // Adjust the path accordingly
+import { NexusGoal } from '../../../../core/models/nexus-models/nexus-proejct-model'; // Adjust the path accordingly
 
 describe('GoalModalComponent', () => {
   let component: GoalModalComponent;

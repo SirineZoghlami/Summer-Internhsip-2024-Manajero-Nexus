@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NexusProjectService } from '../../../../../services/nexus.project.service.service';
+import { NexusProjectService } from '../../../../core/services/nexus-services/nexus.project.service.service';
 import { NbDialogService, NbToastrService } from '@nebular/theme';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 

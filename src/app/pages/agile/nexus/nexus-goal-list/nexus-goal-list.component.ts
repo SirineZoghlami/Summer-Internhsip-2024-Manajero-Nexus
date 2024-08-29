@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NbDialogService } from '@nebular/theme';
-import { NexusProjectService } from '../../../../../services/nexus.project.service.service';
-import { NexusProject, NexusGoal } from '../../../../../models/nexus-proejct-model';
+import { NexusProjectService } from '../../../../core/services/nexus-services/nexus.project.service.service';
+import { NexusProject, NexusGoal } from '../../../../core/models/nexus-models/nexus-proejct-model';
 import { GoalModalComponent } from '../goal-modal/goal-modal.component'; // Adjust the path accordingly
 
 @Component({

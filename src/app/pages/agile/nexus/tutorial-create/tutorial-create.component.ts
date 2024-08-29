@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { TutorialService } from '../../../../../services/tutorial.service';
-import { Tutorial } from '../../../../../models/tutorial.model';
+import { TutorialService } from '../../../../core/services/nexus-services/tutorial.service';
+import { Tutorial } from '../../../../core/models/nexus-models/tutorial.model';
 import { NbToastrService } from '@nebular/theme';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Router } from '@angular/router';

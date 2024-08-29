@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NexusProjectService } from '../../../../../services/nexus.project.service.service';
+import { NexusProjectService } from '../../../../core/services/nexus-services/nexus.project.service.service';
 import { Router } from '@angular/router';
 import { EChartsOption } from 'echarts';
 

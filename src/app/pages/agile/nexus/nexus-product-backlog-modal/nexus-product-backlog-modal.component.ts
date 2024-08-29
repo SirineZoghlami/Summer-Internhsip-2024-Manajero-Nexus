@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { ProductBacklogItem } from '../../../../../models/nexus-proejct-model';
+import { ProductBacklogItem } from '../../../../core/models/nexus-models/nexus-proejct-model';
 import { NbDialogRef } from '@nebular/theme';
 
 @Component({

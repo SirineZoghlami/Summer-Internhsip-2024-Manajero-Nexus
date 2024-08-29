@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { NexusProject, Sprint,NexusGoal, ProductBacklogItem } from '../models/nexus-proejct-model';
+import { NexusProject, Sprint,NexusGoal, ProductBacklogItem } from '../../models/nexus-models/nexus-proejct-model';
 import { catchError } from 'rxjs/operators';
 
 @Injectable({

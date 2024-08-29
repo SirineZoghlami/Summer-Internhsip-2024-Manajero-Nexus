@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NexusProjectService } from '../../../../../services/nexus.project.service.service';
-import { NexusProject } from '../../../../../models/nexus-proejct-model';
+import { NexusProjectService } from '../../../../core/services/nexus-services/nexus.project.service.service';
+import { NexusProject } from '../../../../core/models/nexus-models/nexus-proejct-model';
 import { NbDialogService,NbToastrService } from '@nebular/theme';
 import { ProjectEditModalComponent } from '../project-edit-modal/project-edit-modal.component';
 import { ConfirmationDialogComponent } from '../../../agile/nexus/confirmation-dialog/confirmation-dialog.component';

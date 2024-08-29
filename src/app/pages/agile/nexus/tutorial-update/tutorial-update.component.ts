@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TutorialService } from '../../../../../services/tutorial.service';
-import { Tutorial } from '../../../../../models/tutorial.model';
+import { TutorialService } from '../../../../core/services/nexus-services/tutorial.service';
+import { Tutorial } from '../../../../core/models/nexus-models/tutorial.model';
 import { NbDialogService, NbToastrService } from '@nebular/theme';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { ConfirmationDialogComponent } from '../../../agile/nexus/confirmation-dialog/confirmation-dialog.component'; // Corrected import path

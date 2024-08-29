@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NexusDashboardComponent } from './nexus-dashboard.component';
-import { NexusProjectService } from '../../../../../services/nexus.project.service.service';
+import { NexusProjectService } from '../../../../core/services/nexus-services/nexus.project.service.service';
 import { Router } from '@angular/router';
 import { of, throwError } from 'rxjs';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { NexusProject } from '../../../../../models/nexus-proejct-model';
+import { NexusProject } from '../../../../core/models/nexus-models/nexus-proejct-model';
 
 describe('NexusDashboardComponent', () => {
   let component: NexusDashboardComponent;

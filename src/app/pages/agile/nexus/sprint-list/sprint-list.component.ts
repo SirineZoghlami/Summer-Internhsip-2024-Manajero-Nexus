@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NbDialogService, NbToastrService } from '@nebular/theme';
-import { NexusProjectService } from '../../../../../services/nexus.project.service.service';
-import { Sprint, NexusProject } from '../../../../../models/nexus-proejct-model';
+import { NexusProjectService } from '../../../../core/services/nexus-services/nexus.project.service.service';
+import { Sprint, NexusProject } from '../../../../core/models/nexus-models/nexus-proejct-model';
 import { ReviewModalComponent } from '../review-modal/review-modal.component'; 
 import { SprintModalComponent } from '../sprint-modal/sprint-modal.component';
 import { ConfirmationDialogComponent } from '../../../agile/nexus/confirmation-dialog/confirmation-dialog.component';

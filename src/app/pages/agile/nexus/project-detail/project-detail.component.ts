@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { NexusProject, Sprint, TeamMember } from '../../../../../models/nexus-proejct-model';
+import { NexusProject, Sprint, TeamMember } from '../../../../core/models/nexus-models/nexus-proejct-model';
 
 @Component({
   selector: 'app-project-detail',

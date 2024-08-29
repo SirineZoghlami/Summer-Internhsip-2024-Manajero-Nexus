@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NbDialogRef } from '@nebular/theme';
-import { NexusGoal } from '../../../../../models/nexus-proejct-model'; // Adjust the path accordingly
+import { NexusGoal } from '../../../../core/models/nexus-models/nexus-proejct-model'; // Adjust the path accordingly
 
 @Component({
   selector: 'ngx-goal-modal',

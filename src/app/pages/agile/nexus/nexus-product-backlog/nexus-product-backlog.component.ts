@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NbDialogService } from '@nebular/theme';
-import { NexusProjectService } from '../../../../../services/nexus.project.service.service';
+import { NexusProjectService } from '../../../../core/services/nexus-services/nexus.project.service.service';
 import { NexusProductBacklogModalComponent } from '../nexus-product-backlog-modal/nexus-product-backlog-modal.component';
-import { NexusProject, ProductBacklogItem } from '../../../../../models/nexus-proejct-model';
+import { NexusProject, ProductBacklogItem } from '../../../../core/models/nexus-models/nexus-proejct-model';
 
 @Component({
   selector: 'ngx-nexus-product-backlog',

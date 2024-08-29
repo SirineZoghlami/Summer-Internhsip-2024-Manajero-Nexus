@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { Tutorial } from '../models/tutorial.model';
+import { Tutorial } from '../../models/nexus-models/tutorial.model';
 import { catchError, map } from 'rxjs/operators';
 
 @Injectable({

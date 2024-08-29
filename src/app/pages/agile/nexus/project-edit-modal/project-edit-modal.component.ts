@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NbDialogRef } from '@nebular/theme';
-import { NexusProjectService } from '../../../../../services/nexus.project.service.service';
-import { NexusProject } from '../../../../../models/nexus-proejct-model';
+import { NexusProjectService } from '../../../../core/services/nexus-services/nexus.project.service.service';
+import { NexusProject } from '../../../../core/models/nexus-models/nexus-proejct-model';
 
 @Component({
   selector: 'ngx-project-edit-modal',

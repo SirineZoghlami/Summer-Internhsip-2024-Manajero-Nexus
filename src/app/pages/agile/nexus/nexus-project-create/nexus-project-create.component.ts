@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { NbToastrService, NbStepperComponent } from '@nebular/theme';
 import { Router } from '@angular/router';
-import { NexusProjectService } from '../../../../../services/nexus.project.service.service';
-import { NexusProject } from '../../../../../models/nexus-proejct-model'; // Adjust the path accordingly
+import { NexusProjectService } from '../../../../core/services/nexus-services/nexus.project.service.service';
+import { NexusProject } from '../../../../core/models/nexus-models/nexus-proejct-model'; // Adjust the path accordingly
 
 @Component({
   selector: 'ngx-nexus-project-create',

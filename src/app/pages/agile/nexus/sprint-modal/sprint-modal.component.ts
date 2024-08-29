@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NbDialogRef } from '@nebular/theme';
-import { Sprint } from '../../../../../models/nexus-proejct-model'; // Adjust the path accordingly
+import { Sprint } from '../../../../core/models/nexus-models/nexus-proejct-model'; // Adjust the path accordingly
 
 @Component({
   selector: 'ngx-sprint-modal',

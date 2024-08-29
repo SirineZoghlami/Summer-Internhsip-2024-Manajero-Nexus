@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NexusProjectService } from '../../../../../services/nexus.project.service.service';
-import { NexusProject } from '../../../../../models/nexus-proejct-model'; // Adjust the path accordingly
+import { NexusProjectService } from '../../../../core/services/nexus-services/nexus.project.service.service';
+import { NexusProject } from '../../../../core/models/nexus-models/nexus-proejct-model'; // Adjust the path accordingly
 
 @Component({
   selector: 'app-project-list',

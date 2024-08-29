@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NbDialogRef } from '@nebular/theme';
-import { NexusProjectService } from '../../../../../services/nexus.project.service.service';
+import { NexusProjectService } from '../../../../core/services/nexus-services/nexus.project.service.service';
 
 @Component({
   selector: 'ngx-review-modal',

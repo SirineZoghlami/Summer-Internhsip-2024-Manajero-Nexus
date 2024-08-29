@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Tutorial } from '../../../../../models/tutorial.model';
-import { TutorialService } from '../../../../../services/tutorial.service';
+import { Tutorial } from '../../../../core/models/nexus-models/tutorial.model';
+import { TutorialService } from '../../../../core/services/nexus-services/tutorial.service';
 
 @Component({
   selector: 'ngx-test',
