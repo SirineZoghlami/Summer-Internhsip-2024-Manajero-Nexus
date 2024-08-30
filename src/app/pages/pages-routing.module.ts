@@ -20,7 +20,6 @@ import { GoalModalComponent } from './agile/nexus/goal-modal/goal-modal.componen
 import { ProjectOverviewComponent } from './agile/nexus/project-overview/project-overview.component'
 
 import { NexusProductBacklogComponent } from './agile/nexus/nexus-product-backlog/nexus-product-backlog.component'
-import { TestComponent } from './agile/nexus/test/test.component';
 
 const routes: Routes = [{
   path: '',
@@ -109,20 +108,10 @@ const routes: Routes = [{
       component: ProjectListComponent
     },
     {
-      path: 'agile/nexus/test',
-      component: TestComponent
-    },
- 
- 
-   
-  
-   
-    {
       path: 'agile/nexus/dashboard',
       component: NexusDashboardComponent 
     },
-    
-
+  
     {
       path: 'agile/project-settings/:id',
       component: ProjectSettingsComponent,

@@ -31,7 +31,6 @@ import { ProjectEditModalComponent } from './agile/nexus/project-edit-modal/proj
 import { NgxEchartsModule } from 'ngx-echarts';
 import { ChartModule } from 'angular2-chartjs';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { TestComponent } from './agile/nexus/test/test.component';
 @NgModule({
   imports: [
     PagesRoutingModule,
@@ -74,8 +73,8 @@ import { TestComponent } from './agile/nexus/test/test.component';
     NexusProductBacklogComponent,
     NexusProductBacklogModalComponent,
     ReviewModalComponent,
-    ProjectEditModalComponent,
-    TestComponent,
+    ProjectEditModalComponent
+
   ],
   providers: [],
 })
